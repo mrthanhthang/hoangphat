@@ -1,0 +1,165 @@
+<?php
+$title = 'Trang chủ';
+$this->headTitle($title);
+?>
+<script type="text/javascript">
+        $(document).ready(function(){
+            //Setup Slider for list banner
+            var $lenght = $('#banner-list li').size();
+            if($lenght >= 1){
+                var $index = '<ul>';
+                $index += '<li class="active"></li>';
+                for(var i = 2; i <= $lenght; i++){
+                    $index += '<li></li>';
+                }
+                $index +='</ul>';
+                $('.banner-index').html($index);
+            }
+            
+            var $banner = setInterval( "slideSwitch(false)", 5000 );
+            $('#banner-list').hover(
+                function(){
+                    clearTimeout($banner);
+                },
+                function(){
+                    $banner = setInterval( "slideSwitch(false)", 5000 );
+                }
+            );
+            $(".banner-index ul li").click(function(){
+                clearTimeout($banner);
+                slideSwitch(true, $(this).index());
+                $banner = setInterval( "slideSwitch(false)", 5000 );
+            });
+            
+            //Setup Slider for list thumb
+            $('#thumb-list').css({width: ($('#thumb-list li').size()*150)});
+            var $slide = setInterval( "thumbSwitch(false)", 8000 );
+            $('#thumb-list').hover(
+                function(){
+                    clearTimeout($slide);
+                },
+                function(){
+                    $slide = setInterval( "thumbSwitch(false)", 5000 );
+                }
+            );
+            $('.thumb-back').click(function(){
+                clearTimeout($slide);
+                thumbSwitch(true);
+                $slide = setInterval( "thumbSwitch(false)", 8000 );
+            });
+            $('.thumb-forward').click(function(){
+                clearTimeout($slide);
+                thumbSwitch(false);
+                $slide = setInterval( "thumbSwitch(false)", 8000 );
+            });
+        });
+    </script>
+<div class="banner">
+    <div class="border-top"></div>
+    <div class="inner_banner">
+        <div class="top-cat note-top">
+            <div class="note-top-right"></div>
+        </div>
+        <div class="cat note">
+            <h3 style="font-size: 30px;"><span class="green-title">SHOP</span> CATEGORY</h3>
+            <ul class="category">
+                <?php if(isset($arrCat) && $arrCat){ foreach($arrCat as $cus){ ?>
+                <li><a href="<?php echo $this->url('main', array('action' => 'category'), array('query' => array('cid' =>  $cus->id))); ?>"><?php echo $cus->name; ?></a></li>
+                <?php }} ?>
+            </ul>
+            <div class="note-right"></div>
+        </div>
+        <div class="banner-wrapper">
+            <ul id="banner-list">
+                <li class="thumb active"><a href="#"><img src="<?php echo $this->basePath(); ?>/img/bn2.jpg"/></a></li>
+                <li class="thumb"><a href="#"><img src="<?php echo $this->basePath(); ?>/img/bn3.jpg"/></a></li>
+                <li class="thumb"><a href="#"><img src="<?php echo $this->basePath(); ?>/img/bn4.jpg"/></a></li>
+                <li class="thumb"><a href="#"><img src="<?php echo $this->basePath(); ?>/img/bn5.jpg"/></a></li>
+            </ul>
+            <div class="banner-index">
+                
+            </div>
+        </div>
+        <div class="menu-top">
+            <ul>
+                <li><a href="<?php echo $this->url('main', array('action' => 'latest')); ?>" title="">Latest Items &nbsp;&nbsp;&nbsp;</a><span class="slash-menu">|</span></li>
+                <li><a href="<?php echo $this->url('main', array('action' => 'saleoff')); ?>" title="">Sale Off &nbsp;&nbsp;&nbsp;</a><span class="slash-menu">|</span></li>
+                <li><a href="<?php echo $this->url('main', array('action' => 'about')); ?>" title="">About Us &nbsp;&nbsp;&nbsp;</a><span class="slash-menu">|</span></li>
+                <li><a href="<?php echo $this->url('main', array('action' => 'contact')); ?>" title="">Contact </a></li>
+            </ul>
+            <?php //echo $this->navigation('Navigation')->menu(); ?>
+        </div>
+        <div class="ad-inner-main" id="ad-inner-main">
+    <div class="choice-inner-main">
+        <h3><span class="red-title">HOT </span> DEAL</h3>
+        <div class="thumb-wrapper">
+            <div class="slider-thumb">
+                <div class="thumb-back"></div>
+                <div class="thumb-tray" id="thumb-tray"  style="left: 0;">
+                    <ul id="thumb-list">
+                        <?php if($arrHD){ foreach($arrHD as $hd){ isset($hd->arr_images) && $hd->arr_images ? $hdImages = unserialize($hd->arr_images) : $hdImages = array(''); ?>
+                        <li class="thumb">
+                            <div><a href="<?php echo $this->url('main', array('action' => 'product'), array('query' => array('pid' => $hd->id))); ?>"><img src="<?php echo $this->basePath().'/img/admin/items/'.$hdImages[0]; ?>" /></a></div>
+                            <a href="<?php echo $this->url('main', array('action' => 'product'), array('query' => array('pid' => $hd->id))); ?>"><?php echo $hd->name; ?></a>
+                            <?php if(isset($hd->discount_percent) && $hd->discount_percent){ ?>
+                            <b><del><?php echo number_format($hd->price,0,",","."); ?> đ </del> &nbsp;<span class="orange-title">(<?php echo $hd->discount_percent; ?>%)</span></b><br />
+                            <b><?php echo number_format($hd->price - ($hd->price*($hd->discount_percent)/100),0,",","."); ?> đ</b>
+                            <?php }else{ ?>
+                            <b><?php echo $hd->price ? number_format($hd->price,0,",",".").' đ' : 'Call'; ?></b>
+                            <?php } ?>
+                        </li>
+                        <?php }} ?>
+                    </ul>
+                </div>
+                <div class="thumb-forward" style=""></div>
+            </div>
+        </div>
+    </div>
+    </div>
+    </div>
+</div>
+<div class="main" id="main">
+    <div class="clear"></div>
+    <div class="pro-inner-main">
+    <div class="left-product">
+        <h3><span class="blue-title">LATEST</span> ITEM</h3>
+        <ul class="wrapper-list-product">
+            <li>
+                <ul class="list-product">
+                <?php if($arrLT){ foreach($arrLT as $key => $lt){ isset($lt->arr_images) && $lt->arr_images ? $ltImages = unserialize($lt->arr_images) : $ltImages = array(''); ?>
+                    <li class="product-thumb">
+                        <div><a href="<?php echo $this->url('main', array('action' => 'product'), array('query' => array('pid' => $lt->id))); ?>"><img src="<?php echo $this->basePath().'/img/admin/items/'.$ltImages[0]; ?>" /></a></div>
+                            <a href="<?php echo $this->url('main', array('action' => 'product'), array('query' => array('pid' => $lt->id))); ?>"><?php echo $lt->name; ?></a>
+                            <?php if(isset($lt->discount_percent) && $lt->discount_percent){ ?>
+                            <b><del><?php echo number_format($lt->price,0,",","."); ?> đ </del> &nbsp;<span class="orange-title">(<?php echo $lt->discount_percent; ?>%)</span></b><br />
+                            <b><?php echo number_format($lt->price - ($lt->price*($lt->discount_percent)/100),0,",","."); ?> đ</b>
+                            <?php }else{ ?>
+                            <b><?php echo $lt->price ? number_format($lt->price,0,",",".").' đ' : 'Call'; ?></b>
+                            <?php } ?>
+                    </li>
+                    <?php if(($key+1)%3 == 0){ ?></ul><ul class="list-product"><?php } ?>
+                <?php }} ?> 
+                </ul>
+            </li>
+        </ul>
+    </div>
+    <div class="right-product">
+        <h3><span class="orange-title">SALE</span> OFF</h3>
+        <ul class="wrapper-list-product">
+            <li>
+                <ul class="list-product">
+                <?php if($arrSO){ foreach($arrSO as $key => $so){ isset($so->arr_images) && $so->arr_images ? $soImages = unserialize($so->arr_images) : $soImages = array(''); ?>
+                    <li class="product-thumb">
+                        <div><a href="<?php echo $this->url('main', array('action' => 'product'), array('query' => array('pid' => $so->id))); ?>"><img src="<?php echo $this->basePath().'/img/admin/items/'.$soImages[0]; ?>" /></a></div>
+                            <a href="<?php echo $this->url('main', array('action' => 'product'), array('query' => array('pid' => $so->id))); ?>"><?php echo $so->name; ?></a>
+                            <b><del><?php echo number_format($so->price,0,",","."); ?> đ </del> &nbsp;<span class="orange-title">(<?php echo $so->discount_percent; ?>%)</span></b><br />
+                            <b><?php echo number_format($so->price - ($so->price*($so->discount_percent)/100),0,",","."); ?> đ</b>
+                    </li>
+                    <?php if(($key+1)%3 == 0){ ?></ul><ul class="list-product"><?php } ?>
+                <?php }} ?> 
+                </ul>
+            </li>
+        </ul>
+    </div>
+    </div>
+</div>

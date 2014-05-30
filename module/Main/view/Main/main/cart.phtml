@@ -1,0 +1,156 @@
+<?php
+$title = 'Giỏ Hàng';
+$this->headTitle($title);
+?>
+<script>
+
+    $(document).ready(function(){
+       $('.qty').keyup(function(){
+            var $parent = $(this).parent().parent();
+            var $quantity = 0;
+            if($(this).val() == '') $quantity = 0;
+            else $quantity = parseInt($(this).val());
+            $(this).val($quantity);
+            var $price = $parent.find('td span#cart-price').attr('data-role');
+            var $total = parseInt($(this).val())*$price ;
+            $parent.find('td span#cart-price-total').attr('data-role', $total);
+            $parent.find('td span#cart-price-total').text(($total).formatMoney(0, ',', '.'));
+            var $order = 0;
+            $("#item td span[id^=cart-price-total]").each(function() {
+                $order = parseInt($(this).attr('data-role')) + $order;
+            });
+
+            $('.tax-collapse b').text(($order).formatMoney(0, ',', '.'));
+       });
+       var firstOrder = 0;
+       $("#item td span[id^=cart-price-total]").each(function() {
+            firstOrder = parseInt($(this).attr('data-role')) + firstOrder;
+       });
+       $('.tax-collapse b').text((firstOrder).formatMoney(0, ',', '.'));
+       $('.btn-remove2').click(function(){
+            var $parent = $(this).parent().parent();
+            $parent.fadeOut('fast');
+            $parent.html('');
+       });
+       $("#formUp").validate({
+            rules: {
+                    order_name: "required",
+                    order_email: "required email",
+                    order_phone: "required number",
+                    order_address: "required",
+            },      
+           errorPlacement: function(error,element) {
+                    return true;
+                },
+           submitHandler: function(form) {
+            
+              form.submit();
+           }
+        }); 
+    });
+</script>
+<div class="banner">
+    <div class="border-top"></div>
+    <div class="inner_banner">
+        <div class="top-cat note-top">
+            <div class="note-top-right"></div>
+        </div>
+        <div class="cat note">
+            <h3 style="font-size: 30px;"><span class="green-title">SHOP</span> CATEGORY</h3>
+            <ul class="category">
+                <?php if(isset($arrCat) && $arrCat){ foreach($arrCat as $cus){ ?>
+                <li><a href="<?php echo $this->url('main', array('action' => 'category'), array('query' => array('cid' =>  $cus->id))); ?>"><?php echo $cus->name; ?></a></li>
+                <?php }} ?>
+            </ul>
+            <div class="note-right"></div>
+        </div>
+        <div class="menu-top">
+            <ul>
+                <li><a href="<?php echo $this->url('main', array('action' => 'latest')); ?>" title="">Latest Items &nbsp;&nbsp;&nbsp;</a><span class="slash-menu">|</span></li>
+                <li><a href="<?php echo $this->url('main', array('action' => 'saleoff')); ?>" title="">Sale Off &nbsp;&nbsp;&nbsp;</a><span class="slash-menu">|</span></li>
+                <li><a href="<?php echo $this->url('main', array('action' => 'about')); ?>" title="">About Us &nbsp;&nbsp;&nbsp;</a><span class="slash-menu">|</span></li>
+                <li><a href="<?php echo $this->url('main', array('action' => 'contact')); ?>" title="">Contact </a></li>
+            </ul>
+            <?php //echo $this->navigation('Navigation')->menu(); ?>
+        </div>
+        <div class="ad-inner-main" id="ad-inner-main">
+            <div class="cart-detail-main">
+            <form method="post" name="formUp" id="formUp" action="">
+                <fieldset>
+                    <legend><h4><span class="blue-title">Giỏ</span> Hàng</h4></legend>
+                    <table class="data-table cart-table" id="shopping-cart-table">
+                        <colgroup>
+                            <col width="1"/>
+                            <col/>
+                            <col width="1"/>
+                            <col width="1"/>
+                            <col width="1"/>
+                            <col width="1"/>
+                            <col width="1"/>
+                        </colgroup>
+                        <thead>
+                        <tr class="first last">
+                            <th rowspan="1">&nbsp;</th>
+                            <th rowspan="1"><span class="nobr">Sản Phẩm</span></th>
+                            <th rowspan="1"></th>
+                            <th colspan="1" class="a-center"><span class="nobr">Giá</span></th>
+                            <th class="a-center" rowspan="1">Số lượng</th>
+                            <th colspan="1" class="a-center">Tổng cộng</th>
+                            <th class="a-center" rowspan="1">&nbsp;</th>
+                        </tr>
+                        </thead>
+                        <tfoot>
+                            <tr class="first last tax-total">
+                                <td class="last" colspan="50">
+                                    <span class="tax-collapse ">Tổng cộng: <b></b> VNĐ</span>
+                                </td>
+                            </tr>
+                        </tfoot>
+                        <tbody>
+                        <?php if(isset($arrItem) && count($arrItem)){ foreach($arrItem as $i){ ?>
+                        <tr id="item" class="first last odd">
+                            <td><a title="White Sundress" href="#"><img width="75" height="75" alt="<?php echo $i->name; ?>" src="<?php  echo $this->basePath().'/img/admin/items/'.$i->arr_images; ?>"></a></td>
+                            <td><h4 class="product-name"><a href="#"><?php echo $i->name; ?></a></h4></td>
+                            <td></td>
+                            <td><span id="cart-price" data-role="<?php echo $i->price - ($i->price*$i->discount_percent)/100; ?>" class="cart-price"><?php echo $i->price ? number_format(($i->price - ($i->price*$i->discount_percent)/100),0,",",".").' VNĐ' : 'Call'; ?></span></td>
+                            <td>
+                                <input maxlength="12" class="required number input-text qty" title="Qty" size="4" value="1" name="cart[<?php echo $i->id; ?>]"/>
+                            </td>
+                            <td><span id="cart-price-total" data-role="<?php echo $i->price - ($i->price*$i->discount_percent)/100; ?>" class="cart-price"><?php echo $i->price ? number_format(($i->price - ($i->price*$i->discount_percent)/100),0,",",".").' VNĐ' : 'Call'; ?></span></td>
+                            <td><a class="btn-remove2" title="Remove item" href="#">Remove item</a></td>
+                        </tr>
+                        <?php }} ?>
+                        </tbody>
+                    </table>
+                </fieldset>
+                <fieldset>
+                    <legend><h4><span class="blue-title">Thông</span> Tin Khách Hàng</h4></legend>
+                    <table>
+                        <tr>
+                            <td>Họ và tên *</td>
+                            <td><input type="text" name="order_name" /></td>
+                        </tr>
+                        <tr>
+                            <td>Email *</td>
+                            <td><input type="text" name="order_email" /></td>
+                        </tr>
+                         <tr>
+                            <td>Điện thoại *</td>
+                            <td><input type="text" name="order_phone" /></td>
+                        </tr>
+                        <tr>
+                            <td>Địa chỉ *</td>
+                            <td><input type="text" name="order_address" /></td>
+                        </tr>
+                    </table>
+                </fieldset>
+                <fieldset>
+                    <p style="text-align: center;"><button>Đồng ý</button> &nbsp; <button type="reset">Hủy</button></p>
+                </fieldset>
+                <div class="clear"></div>
+            </form>
+            </div>
+            <div class="clear"></div>
+        </div>
+    </div>
+</div>

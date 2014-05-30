@@ -1,0 +1,30 @@
+<?php
+/*
+ * Develop by Webis Team
+ * Leader : Doan Tran Buu Loc (locdt@webis.com)
+ * Project Name : AD Webis
+ * Created date : 14/06/2013
+ * Copyright @ Webis.INC. All right reserved 
+ */
+?>
+<?php $container = $this->navigation()->breadcrumbs() ?>
+<?php /* @var $container \Zend\View\Helper\Navigation\Breadcrumbs */ ?>
+<?php $navigation = $container->getContainer()  ?>
+<?php /* @var $navigation \Zend\Navigation\Navigation */ ?>
+
+<ul class="breadcrumb">
+    <?php $active = $container->findActive($navigation) ?>
+    <?php foreach($this->pages as $key => $page): ?>
+        <?php /* @var $page \Zend\Navigation\Page\Mvc */ ?>
+        <?php if ($key < count($this->pages) - 1): ?>
+            <li>
+                <a href="<?php echo $page->getHref() ?>"><?php echo $this->translate($page->getLabel()) ?></a>
+                <span class="divider">/</span>
+            </li>
+        <?php else: ?>
+            <li class="active">
+                <?php echo $this->translate($page->getLabel()) ?>
+            </li>    
+        <?php endif ?>
+    <?php endforeach ?>
+</ul>

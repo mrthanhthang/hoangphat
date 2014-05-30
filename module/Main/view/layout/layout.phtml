@@ -1,0 +1,100 @@
+<?php echo $this->doctype(); ?>
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+		<meta name="google-site-verification" content="A0XNAugHQazno3xtGRFmiBOcWulXez0JrhLYujcXPPQ" />
+		<meta name="author" content="jason" />
+		<meta name="description" content="Chanh Tay" />
+		<meta name="keywords" content="glassware, gia dung, thuy tinh, chen, dia, ly, bat" />
+		<script>
+		  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+		  ga('create', 'UA-42301931-2', 'chanhtay.com');
+		  ga('send', 'pageview');
+		</script>
+
+        <?php echo $this->headTitle($this->translate('Chánh Tây'))->setSeparator(' - ')->setAutoEscape(false) ?>
+        <?php echo $this->headMeta()->appendName('viewport', 'width=device-width, initial-scale=1.0') ?>
+
+        <!-- Le styles -->
+        <?php echo $this->headLink(array('rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon', 'href' => $this->basePath() . '/img/favicon.ico'))
+                        ->prependStylesheet($this->basePath()."/css/ie7.css", "", 'lte IE 7')
+                        ->prependStylesheet($this->basePath()."/css/ie8.css", "", 'lte IE 8')
+                        ->prependStylesheet($this->basePath() . '/css/main.css')?>
+
+        <!-- Scripts -->
+        <?php echo $this->headScript()->prependFile($this->basePath() . '/js/html5.js', 'text/javascript', array('conditional' => 'lt IE 9',))
+                                      ->prependFile($this->basePath() . '/js/jquery.validate.js')
+                                      ->prependFile($this->basePath() . '/js/common.js')
+                                      ->prependFile($this->basePath() . '/js/jquery.js') ?>
+
+    </head>
+    <body>
+		<!-- Google Tag Manager -->
+		<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-RMPTZ"
+		height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+		<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+		new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+		j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+		'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+		})(window,document,'script','dataLayer','GTM-RMPTZ');</script>
+		<!-- End Google Tag Manager -->
+        <div class="containner">
+        <div class="header">
+            <div class="inner-header">
+                <div class="nav-header">
+                    <div class="quantity"><?php echo $cart; ?></div>
+                    <div class="cart"><a style="color: transparent;" href="<?php echo $this->url('main', array('action' => 'cart')); ?>" title="cart">Cart</a></div>
+                </div>
+                <div class="logo">
+                    <!--<a href="index.htm"><img alt="default logo" src="img/logo.gif"/></a>-->
+                    <h3 style="color: #494949;"><a href="<?php echo $this->url('main'); ?>">EXIMCO CHÁNH TÂY</a></h3>
+                    <div class="caret"></div>
+                </div>
+                <div class="info-header">
+                    <form name="search-form" method="" action="">
+                        <div class="search">
+                            <span>Search</span>
+                            <span class="slash-search">|</span>
+                            <input class="search-input"  name="search" />
+                            <button class="search-button"></button>
+                        </div>
+                    </form>
+                </div>
+                <div></div>
+            </div>
+        </div>
+        <?php echo $this->content; ?>
+        <div class="clear"></div>
+        <div class="footer-main">
+            <div class="clear"></div>
+            <div class="ft-botm">
+                <div class="inner-foot visit">
+                    <span style="font-weight: bold;">Visit</span><br />
+                    <span>124/8 An Nhơn, P17, Q.Gò Vấp</span><br />
+                    <span>Ho Chi Minh City, Viet Nam</span>
+                </div>
+                <div class="inner-foot call">
+                    <span style="font-weight: bold;">Call</span><br />
+                    <span>Tel: 0934 109-968</span><br />
+                    <span>Fax: 08 6297-5889</span>
+                </div>
+                <div class="inner-foot cont">
+                    <span style="font-weight: bold;">Contact</span><br />
+                    <span>jasonsmith2812@gmail.com</span>
+                </div>
+                <div class="inner-foot copy">
+                    <span style="font-weight: bold;">Copyright</span><br />
+                    <span>© <?php echo date('Y') ?> by Chánh Tây</span><br />
+                    <span>All rights reserved</span>
+                </div>
+            </div> 
+            <div class="clear"></div>     	 
+        </div>
+    </div>
+    </body>
+</html>

@@ -1,0 +1,104 @@
+<?php
+$title = 'Sản Phẩm Mới Nhất';
+$this->headTitle($title);
+?>
+<script>
+    $(document).ready(function(){
+        $('a#add-cart').click(function(){
+            var $key = $(this).attr('data-id');
+            var $name = $(this).attr('data-name');
+            $.ajax({
+                url: '<?php echo $this->url('main', array('action'=>'servCart')); ?>',
+                type: 'get',
+                data: 'key=' + $key,
+                async:false,
+                success: function(jsonValue){ 
+                    
+                    var getData = $.parseJSON(jsonValue);
+                    $quantity = getData.cart;
+                    $('.quantity').html($quantity);
+                    $('#nf strong#pro').html($name);
+                    $('#nf').fadeOut('fast');
+                },
+                error: function (){
+                    alert('Error');
+                }
+            });
+            $('#nf').fadeIn('fast');
+        });
+        $('#close').click(function(){
+           $('#nf').fadeOut('fast');
+        });
+        $('.list-item-cat li').hover(
+            function(){
+                $(this).children('.cart-cat').fadeIn('fast');
+            },
+            function(){
+                $(this).children('.cart-cat').fadeOut('fast');
+            }
+        );
+    })
+</script>
+<div style="display: none;" id="nf">Bạn đã thêm sản phẩm <strong id="pro">"..."</strong> vào giỏ hàng <a id="close">[close]</a></div>
+<div class="banner">
+    <div class="border-top"></div>
+    <div class="inner_banner">
+        <div class="top-cat note-top">
+            <div class="note-top-right"></div>
+        </div>
+        <div class="cat note">
+            <h3 style="font-size: 30px;"><span class="green-title">SHOP</span> CATEGORY</h3>
+            <ul class="category">
+                <?php if(isset($arrCat) && $arrCat){ foreach($arrCat as $cus){ ?>
+                <li><a href="<?php echo $this->url('main', array('action' => 'category'), array('query' => array('cid' =>  $cus->id))); ?>"><?php echo $cus->name; ?></a></li>
+                <?php }} ?>
+            </ul>
+            <div class="note-right"></div>
+        </div>
+        <div class="menu-top">
+            <ul>
+                <li><a href="<?php echo $this->url('main', array('action' => 'latest')); ?>" title="">Latest Items &nbsp;&nbsp;&nbsp;</a><span class="slash-menu">|</span></li>
+                <li><a href="<?php echo $this->url('main', array('action' => 'saleoff')); ?>" title="">Sale Off &nbsp;&nbsp;&nbsp;</a><span class="slash-menu">|</span></li>
+                <li><a href="<?php echo $this->url('main', array('action' => 'about')); ?>" title="">About Us &nbsp;&nbsp;&nbsp;</a><span class="slash-menu">|</span></li>
+                <li><a href="<?php echo $this->url('main', array('action' => 'contact')); ?>" title="">Contact </a></li>
+            </ul>
+        </div>
+        <div class="ad-inner-main" id="ad-inner-main">
+            <div class="cat-detail-main">
+                <div style="float: left;">
+                <?php if(isset($arrLT) && count($arrLT)){ ?>
+                <ul class="list-item-cat">
+                <?php foreach($arrLT as $k => $i){ isset($i->arr_images) && $i->arr_images ? $images = unserialize($i->arr_images) : $images = array(''); ?>
+                        <li style=""><a href="<?php echo $this->url('main', array('action' => 'product'), array('query' => array('pid' => $i->id))); ?>"><img src="<?php  echo $this->basePath().'/img/admin/items/'.$images[0]; ?>" alt="<?php  echo $i->name; ?>" /></a>
+                            <div class="caption">
+                                <div class="left-cap"><?php  echo $i->name; ?></div>
+                                <?php if(isset($i->discount_percent) && $i->discount_percent){ ?>
+                                <div class="right-cap"><span><?php echo number_format(($i->price - ($i->price * $i->discount_percent)/100),0,",","."); ?> đ</div>
+                                <div class="sale-percent"><del style="color: white;"><?php echo number_format($i->price,0,",","."); ?> đ</del>&nbsp;&nbsp;(<?php  echo $i->discount_percent; ?> %)</div>
+                                <?php }else{ ?>
+                                <div class="right-cap"><span><?php echo $i->price ? number_format($i->price,0,",",".").' đ' : 'Call'; ?></span></div>
+                                <?php } ?>
+                            </div>
+                            <div style="display: none;" class="cart-cat"> <a id="add-cart" data-name="<?php echo $i->name; ?>" data-id="<?php echo $i->id; ?>" href="javascript:void(0);">&nbsp;+ Thêm vào giỏ hàng</a></div>
+                        </li>
+                    <?php if(($k+1)%3 == 0){?></ul><ul class="list-item-cat"> <?php } ?>
+                <?php } echo '</ul>';} ?>
+                </div>
+                <div class="clear"></div>
+                <?php
+                if(isset($arrLT) && $arrLT && count($arrLT))
+                echo $this->paginationControl($this->arrLT, 'Sliding', 'partial/pagination', 
+                    array(
+                        'route' => 'main', 
+                        'action' => 'latest',
+                        'params' => array(
+                            
+                        ),
+                    )
+                ) ;
+            ?> 
+            </div>
+        </div>
+    </div>
+</div>
+

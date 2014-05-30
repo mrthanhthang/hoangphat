@@ -1,0 +1,187 @@
+<?php $this->layout()->setTemplate('error/404'); ?> 
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+		
+		<style>
+			*{
+				margin:0;
+				padding:0;
+			}
+			body{
+				font-family: 'Audiowide', cursive, arial, helvetica, sans-serif;
+				background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAUElEQVQYV2NkYGAwBuKzQAwDID4IoIgxIikAMZE1oRiArBDdZBSNMIXoJiFbDZYDKcSmCOYimDuNSVKIzRNYrUYOFuQgweoZbIoxgoeoAAcAEckW11HVTfcAAAAASUVORK5CYII=) repeat;
+				background-color:#212121;
+				color:white;
+				font-size: 18px;
+				padding-bottom:20px;
+			}
+			.error-code{
+				font-family: 'Creepster', cursive, arial, helvetica, sans-serif;
+				font-size: 200px;
+				color: white;
+				color: rgba(255, 255, 255, 0.98);
+				width: 50%;
+				text-align: right;
+				margin-top: 5%;
+				text-shadow: 5px 5px hsl(0, 0%, 25%);
+				float: left;
+			}
+			.not-found{
+				width: 47%;
+				float: right;
+				margin-top: 5%;
+				font-size: 50px;
+				color: white;
+				text-shadow: 2px 2px 5px hsl(0, 0%, 61%);
+				padding-top: 70px;
+			}
+			.clear{
+				float:none;
+				clear:both;
+			}
+			.content{
+				text-align:center;
+				line-height: 30px;
+			}
+			input[type=text]{
+				border: hsl(247, 89%, 72%) solid 1px;
+				outline: none;
+				padding: 5px 3px;
+				font-size: 16px;
+				border-radius: 8px;
+			}
+			a{
+				text-decoration: none;
+				color: #9ECDFF;
+				text-shadow: 0px 0px 2px white;
+			}
+			a:hover{
+				color:white;
+			}
+
+		</style>
+		<title>Error</title>
+	</head>
+	<body>
+		
+		<p class="error-code">
+			404
+		</p>
+		<p class="not-found">Not<br/>Found</p>
+		<div class="clear"></div>
+		<div class="content">
+            
+            <h2><?php echo $this->message ?></h2>
+            
+            <?php if (isset($this->reason) && $this->reason): ?>
+            
+            <?php
+            $reasonMessage= '';
+            switch ($this->reason) {
+                case 'error-controller-cannot-dispatch':
+                    $reasonMessage = $this->translate('The requested controller was unable to dispatch the request.');
+                    break;
+                case 'error-controller-not-found':
+                    $reasonMessage = $this->translate('The requested controller could not be mapped to an existing controller class.');
+                    break;
+                case 'error-controller-invalid':
+                    $reasonMessage = $this->translate('The requested controller was not dispatchable.');
+                    break;
+                case 'error-router-no-match':
+                    $reasonMessage = $this->translate('The requested URL could not be matched by routing.');
+                    break;
+                default:
+                    $reasonMessage = $this->translate('We cannot determine at this time why a 404 was generated.');
+                    break;
+            }
+            ?>
+            
+            <p><?php echo $reasonMessage ?></p>
+            
+            <?php endif ?>
+            
+            <?php if (isset($this->controller) && $this->controller): ?>
+            
+            <dl>
+                <dt><?php echo $this->translate('Controller') ?>:</dt>
+                <dd><?php echo $this->escapeHtml($this->controller) ?>
+            <?php
+            if (isset($this->controller_class)
+                && $this->controller_class
+                && $this->controller_class != $this->controller
+            ) {
+                echo '(' . sprintf($this->translate('resolves to %s'), $this->escapeHtml($this->controller_class)) . ')';
+            }
+            ?>
+            </dd>
+            </dl>
+            
+            <?php endif ?>
+            
+            <?php if (isset($this->display_exceptions) && $this->display_exceptions): ?>
+            
+            <?php if(isset($this->exception) && $this->exception instanceof Exception): ?>
+            <hr/>
+            <h2><?php echo $this->translate('Additional information') ?>:</h2>
+            <h3><?php echo get_class($this->exception); ?></h3>
+            <dl>
+                <dt><?php echo $this->translate('File') ?>:</dt>
+                <dd>
+                    <pre class="prettyprint linenums"><?php echo $this->exception->getFile() ?>:<?php echo $this->exception->getLine() ?></pre>
+                </dd>
+                <dt><?php echo $this->translate('Message') ?>:</dt>
+                <dd>
+                    <pre class="prettyprint linenums"><?php echo $this->exception->getMessage() ?></pre>
+                </dd>
+                <dt><?php echo $this->translate('Stack trace') ?>:</dt>
+                <dd>
+                    <pre class="prettyprint linenums"><?php echo $this->exception->getTraceAsString() ?></pre>
+                </dd>
+            </dl>
+            <?php
+                $e = $this->exception->getPrevious();
+                if ($e) :
+            ?>
+            <hr/>
+            <h2><?php echo $this->translate('Previous exceptions') ?>:</h2>
+            <ul class="unstyled">
+                <?php while($e) : ?>
+                <li>
+                    <h3><?php echo get_class($e); ?></h3>
+                    <dl>
+                        <dt><?php echo $this->translate('File') ?>:</dt>
+                        <dd>
+                            <pre class="prettyprint linenums"><?php echo $e->getFile() ?>:<?php echo $e->getLine() ?></pre>
+                        </dd>
+                        <dt><?php echo $this->translate('Message') ?>:</dt>
+                        <dd>
+                            <pre class="prettyprint linenums"><?php echo $e->getMessage() ?></pre>
+                        </dd>
+                        <dt><?php echo $this->translate('Stack trace') ?>:</dt>
+                        <dd>
+                            <pre class="prettyprint linenums"><?php echo $e->getTraceAsString() ?></pre>
+                        </dd>
+                    </dl>
+                </li>
+                <?php
+                    $e = $e->getPrevious();
+                    endwhile;
+                ?>
+            </ul>
+            <?php endif; ?>
+            
+            <?php else: ?>
+            
+            <h3><?php echo $this->translate('No Exception available') ?></h3>
+            
+            <?php endif ?>
+            
+            <?php endif ?>
+			The page your are looking for is not found.
+			<br/><a href="index.html">Go Home</a> or<br/><form>Search<br/><input autofocus type="text" name="search" /></form>
+		</div>
+	</body>
+</html>
+

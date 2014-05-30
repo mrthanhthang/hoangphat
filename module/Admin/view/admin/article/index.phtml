@@ -1,0 +1,55 @@
+<div class="row-fluid sortable">
+    <div class="box span12">
+        <div class="box-header well">
+            <h2><i class="icon-briefcase"></i> Danh Sách Bài Viết</h2>
+        </div>
+        <div class="box-content">
+            <table class="table table-striped table-bordered bootstrap-datatable datatable">
+                <thead>
+                <tr>
+                    <th>Tiêu Đề</th>
+                    <th>Thuộc</th>
+                    <th>Hình ảnh</th>
+                    <th>Trạng thái</th>
+                    <th>Thao tác</th>
+                </tr>
+                </thead>
+                <tbody>
+                <?php if(isset($arrArticle) && $arrArticle && count($arrArticle)){ ?>
+                    <?php foreach($arrArticle as $item){?>
+
+                        <tr>
+                            <td ><?php echo $item->title; ?></td>
+                            <td class="center"><?php echo $item->name; ?></td>
+                            <td width="20%" class="center"><img width="90%" alt="<?php echo isset($item) && isset($item->name) && $item->name ? $item->name : '' ; ?>" src="<?php echo isset($item) && isset(unserialize($item->properties)['avata']) && unserialize($item->properties)['avata'] ? $this->basePath().'/img/admin/article/'.unserialize($item->properties)['avata'] : ''; ?>" class="grayscale" style="display: block;"/>
+                            </td>
+                            <td class="center"><?php echo $item->status; ?></td>
+                            <td class="center">
+                                <a class="btn btn-success" href="<?php echo $this->url('adarticle', array('action' => 'detail'), array('query' => array('id' => $item->id))); ?>">
+                                    <i class="icon-zoom-in icon-white"></i>
+                                    Xem
+                                </a>
+                                <a class="btn btn-info" href="<?php echo $this->url('adarticle', array('action' => 'save'), array('query' => array('id' => $item->id))); ?>">
+                                    <i class="icon-edit icon-white"></i>
+                                    Sửa
+                                </a>
+                                <a class="btn btn-danger" href="#">
+                                    <i class="icon-trash icon-white"></i>
+                                    Xóa
+                                </a>
+                            </td>
+
+                        </tr>
+                    <?php }}else {?>
+                    <tr>
+                        <td colspan="7">
+                            <?php echo $this->render('partial/result_not_found'); ?>
+                        </td>
+                    </tr>
+                <?php } ?>
+                </tbody>
+            </table>
+        </div>
+    </div><!--/span-->
+
+</div>

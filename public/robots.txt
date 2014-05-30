@@ -1,0 +1,2 @@
+User-agent: *
+Sitemap: http://chanhtay.com/sitemap.xml

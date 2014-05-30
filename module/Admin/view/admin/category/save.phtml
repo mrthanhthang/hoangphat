@@ -1,0 +1,64 @@
+<script type="text/javascript">
+    $(document).ready(function(){
+       $("#formUp").validate({
+            rules: {
+                    name: "required",
+            },      
+           errorPlacement: function(error,element) {
+                    return true;
+                },
+           submitHandler: function(form) {
+            
+              form.submit();
+           }
+        }); 
+    });
+</script>
+<div class="row-fluid sortable ui-sortable">
+				<div class="box span12">
+					<div class="box-header well">
+						<h2><i class="icon-edit"></i> Danh Mục</h2>
+					</div>
+					<div class="box-content">
+						<form class="form-horizontal" id="formUp" method="post" action="" name="save" enctype="multipart/form-data">
+						  <fieldset>
+							<div class="control-group">
+							  <label class="control-label" for="typeahead">Tên danh mục</label>
+							  <div class="controls">
+								<input type="text" name="name" value="<?php echo isset($cus) && isset($cus->name) && $cus->name ? $cus->name : '' ; ?>" class="span4 typeahead" id="typeahead" data-provide="typeahead" data-items="4" data-source="[&quot;Alabama&quot;,&quot;Alaska&quot;,&quot;Arizona&quot;,&quot;Arkansas&quot;,&quot;California&quot;,&quot;Colorado&quot;,&quot;Connecticut&quot;,&quot;Delaware&quot;,&quot;Florida&quot;,&quot;Georgia&quot;,&quot;Hawaii&quot;,&quot;Idaho&quot;,&quot;Illinois&quot;,&quot;Indiana&quot;,&quot;Iowa&quot;,&quot;Kansas&quot;,&quot;Kentucky&quot;,&quot;Louisiana&quot;,&quot;Maine&quot;,&quot;Maryland&quot;,&quot;Massachusetts&quot;,&quot;Michigan&quot;,&quot;Minnesota&quot;,&quot;Mississippi&quot;,&quot;Missouri&quot;,&quot;Montana&quot;,&quot;Nebraska&quot;,&quot;Nevada&quot;,&quot;New Hampshire&quot;,&quot;New Jersey&quot;,&quot;New Mexico&quot;,&quot;New York&quot;,&quot;North Dakota&quot;,&quot;North Carolina&quot;,&quot;Ohio&quot;,&quot;Oklahoma&quot;,&quot;Oregon&quot;,&quot;Pennsylvania&quot;,&quot;Rhode Island&quot;,&quot;South Carolina&quot;,&quot;South Dakota&quot;,&quot;Tennessee&quot;,&quot;Texas&quot;,&quot;Utah&quot;,&quot;Vermont&quot;,&quot;Virginia&quot;,&quot;Washington&quot;,&quot;West Virginia&quot;,&quot;Wisconsin&quot;,&quot;Wyoming&quot;]" />
+							  </div>
+							</div>
+							<div class="control-group">
+							  <label class="control-label">Hình ảnh</label>
+							  <div class="controls">
+                                <ul class="thumbnails gallery">
+							         <li class="thumbnail" id="image-1">
+								        <img alt="<?php echo isset($cus) && isset($cus->name) && $cus->name ? $cus->name : '' ; ?>" src="<?php echo isset($cus) && isset($cus->image) && $cus->image ? $this->basePath().'/img/admin/cats/'.$cus->image : ''; ?>" class="grayscale" style="display: block;"/>
+							         </li>
+				                </ul>
+								<input name="image" type="file"/>
+							  </div>
+							</div>
+                            
+							<div class="control-group">
+							  <label class="control-label" for="typeahead">Danh mục cha</label>
+							  <div class="controls">
+                                <select name="parent_id" id="1">
+                                    <option value="0">------- Chọn danh mục -------</option>
+                                    <?php if($arrPID){ foreach($arrPID as $pID){ ?>
+                                    <option <?php echo isset($cus) && isset($cus->parent_id) && $cus->parent_id == $pID->id ? 'selected="on"' : '' ; ?> value="<?php echo $pID->id; ?>"><?php echo $pID->name; ?></option>
+                                    <?php }} ?>
+                                </select>
+                              </div>
+							</div>
+							<div class="form-actions">
+							  <button type="submit" class="btn btn-primary">Cập nhật</button>
+							  <button type="reset" class="btn">Hủy</button>
+							</div>
+						  </fieldset>
+						</form>   
+
+					</div>
+				</div><!--/span-->
+
+			</div>

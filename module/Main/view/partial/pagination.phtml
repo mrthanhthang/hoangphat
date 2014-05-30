@@ -1,0 +1,52 @@
+<?php
+/*
+ * Develop by Webis Team
+ * Leader : Doan Tran Buu Loc (locdt@webis.com)
+ * Project Name : AD Webis
+ * Created date : 07/06/2013
+ * Copyright © Webis.INC. All right reserved 
+ */
+$route  = $this->route;
+$action = $this->action;
+$params = $this->params; 
+
+$build_query = '';
+if(is_array($params)){
+    foreach($params as $key => $val){
+        if(is_null($val) || $val == '')
+            unset($params[$key]);
+    }
+    $build_query = http_build_query($params);
+    
+    if(sizeof($params) > 0){
+        $build_query = '&'.$build_query;
+    }
+}
+
+if (isset($this->pageCount) && $this->totalItemCount > $this->itemCountPerPage): ?>
+<div class="pagination pagination-centered">
+   <ul>
+        <?php if (! is_null($this->previous)): ?>
+            <li><a href="<?php echo $this->url($route, array('action' => $action)) ?>?page=<?php echo $this->first . $build_query ?>">«</a></li>
+            <li><a href="<?php echo $this->url($route, array('action' => $action)) ?>?page=<?php echo $this->previous . $build_query ?>">Prev</a></li>
+        <?php else: ?>    
+            <li class="disabled"><a href="javascript:void(0)">«</a></li>
+            <li class="disabled"><a href="javascript:void(0)">Prev</a></li>
+        <?php endif; ?>
+        <?php foreach ($this->pagesInRange as $page): ?>
+             <?php if ($page == $this->current): ?>
+                <li class="active"><a href="<?php echo $this->url($route, array('action' => $action)) ?>?page=<?php echo $page . $build_query ?>"><?php echo $page ?></a></li>
+             <?php else: ?>
+                <li><a href="<?php echo $this->url($route, array('action' => $action)) ?>?page=<?php echo $page . $build_query ?>"><?php echo $page ?></a></li>
+             <?php endif; ?>     
+        <?php endforeach; ?>
+        <?php if (! is_null($this->next)): ?>
+            <li><a href="<?php echo $this->url($route, array('action' => $action)) ?>?page=<?php echo $this->next . $build_query ?>">Next</a></li>
+            <li><a href="<?php echo $this->url($route, array('action' => $action)) ?>?page=<?php echo $this->last . $build_query ?>">»</a></li>
+        <?php else: ?>    
+            <li class="disabled"><a href="javascript:void(0)">Next</a></li>
+            <li class="disabled"><a href="javascript:void(0)">»</a></li>
+        <?php endif; ?>
+  </ul>  
+</div>
+<?php endif; ?>

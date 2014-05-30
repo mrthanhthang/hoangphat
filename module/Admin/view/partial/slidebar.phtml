@@ -1,0 +1,44 @@
+<?php
+/*
+ * Develop by Webis Team
+ * Leader : Doan Tran Buu Loc (locdt@webis.com)
+ * Project Name : AD Webis
+ * Created date : 14/06/2013
+ * Copyright © Webis.INC. All right reserved 
+ */
+?>
+<?php
+$widgets = isset($config['widget']) ? $config['widget'] : null;
+
+if (!is_null($widgets) && isset($widgets['title'])) {
+    $widgets = array(
+        0 => $widgets,
+    );
+}
+?>
+<div id="panel-left-top"></div>  
+<div id="panel-left-mid">
+    <div id="left-menu">
+        <?php if (!is_null($widgets)): ?>
+            <?php foreach ($widgets as $widget): ?>
+                <h4><?php echo $this->translate($widget['title']) ?></h4>
+                <ul>
+                    <?php if (is_array($widget['item'])): ?>
+                        <?php
+                        if (isset($widget['item']['action']))
+                            $widget['item'] = array(
+                                0 => $widget['item'],
+                            );
+                        ?>
+                        <?php foreach ($widget['item'] as $val): ?>
+                            <li>
+                                <a name="navi" href="<?php echo $this->url($config['route'], array('action' => $val['action'])) ?>"><?php echo $this->translate($val['name']) ?></a>
+                            </li>
+                        <?php endforeach; ?> 
+                    <?php endif; ?>
+                </ul>
+            <?php endforeach; ?>
+        <?php endif; ?>
+    </div>
+</div>
+<div id="panel-left-bot"></div>  

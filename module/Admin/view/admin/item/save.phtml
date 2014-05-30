@@ -1,0 +1,129 @@
+<?php isset($item) && isset($item->arr_images) && count($item->arr_images) ? $images = unserialize($item->arr_images) : array() ; ?>
+<script type="text/javascript">
+    $(document).ready(function(){
+       var image = '<li>';
+            image += '<input name="arr_images[]" type="file"/>&nbsp;&nbsp;';
+            image += '<button id="danger" type="button" class="btn btn-danger">';
+            image += '<i class="icon-remove"></i>';
+            image += '<span> Hủy</span>';
+            image += '</button>';
+            image += '</li>';
+       $('#add').click(function(){
+            $('#attach').append(image);
+       });
+       $('.thumbnail #remove').click(function(){
+            var $parent = $(this).parent();
+            $parent.hide('fast');
+            $parent.append('<input type="hidden" name="remove[]" value="'+$parent.attr('data-role')+'" />');
+       });
+       $("#formUp").validate({
+            rules: {
+                    name: "required",
+            },      
+           errorPlacement: function(error,element) {
+                    return true;
+                },
+           submitHandler: function(form) {
+            
+              form.submit();
+           }
+        }); 
+    });
+</script>
+<div class="row-fluid sortable ui-sortable">
+				<div class="box span12">
+					<div class="box-header well">
+						<h2><i class="icon-edit"></i> Sản Phầm</h2>
+					</div>
+					<div class="box-content">
+						<form class="form-horizontal" id="formUp" method="post" action="" name="save" enctype="multipart/form-data">
+						  <fieldset>
+							<div class="control-group">
+							  <label class="control-label" for="typeahead">Tên sản phẩm</label>
+							  <div class="controls">
+								<input type="text" name="name" value="<?php echo isset($item) && isset($item->name) && $item->name ? $item->name : '' ; ?>" class="span4 typeahead" id="typeahead" data-provide="typeahead" data-items="4" data-source="[&quot;Alabama&quot;,&quot;Alaska&quot;,&quot;Arizona&quot;,&quot;Arkansas&quot;,&quot;California&quot;,&quot;Colorado&quot;,&quot;Connecticut&quot;,&quot;Delaware&quot;,&quot;Florida&quot;,&quot;Georgia&quot;,&quot;Hawaii&quot;,&quot;Idaho&quot;,&quot;Illinois&quot;,&quot;Indiana&quot;,&quot;Iowa&quot;,&quot;Kansas&quot;,&quot;Kentucky&quot;,&quot;Louisiana&quot;,&quot;Maine&quot;,&quot;Maryland&quot;,&quot;Massachusetts&quot;,&quot;Michigan&quot;,&quot;Minnesota&quot;,&quot;Mississippi&quot;,&quot;Missouri&quot;,&quot;Montana&quot;,&quot;Nebraska&quot;,&quot;Nevada&quot;,&quot;New Hampshire&quot;,&quot;New Jersey&quot;,&quot;New Mexico&quot;,&quot;New York&quot;,&quot;North Dakota&quot;,&quot;North Carolina&quot;,&quot;Ohio&quot;,&quot;Oklahoma&quot;,&quot;Oregon&quot;,&quot;Pennsylvania&quot;,&quot;Rhode Island&quot;,&quot;South Carolina&quot;,&quot;South Dakota&quot;,&quot;Tennessee&quot;,&quot;Texas&quot;,&quot;Utah&quot;,&quot;Vermont&quot;,&quot;Virginia&quot;,&quot;Washington&quot;,&quot;West Virginia&quot;,&quot;Wisconsin&quot;,&quot;Wyoming&quot;]" />
+							  </div>
+							</div>
+							<div class="control-group">
+							  <label class="control-label">Hình ảnh</label>
+							  <div class="controls">
+                                <ul class="thumbnails gallery">
+							         <li class="thumbnail" id="image-1" style="margin: 0;">
+								        <img alt="<?php echo isset($item) && isset($item->name) && $item->name ? $item->name : '' ; ?>" src="<?php echo isset($item) && isset($item->arr_images) && $item->arr_images ? $this->basePath().'/img/admin/items/'.$images[0] : ''; ?>" class="grayscale" style="display: block;"/> 
+								        <input name="arr_images[0]" type="file"/>
+                                     </li>
+				                </ul>
+							  </div>
+							</div>
+                            <div class="control-group">
+							  <label class="control-label">Hình ảnh đính kèm</label>
+							  <div class="controls">
+                                <?php if(isset($images) && count($images) > 1){ unset($images[0]); $i = 1;?>
+                                <ul class="thumbnails gallery">
+                                    <?php foreach($images as $img){ ?>
+							         <li class="thumbnail" id="image-1" data-role="<?php echo $i; $i++?>" style="margin: 0;">
+                                     <i id="remove" class="icon-remove" style="cursor: pointer;"></i>
+								        <img alt="<?php echo isset($item) && isset($item->name) && $item->name ? $item->name : '' ; ?>" src="<?php echo isset($item) && isset($item->arr_images) && $item->arr_images ? $this->basePath().'/img/admin/items/'.$img : ''; ?>" class="grayscale" style="display: block;"/>
+                                        <input name="arr_images[]" type="file"/>
+                                     </li>
+                                     <?php } ?>
+				                </ul>
+                                <h4>Ảnh mới</h4>
+                                <?php } ?>
+                                <ul id="attach">
+                                    <li>
+                                        <input name="arr_images[]" type="file"/>
+                                    </li>
+                                </ul>
+                                <button id="add" type="button" class="btn btn-info">
+                                <i class="icon-plus"></i>
+                                <span> Thêm ảnh</span>
+                                </button>
+							  </div>
+							</div>
+                            <div class="control-group">
+							  <label class="control-label">Danh mục</label>
+							  <div class="controls">
+								<select name="category_id">
+                                    <option value="0">------- Chọn danh mục -------</option>
+                                    <?php if($arrPID){ foreach($arrPID as $pID){ ?>
+                                    <option <?php echo isset($item) && isset($item->category_id) && $item->category_id == $pID->id ? 'selected="on"' : '' ; ?> value="<?php echo $pID->id; ?>"><?php echo $pID->name; ?></option>
+                                    <?php }} ?>
+                                </select>
+							  </div>
+							</div>
+                            <div class="control-group">
+							  <label class="control-label">Giá</label>
+							  <div class="controls">
+								<input class="span2 required number" value="<?php echo isset($item) && isset($item->price) && $item->price ? $item->price : '' ; ?>" type="text" name="price" />
+							  </div>
+							</div>   
+                            <div class="control-group">
+							  <label class="control-label">Giảm giá</label>
+							  <div class="controls">
+								<input class="span2" value="<?php echo isset($item) && isset($item->discount_percent) && $item->discount_percent ? $item->discount_percent : '' ; ?>" type="text" name="discount_percent" />
+							  </div>
+							</div>     
+							<div class="control-group">
+							  <label class="control-label">Mô tả</label>
+							  <div class="controls">
+                                <textarea name="description"><?php echo isset($item) && isset($item->description) && $item->description ? $item->description : '' ; ?></textarea>
+							  </div>
+							</div>
+                            <div class="control-group">
+							  <label class="control-label">Kích hoạt</label>
+							  <div class="controls">
+                                <input name="is_active" type="checkbox" <?php echo isset($item) && isset($item->is_active) && $item->is_active == 1 ? 'checked="on"' : 'checked="on"' ; ?>  value="1"/>
+							  </div>
+							</div>
+							<div class="form-actions">
+							  <button type="submit" class="btn btn-primary">Save changes</button>
+							  <button type="reset" class="btn">Cancel</button>
+							</div>
+						  </fieldset>
+						</form>   
+
+					</div>
+				</div><!--/span-->
+
+			</div>

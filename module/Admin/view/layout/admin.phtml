@@ -1,0 +1,156 @@
+<?php echo $this->doctype(); ?>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <?php echo $this->headTitle('Admin - Chanh Tay Corporation')->setSeparator(' - ')->setAutoEscape(false) ?>
+
+    <?php echo $this->headMeta()->appendName('viewport', 'width=device-width, initial-scale=1.0') ?>
+
+    <!-- Le styles -->
+    <?php echo $this->headLink(array('rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon', 'href' => $this->basePath() . '/img/favicon.ico'))
+                    ->prependStylesheet($this->basePath() . '/css/style.css')
+                    ->prependStylesheet($this->basePath() . '/css/chosen.css')
+                    ->prependStylesheet($this->basePath() . '/css/bootstrap-responsive.css')
+                    ->prependStylesheet($this->basePath() . '/css/bootstrap.css') ?>
+
+    <!-- Scripts -->
+    <?php echo $this->headScript()->prependFile($this->basePath() . '/js/bootstrap.min.js')
+                                  ->prependFile($this->basePath() . '/js/jquery.validate.js')
+                                  ->prependFile($this->basePath() . '/js/tinymce/tinymce.min.js')
+                                  ->prependFile($this->basePath() . '/js/jquery.js') 
+                                  ->prependFile($this->basePath() . '/js/html5.js', 'text/javascript', array('conditional' => 'lt IE 9',))?>
+
+    <script type="text/javascript">      
+        $(document).ready(function() {
+            $('img').error(function(){
+                $(this).attr('src', '<?php echo $this->basePath('img/no_photo.jpg') ?>');
+            });
+            
+            //Call Texteditor plugin
+            tinymce.init({
+                selector: "textarea",
+                theme: "modern",
+                plugins: [
+                    "advlist autolink lists link image charmap print preview hr anchor pagebreak",
+                    "searchreplace wordcount visualblocks visualchars code fullscreen",
+                    "insertdatetime media nonbreaking save table contextmenu directionality",
+                    "emoticons template paste textcolor"
+                ],
+                toolbar1: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image",
+                toolbar2: "print preview media | forecolor backcolor emoticons",
+                image_advtab: true,
+                language : 'vi_VN',
+                height: 400,
+             });
+        });
+    </script>
+  </head>
+
+  <body>
+		<!-- topbar starts -->
+	<div class="navbar">
+		<div class="navbar-inner">
+			<div class="container-fluid">
+				<a class="btn btn-navbar" data-toggle="collapse" data-target=".top-nav.nav-collapse,.sidebar-nav.nav-collapse">
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</a>
+				<a class="brand" href="<?php echo $this->url('admin') ?>"><span>Sport</span></a>
+				
+				<!-- user dropdown starts -->
+                <?php if(isset($user) && $user){ ?>
+				<div class="btn-group pull-right" >
+					<a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+						<i class="icon-user"></i><span class="hidden-phone"> <?php echo isset($user->username) ? $user->username : ''; ?></span>
+						<span class="caret"></span>
+					</a>
+					<ul class="dropdown-menu">
+						<li><a href="#">Profile</a></li>
+						<li class="divider"></li>
+						<li><a href="<?php echo $this->url('aditm', array('action' => 'logout')) ?>">Logout</a></li>
+					</ul>
+				</div>
+                <?php } ?>
+				<!-- user dropdown ends -->
+				
+				<div class="top-nav nav-collapse">
+					<ul class="nav">
+						<li><a href="<?php echo $this->url('main') ?>">Visit Site</a></li>
+					</ul>
+				</div><!--/.nav-collapse -->
+			</div>
+		</div>
+	</div>
+	<!-- topbar ends -->
+		<div class="container-fluid">
+		<div class="row-fluid">
+				
+			<!-- left menu starts -->
+			<div class="span2 main-menu-span">
+				<div class="well nav-collapse sidebar-nav">
+					<ul class="nav nav-tabs nav-stacked main-menu">
+						<li class="nav-header hidden-tablet">Sản Phẩm</li>
+						<li><a class="ajax-link" href="<?php echo $this->url('aditm'); ?>"><i class="icon-align-justify"></i><span class="hidden-tablet"> Danh Sách</span></a></li>
+						<li><a class="ajax-link" href="<?php echo $this->url('aditm', array('action' => 'save')); ?>"><i class="icon-plus"></i><span class="hidden-tablet"> Thêm Mới</span></a></li>
+                        <li class="nav-header hidden-tablet">Danh Mục</li>
+						<li><a class="ajax-link" href="<?php echo $this->url('adcat'); ?>"><i class="icon-align-justify"></i><span class="hidden-tablet"> Danh Sách</span></a></li>
+						<li><a class="ajax-link" href="<?php echo $this->url('adcat', array('action' => 'save')); ?>"><i class="icon-plus"></i><span class="hidden-tablet"> Thêm Mới</span></a></li>
+                        <li class="nav-header hidden-tablet">Đơn Hàng</li>
+						<li><a class="ajax-link" href="<?php echo $this->url('adord'); ?>"><i class="icon-align-justify"></i><span class="hidden-tablet"> Danh Sách</span></a></li>
+                        <!-- Customer menu -->
+                        <li class="nav-header hidden-tablet">Khách Hàng</li>
+						<li><a class="ajax-link" href="<?php echo $this->url('adcus'); ?>"><i class="icon-align-justify"></i><span class="hidden-tablet"> Danh Sách</span></a></li>
+						<li><a class="ajax-link" href="<?php echo $this->url('adcus', array('action' => 'save')); ?>"><i class="icon-plus"></i><span class="hidden-tablet"> Thêm Mới</span></a></li>
+                        <!-- Article categories menu -->                        
+                        <li class="nav-header hidden-tablet">Loại bài viết</li>
+						<li><a class="ajax-link" href="<?php echo $this->url('adartCat'); ?>"><i class="icon-align-justify"></i><span class="hidden-tablet"> Danh Sách</span></a></li>
+						<li><a class="ajax-link" href="<?php echo $this->url('adartCat', array('action' => 'save')); ?>"><i class="icon-plus"></i><span class="hidden-tablet"> Thêm Mới</span></a></li>
+                        <!-- Article menu -->                        
+                        <li class="nav-header hidden-tablet">Bài viết</li>
+						<li><a class="ajax-link" href="<?php echo $this->url('adarticle'); ?>"><i class="icon-align-justify"></i><span class="hidden-tablet"> Danh Sách</span></a></li>
+						<li><a class="ajax-link" href="<?php echo $this->url('adarticle', array('action' => 'save')); ?>"><i class="icon-plus"></i><span class="hidden-tablet"> Thêm Mới</span></a></li>
+                        
+                        
+					</ul>
+				</div><!--/.well -->
+			</div><!--/span-->
+			<!-- left menu ends -->
+			
+			<div id="content" class="span10">
+                <div>
+    				<ul class="breadcrumb">
+    					<li>
+    						<a href="<?php echo $this->url('aditm'); ?>">Home</a>
+    					</li>
+    				</ul>
+    			</div>
+                <?php echo $this->content; ?>
+			</div><!--/#content.span10-->
+				</div><!--/fluid-row-->
+				
+		<hr>
+
+		<div class="modal hide fade" id="myModal">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">×</button>
+				<h3>Settings</h3>
+			</div>
+			<div class="modal-body">
+				<p>Here settings can be configured...</p>
+			</div>
+			<div class="modal-footer">
+				<a href="#" class="btn" data-dismiss="modal">Close</a>
+				<a href="#" class="btn btn-primary">Save changes</a>
+			</div>
+		</div>
+
+		<footer>
+			<p class="pull-left">&copy; <a href="#" target="_blank">Webis</a> 2012</p>
+			<p class="pull-right">Powered by: <a href="#">Sport</a></p>
+		</footer>
+		
+	</div><!--/.fluid-container-->
+</body>
+</html>

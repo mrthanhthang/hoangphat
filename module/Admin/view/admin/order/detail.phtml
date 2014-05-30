@@ -1,0 +1,78 @@
+<div class="row-fluid sortable">		
+	<div class="box span12">
+		<div class="box-header well">
+			<h2><i class="icon-briefcase"></i> Thông Tin Đơn Hàng</h2>
+		</div>
+		<div class="box-content">
+			<table class="table table-striped table-bordered bootstrap-datatable datatable">
+			  <thead>
+				  <tr>
+					  <th>Sản phẩm</th>
+					  <th>Số lượng</th>
+                      <th>Giá</th>
+					  <th>Giảm giá</th>
+					  <th>Tổng Cộng</th>
+				  </tr>
+			  </thead>   
+			  <tbody>
+              <?php if(isset($arrItem) && $arrItem && count($arrItem)){ $total = 0; ?>
+              <?php foreach($arrItem as $i){ 
+                if(isset($i->discount_percent) && $i->discount_percent)
+                    $total += ($i->price - ($i->price*$i->discount_percent)/100)*$i->quantity;
+                else
+                    $total +=  $i->price * $i->quantity;
+              ?>
+				<tr>
+					<td><?php echo $i->name; ?></td>
+					<td class="center"><?php echo $i->quantity; ?></td>
+					<td class="center"><?php echo number_format($i->price,0,",","."); ?> đ</td>
+					<td class="center"><span class="label label-warning"><?php echo $i->discount_percent; ?> %</span></td>
+                    <td class="center"><?php echo number_format(($i->price - ($i->price*$i->discount_percent)/100)*$i->quantity,0,",","."); ?> đ</td>
+				</tr>
+            <?php } ?>
+                <tr>
+                    <td colspan="5" style="text-align: right;">Tổng Tiền = <?php echo number_format($total,0,",","."); ?> đ</td>
+                </tr>
+            <?php }else echo $this->render('partial/result_not_found'); ?>
+			  </tbody>
+		  </table>         
+		</div>
+	</div>		
+</div>
+<div class="row-fluid sortable">		
+	<div class="box span12">
+		<div class="box-header well">
+			<h2><i class="icon-search"></i> Thông Tn Khách Hàng</h2>
+		</div>
+		<div class="box-content">
+            <form class="form-horizontal" id="formUp" method="get" action="" name="search" enctype="multipart/form-data">
+                <fieldset>
+                    <div class="control-group">
+                        <label class="control-label" for="typeahead">Tên khách hàng</label>
+                        <div class="controls">
+                            <input type="text" name="order_name" value="<?php echo $ord->order_name; ?>" readonly="on" class="span4 typeahead" id="typeahead" data-provide="typeahead" data-items="4" data-source="[&quot;Alabama&quot;,&quot;Alaska&quot;,&quot;Arizona&quot;,&quot;Arkansas&quot;,&quot;California&quot;,&quot;Colorado&quot;,&quot;Connecticut&quot;,&quot;Delaware&quot;,&quot;Florida&quot;,&quot;Georgia&quot;,&quot;Hawaii&quot;,&quot;Idaho&quot;,&quot;Illinois&quot;,&quot;Indiana&quot;,&quot;Iowa&quot;,&quot;Kansas&quot;,&quot;Kentucky&quot;,&quot;Louisiana&quot;,&quot;Maine&quot;,&quot;Maryland&quot;,&quot;Massachusetts&quot;,&quot;Michigan&quot;,&quot;Minnesota&quot;,&quot;Mississippi&quot;,&quot;Missouri&quot;,&quot;Montana&quot;,&quot;Nebraska&quot;,&quot;Nevada&quot;,&quot;New Hampshire&quot;,&quot;New Jersey&quot;,&quot;New Mexico&quot;,&quot;New York&quot;,&quot;North Dakota&quot;,&quot;North Carolina&quot;,&quot;Ohio&quot;,&quot;Oklahoma&quot;,&quot;Oregon&quot;,&quot;Pennsylvania&quot;,&quot;Rhode Island&quot;,&quot;South Carolina&quot;,&quot;South Dakota&quot;,&quot;Tennessee&quot;,&quot;Texas&quot;,&quot;Utah&quot;,&quot;Vermont&quot;,&quot;Virginia&quot;,&quot;Washington&quot;,&quot;West Virginia&quot;,&quot;Wisconsin&quot;,&quot;Wyoming&quot;]" />
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="typeahead">Email</label>
+                        <div class="controls">
+                            <input type="text" name="order_email" value="<?php echo $ord->order_email; ?>" readonly="on" class="span4 typeahead" id="typeahead" data-provide="typeahead" data-items="4" data-source="[&quot;Alabama&quot;,&quot;Alaska&quot;,&quot;Arizona&quot;,&quot;Arkansas&quot;,&quot;California&quot;,&quot;Colorado&quot;,&quot;Connecticut&quot;,&quot;Delaware&quot;,&quot;Florida&quot;,&quot;Georgia&quot;,&quot;Hawaii&quot;,&quot;Idaho&quot;,&quot;Illinois&quot;,&quot;Indiana&quot;,&quot;Iowa&quot;,&quot;Kansas&quot;,&quot;Kentucky&quot;,&quot;Louisiana&quot;,&quot;Maine&quot;,&quot;Maryland&quot;,&quot;Massachusetts&quot;,&quot;Michigan&quot;,&quot;Minnesota&quot;,&quot;Mississippi&quot;,&quot;Missouri&quot;,&quot;Montana&quot;,&quot;Nebraska&quot;,&quot;Nevada&quot;,&quot;New Hampshire&quot;,&quot;New Jersey&quot;,&quot;New Mexico&quot;,&quot;New York&quot;,&quot;North Dakota&quot;,&quot;North Carolina&quot;,&quot;Ohio&quot;,&quot;Oklahoma&quot;,&quot;Oregon&quot;,&quot;Pennsylvania&quot;,&quot;Rhode Island&quot;,&quot;South Carolina&quot;,&quot;South Dakota&quot;,&quot;Tennessee&quot;,&quot;Texas&quot;,&quot;Utah&quot;,&quot;Vermont&quot;,&quot;Virginia&quot;,&quot;Washington&quot;,&quot;West Virginia&quot;,&quot;Wisconsin&quot;,&quot;Wyoming&quot;]" />
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="typeahead">Địa chỉ</label>
+                        <div class="controls">
+                            <input type="text" name="order_address" value="<?php echo $ord->order_address; ?>" readonly="on" class="span4 typeahead" id="typeahead" data-provide="typeahead" data-items="4" data-source="[&quot;Alabama&quot;,&quot;Alaska&quot;,&quot;Arizona&quot;,&quot;Arkansas&quot;,&quot;California&quot;,&quot;Colorado&quot;,&quot;Connecticut&quot;,&quot;Delaware&quot;,&quot;Florida&quot;,&quot;Georgia&quot;,&quot;Hawaii&quot;,&quot;Idaho&quot;,&quot;Illinois&quot;,&quot;Indiana&quot;,&quot;Iowa&quot;,&quot;Kansas&quot;,&quot;Kentucky&quot;,&quot;Louisiana&quot;,&quot;Maine&quot;,&quot;Maryland&quot;,&quot;Massachusetts&quot;,&quot;Michigan&quot;,&quot;Minnesota&quot;,&quot;Mississippi&quot;,&quot;Missouri&quot;,&quot;Montana&quot;,&quot;Nebraska&quot;,&quot;Nevada&quot;,&quot;New Hampshire&quot;,&quot;New Jersey&quot;,&quot;New Mexico&quot;,&quot;New York&quot;,&quot;North Dakota&quot;,&quot;North Carolina&quot;,&quot;Ohio&quot;,&quot;Oklahoma&quot;,&quot;Oregon&quot;,&quot;Pennsylvania&quot;,&quot;Rhode Island&quot;,&quot;South Carolina&quot;,&quot;South Dakota&quot;,&quot;Tennessee&quot;,&quot;Texas&quot;,&quot;Utah&quot;,&quot;Vermont&quot;,&quot;Virginia&quot;,&quot;Washington&quot;,&quot;West Virginia&quot;,&quot;Wisconsin&quot;,&quot;Wyoming&quot;]" />
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="typeahead">Số điện thoại</label>
+                        <div class="controls">
+                            <input type="text" name="order_phone" value="<?php echo $ord->order_phone; ?>" readonly="on" class="span4 typeahead" id="typeahead" data-provide="typeahead" data-items="4" data-source="[&quot;Alabama&quot;,&quot;Alaska&quot;,&quot;Arizona&quot;,&quot;Arkansas&quot;,&quot;California&quot;,&quot;Colorado&quot;,&quot;Connecticut&quot;,&quot;Delaware&quot;,&quot;Florida&quot;,&quot;Georgia&quot;,&quot;Hawaii&quot;,&quot;Idaho&quot;,&quot;Illinois&quot;,&quot;Indiana&quot;,&quot;Iowa&quot;,&quot;Kansas&quot;,&quot;Kentucky&quot;,&quot;Louisiana&quot;,&quot;Maine&quot;,&quot;Maryland&quot;,&quot;Massachusetts&quot;,&quot;Michigan&quot;,&quot;Minnesota&quot;,&quot;Mississippi&quot;,&quot;Missouri&quot;,&quot;Montana&quot;,&quot;Nebraska&quot;,&quot;Nevada&quot;,&quot;New Hampshire&quot;,&quot;New Jersey&quot;,&quot;New Mexico&quot;,&quot;New York&quot;,&quot;North Dakota&quot;,&quot;North Carolina&quot;,&quot;Ohio&quot;,&quot;Oklahoma&quot;,&quot;Oregon&quot;,&quot;Pennsylvania&quot;,&quot;Rhode Island&quot;,&quot;South Carolina&quot;,&quot;South Dakota&quot;,&quot;Tennessee&quot;,&quot;Texas&quot;,&quot;Utah&quot;,&quot;Vermont&quot;,&quot;Virginia&quot;,&quot;Washington&quot;,&quot;West Virginia&quot;,&quot;Wisconsin&quot;,&quot;Wyoming&quot;]" />
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,19 @@
+.top-cat {
+    background: url('../img/linen_header.jpg') repeat transparent;
+    min-height: 20px;
+    position: absolute;
+    top: -20px;
+    width: 220px;
+    left: 0px;
+}
+ul#banner-list li {top: 0!important;}
+.category a,.menu-top a{color: #FFFFFF!important;}
+.logo h3 a{color: #494949!important;}
+.banner-index ul{padding-left: 400px;}
+.banner-index ul li {float: left;}
+#main{padding-top: 50px;}
+#thumb-tray{position: relative!important;}
+#ad-inner-main{position: relative!important; bottom: 0px; left: 0px; width: 880px;}
+.thumb-pro-tray{position: relative!important;}
+#ad-inner-main-all{position: relative!important; top: 0px; left: 0px; width: 880px;}
+.note-right{display: none;}
