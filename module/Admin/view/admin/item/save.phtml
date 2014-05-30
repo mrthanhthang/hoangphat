@@ -10,6 +10,10 @@
             image += '</li>';
        $('#add').click(function(){
             $('#attach').append(image);
+           $('.btn-danger').click(function(){
+               var obj = $(this).parent();
+               obj.remove();
+           });
        });
        $('.thumbnail #remove').click(function(){
             var $parent = $(this).parent();

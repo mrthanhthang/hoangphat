@@ -8,7 +8,7 @@ use Zend\View\Model\ViewModel;
 class ArticleCategoryController extends AbstractActionController
 {
     protected $articleCategoryTable;
-   
+
     public function getArticleCategoryTable()
     {
         if (!$this->articleCategoryTable) {
@@ -54,10 +54,9 @@ class ArticleCategoryController extends AbstractActionController
                 move_uploaded_file($file["tmp_name"], $mkdirArticle . $newFile);
                 $properties['avata'] = $newFile;
             }
-          
             $objRequest->properties = $properties;             
             $this->getArticleCategoryTable()->saveArticleCategory($objRequest); 
-            return $this->redirect()->toRoute('adartCat');    
+            return $this->redirect()->toRoute('adartCat');
         }
                    
         /* Edit Article Category*/
@@ -69,5 +68,18 @@ class ArticleCategoryController extends AbstractActionController
             );
         }       
         return array('treeArtCat' => $treeArtCat);
+    }
+    public function delAction()
+    {
+        $mkdirArticle = 'public/img/admin/article/';
+        $id = $this->params()->fromQuery('id');
+        $item = $this->getArticleCategoryTable()->getArticleCategory($id);
+        if($item) {
+            $image = $item->properties['avata'];
+            if($image) unlink($mkdirArticle.$image);
+            $this->getArticleCategoryTable()->deleteArticleCategory($item->id);
+        }
+        return $this->redirect()->toRoute('adartCat');
+        return new ViewModel(array());
     }
 }

@@ -82,4 +82,8 @@ class ArticleCategoryTable
             }
         }
     }
+    public function deleteArticleCategory($id)
+    {
+        $this->tableGateway->delete(array('id' => $id));
+    }
 }

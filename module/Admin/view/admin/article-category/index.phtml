@@ -60,7 +60,7 @@
 							<i class="icon-edit icon-white"></i>  
 							Sửa                                            
 						</a>
-						<a class="btn btn-danger" href="#">
+						<a class="btn btn-danger" href="<?php echo $this->url('adartCat', array('action' => 'del'), array('query' => array('id' => $item->id))); ?>">
 							<i class="icon-trash icon-white"></i> 
 							Xóa
 						</a>

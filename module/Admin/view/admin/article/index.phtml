@@ -49,6 +49,19 @@
                 <?php } ?>
                 </tbody>
             </table>
+            <?php
+            if(isset($arrArticle) && $arrArticle && count($arrArticle))
+                echo $this->paginationControl($this->arrArticle, 'Sliding', 'partial/pagination',
+                    array(
+                        'route' => 'adarticle',
+                        'action' => 'index',
+                        'params' => array(
+                            'name' => isset($_GET['name']) ? $_GET['name'] : '' ,
+                            'cat_id' => isset($_GET['cat_id']) ? $_GET['cat_id'] : '',
+                        ),
+                    )
+                ) ;
+            ?>
         </div>
     </div><!--/span-->
 

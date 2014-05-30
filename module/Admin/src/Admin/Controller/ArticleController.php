@@ -37,6 +37,7 @@ class ArticleController extends AbstractActionController
     }
     public function saveAction() {
         $mkdirArticle = 'public/img/admin/article/';
+
         $treeArtCat = $this->getArticleCategoryTable()->getTreeMenu(0);
         $request = $this->getRequest();
         $properties = array();
@@ -60,6 +61,26 @@ class ArticleController extends AbstractActionController
                 $properties['avata'] = $newFile;
             }
 
+            /*Attach File*/
+            if ($_FILES['arr_file']) {
+                $arr_file = $this->getArticleTable()->reArrayFiles($_FILES['arr_file']);
+                foreach($arr_file as $file){
+                    if($file['name']){
+                        $newFile = "artcat" . $file['size']. "_" . time('now') . "." . substr($file["name"], strrpos($file["name"], '.') + 1);
+                        move_uploaded_file($file["tmp_name"], $mkdirArticle . $newFile);
+                        $properties['file'][] = $newFile;
+                    }
+                }
+            }
+
+            /*Delete File attach*/
+            if(isset($objRequest->remove) && $objRequest->remove && count($objRequest->remove)){
+                foreach($objRequest->remove as $remove){
+                    if($properties['file'][$remove]) unlink($mkdirArticle.$properties['file'][$remove]);
+                    unset($properties['file'][$remove]);
+                }
+            }
+
             $objRequest->properties = $properties;
             $this->getArticleTable()->saveArticle($objRequest);
             return $this->redirect()->toRoute('adarticle');
@@ -68,6 +89,17 @@ class ArticleController extends AbstractActionController
         /* Edit Article*/
         if (isset($_GET['id'])) {
             $article = $this->getArticleTable()->getArticle($_GET['id']);
+
+            if(isset($_GET['delva']) && $_GET['delva'] == 'delva'){
+
+                if($article -> properties['avata']){
+                    unlink($mkdirArticle.$article -> properties['avata']);
+                    unset($article -> properties['avata']);
+                    $this->getArticleTable()->saveArticle($article);
+                    return $this->redirect()->toRoute('adarticle', array('action' => 'save'), array('query' => array('id' => $article->id )));
+                }
+            }
+
             return array(
                 'article' => $article,
                 'treeArtCat' => $treeArtCat

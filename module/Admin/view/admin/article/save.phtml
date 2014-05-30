@@ -1,5 +1,24 @@
 <script type="text/javascript">
     $(document).ready(function(){
+        var image = '<li>';
+        image += '<input name="arr_file[]" type="file"/>&nbsp;&nbsp;';
+        image += '<button id="danger" type="button" class="btn btn-danger">';
+        image += '<i class="icon-remove"></i>';
+        image += '<span> Hủy</span>';
+        image += '</button>';
+        image += '</li>';
+        $('#add').click(function(){
+            $('#attach').append(image);
+            $('.btn-danger').click(function(){
+                var obj = $(this).parent();
+                obj.remove();
+            });
+        });
+        $('.thumbnail #remove').click(function(){
+            var $parent = $(this).parent();
+            $parent.hide('fast');
+            $parent.append('<input type="hidden" name="remove[]" value="'+$parent.attr('data-role')+'" />');
+        });
         $("#formUp").validate({
             rules: {
                 name: "required",
@@ -41,23 +60,51 @@
                         </div>
                     </div>
                     <div class="control-group">
-                        <label class="control-label" for="typeahead">HÌnh ảnh</label>
+                        <label class="control-label" for="typeahead">HÌnh Avata</label>
                         <div class="controls">
                             <ul class="thumbnails gallery">
-                                <li class="thumbnail" id="image-1" style="margin: 0px;">
-                                    <?php  if (isset($article)){?>
+                                <li class="thumbnail" id="image-1"  style="margin: 0px;">
+                                    <?php  if (isset($article->properties['avata'])){?>
                                         <a style="height: 10px;" href="<?php echo $this->url('adarticle', array('action' => 'save'), array('query' => array('id' => $article->id, 'delva' => 'delva'))); ?>">
                                             <i style="cursor: pointer;" class="icon-remove" id=""></i>
                                         </a>
+
+                                    <img alt="<?php echo isset($article) && isset($article->name) && $article->name ? $article->name : '' ; ?>" src="<?php echo isset($article) && isset($article->properties['avata']) && $article->properties['avata'] ? $this->basePath().'/img/admin/article/'.$article->properties['avata'] : ''; ?>" class="grayscale" style="display: block;"/>
                                     <?php
                                     }
                                     ?>
-                                    <img alt="<?php echo isset($article) && isset($article->name) && $article->name ? $article->name : '' ; ?>" src="<?php echo isset($article) && isset($article->properties['avata']) && $article->properties['avata'] ? $this->basePath().'/img/admin/article/'.$article->properties['avata'] : ''; ?>" class="grayscale" style="display: block;"/>
-
                                     <input name="image" type="file"/>
                                 </li>
                             </ul>
 
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">Hình ảnh đính kèm</label>
+                        <div class="controls">
+                            <?php if(isset($article->properties['file'])){
+                                $arr_file = $article->properties['file'];
+                                ?>
+                                <ul class="thumbnails gallery">
+                                    <?php foreach($arr_file as $key => $img){ $i=1 ?>
+                                        <li class="thumbnail" id="image-1" data-role="<?php echo $key?>" style="margin: 0;">
+                                            <i id="remove" class="icon-remove" style="cursor: pointer;"></i>
+                                            <img src="<?php echo $this->basePath().'/img/admin/article/'.$img ; ?>" class="grayscale" style="display: block;"/>
+                                            <input name="arr_images[]" type="file"/>
+                                        </li>
+                                    <?php } ?>
+                                </ul>
+                                <h4>Ảnh mới</h4>
+                            <?php } ?>
+                            <ul id="attach">
+                                <li>
+                                    <input name="arr_file[]" type="file"/>
+                                </li>
+                            </ul>
+                            <button id="add" type="button" class="btn btn-info">
+                                <i class="icon-plus"></i>
+                                <span> Thêm ảnh</span>
+                            </button>
                         </div>
                     </div>
                     <div class="control-group">

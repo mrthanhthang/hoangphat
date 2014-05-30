@@ -72,6 +72,7 @@ class ItemController extends AbstractActionController
                 mkdir('public/img/admin/items');
             if ($_FILES['arr_images']) {
                 $file_ary = $this->getItemTable()->reArrayFiles($_FILES['arr_images']);
+
                 foreach ($file_ary as $key => $file) {
                     if ($file['name'] != null) {
                         $newFile = "item_" . $file['size']. "_" . time('now') . "." . substr($file["name"], strrpos($file["name"], '.') + 1);
@@ -94,7 +95,7 @@ class ItemController extends AbstractActionController
             }
             $objRequest->arr_images = serialize(array_unique($listImg));
             $this->getItemTable()->saveItem($objRequest);
-            return $this->redirect()->toRoute('aditm');
+            //return $this->redirect()->toRoute('aditm');
         }
         $arrPID = $this->getCategoryTable()->getParentID();
         if (isset($_GET['id'])) {          
@@ -113,7 +114,13 @@ class ItemController extends AbstractActionController
     {
         $id = $this->params()->fromQuery('id');
         $item = $this->getItemTable()->getItem($id);
-        if($item) $this->getItemTable()->deleteItem($item->id);
+        if($item) {
+            $arr_images = unserialize( $item->arr_images);
+            foreach($arr_images as $image){
+                unlink("public/img/admin/items/$image");
+            }
+            $this->getItemTable()->deleteItem($item->id);
+        }
         return $this->redirect()->toRoute('aditm');
         return new ViewModel(array());
     }
