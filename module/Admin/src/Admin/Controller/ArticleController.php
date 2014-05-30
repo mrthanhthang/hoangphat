@@ -89,7 +89,7 @@ class ArticleController extends AbstractActionController
         /* Edit Article*/
         if (isset($_GET['id'])) {
             $article = $this->getArticleTable()->getArticle($_GET['id']);
-
+            /* Delete avata*/
             if(isset($_GET['delva']) && $_GET['delva'] == 'delva'){
 
                 if($article -> properties['avata']){

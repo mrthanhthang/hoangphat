@@ -49,9 +49,9 @@
 				<tr>                				
 					<td ><?php echo $item->name; ?></td>
 					<td class="center"><?php echo $item->parent_id; ?></td>
-					<td class="center"><img alt="<?php echo isset($item) && isset($item->name) && $item->name ? $item->name : '' ; ?>" src="<?php echo isset($item) && isset($item->properties['avata']) && $item->properties['avata'] ? $this->basePath().'/img/admin/article/'.$item->properties['avata'] : ''; ?>" class="grayscale" style="display: block; width: 80px;"/></td>                   
+					<td class="center"><img alt="<?php echo isset($item) && isset($item->name) && $item->name ? $item->name : '' ; ?>" src="<?php echo isset($item) && isset($item->properties['avata']) && $item->properties['avata'] ? $this->basePath().'/img/admin/article/'.$item->properties['avata'] : ''; ?>" class="" style=" width: 80px;"/></td>
 					<td class="center"><?php echo $item->status; ?></td>
-                    <td class="center">
+                    <td class="right">
 						<a class="btn btn-success" href="<?php echo $this->url('adartCat', array('action' => 'detail'), array('query' => array('id' => $item->id))); ?>">
 							<i class="icon-zoom-in icon-white"></i>  
 							Xem                                            

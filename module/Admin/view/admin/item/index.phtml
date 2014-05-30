@@ -45,7 +45,7 @@
 					  <th>Tên sản phẩm</th>
 					  <th>Ngày tạo</th>
 					  <th>Giá</th>
-					  <th>Giảm giá</th>
+					  <th>Trạng Thái</th>
 					  <th>Thao tác</th>
 				  </tr>
 			  </thead>   
@@ -58,20 +58,26 @@
 					<td class="center"><?php echo $i->date_create; ?></td>
 					<td class="center"><?php echo $i->price; ?></td>
 					<td class="center">
-						<span class="label label-warning"><?php echo $i->discount_percent; ?> %</span>
+						<span class="label label-warning"><?php echo $status['product']['1'] ?> %</span>
 					</td>
-					<td class="center">
-						<a class="btn btn-success" href="<?php echo $this->url('main', array('action' => 'product'), array('query' => array('pid' => $i->id))); ?>">
-							<i class="icon-zoom-in icon-white"></i>  
-							Xem                                            
+					<td style="text-align: right">
+						<a title="Xem" class="btn btn-success" href="<?php echo $this->url('main', array('action' => 'product'), array('query' => array('pid' => $i->id))); ?>">
+							<i class="icon-zoom-in icon-white"></i>
 						</a>
-						<a class="btn btn-info" href="<?php echo $this->url('aditm', array('action' => 'save'), array('query' => array('id' => $i->id))); ?>">
-							<i class="icon-edit icon-white"></i>  
-							Sửa                                            
+						<a title="Sửa" class="btn btn-info" href="<?php echo $this->url('aditm', array('action' => 'save'), array('query' => array('id' => $i->id))); ?>">
+							<i class="icon-edit icon-white"></i>
 						</a>
-						<a class="btn btn-danger" href="<?php echo $this->url('aditm', array('action' => 'del'), array('query' => array('id' => $i->id))); ?>">
-							<i class="icon-trash icon-white"></i> 
-							Xóa
+                        <a title="SetHome" class="btn btn-inverse" href="<?php echo $this->url('aditm', array('action' => 'index'), array('query' => array('id' => $i->id, 'action' => 'sethome', ))); ?>">
+                            <i class="icon-home icon-white"></i>
+                        </a>
+                        <a title="Enable" class="btn btn-success" href="<?php echo $this->url('aditm', array('action' => 'index'), array('query' => array('id' => $i->id, 'action' => 'enable', ))); ?>">
+                            <i class="icon-ok icon-white"></i>
+                        </a>
+                        <a title="Disable" class="btn btn-inverse" href="<?php echo $this->url('aditm', array('action' => 'index'), array('query' => array('id' => $i->id, 'action' => 'disable', ))); ?>">
+                            <i class="icon-off icon-white"></i>
+                        </a>
+						<a title="Xóa" class="btn btn-danger" href="<?php echo $this->url('aditm', array('action' => 'del'), array('query' => array('id' => $i->id))); ?>">
+							<i class="icon-trash icon-white"></i>
 						</a>
 					</td>
 				</tr>

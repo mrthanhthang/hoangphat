@@ -48,7 +48,27 @@ class ItemController extends AbstractActionController
             $arrItem = $this->getItemTable()->searchItem($name, $cat_id, $pIndex);
         }else
             $arrItem = $this->getItemTable()->fetchAll($pIndex);
-			
+
+        /*Action product*/
+        if(isset($_GET['action']) && $_GET['action']){
+            $action = $_GET['action'];
+            $id = $_GET['id'];
+            /*Set home product*/
+            if($action == 'sethome'){
+                $data = array('home' => SET_HOME);
+                $this->getItemTable()->updateItem($id,$data);
+            }
+            /*Enable product*/
+            if($action == 'enable'){
+                $this->getItemTable()->changStatusItem($id,ENABLE);
+            }
+            /*Disable product*/
+            if($action == 'disable'){
+                $this->getItemTable()->changStatusItem($id,DISABLE);
+            }
+        }
+
+
         $arrPID = $this->getCategoryTable()->getParentID();      
         return new ViewModel(array(
             'arrItem' => $arrItem,

@@ -12,7 +12,12 @@ class Item
     public $is_active;
     public $price;
     public $discount_percent;
-	public $view;
+    public $view;
+
+    public $status;
+    public $home;
+
+
 
     public function exchangeArray($data)
     {
@@ -26,6 +31,9 @@ class Item
         $this->price                = (isset($data['price'])) ? $data['price'] : null;
         $this->discount_percent     = (isset($data['discount_percent'])) ? $data['discount_percent'] : null;
         $this->view                 = (isset($data['view'])) ? $data['view'] : null;
+
+        $this->status               = (isset($data['status'])) ? $data['status'] : null;
+        $this->home                 = (isset($data['home'])) ? $data['home'] : null;
     }
     
     // Add the following method:

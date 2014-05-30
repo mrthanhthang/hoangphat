@@ -21,7 +21,7 @@
                         <tr>
                             <td ><?php echo $item->title; ?></td>
                             <td class="center"><?php echo $item->name; ?></td>
-                            <td width="20%" class="center"><img width="90%" alt="<?php echo isset($item) && isset($item->name) && $item->name ? $item->name : '' ; ?>" src="<?php echo isset($item) && isset(unserialize($item->properties)['avata']) && unserialize($item->properties)['avata'] ? $this->basePath().'/img/admin/article/'.unserialize($item->properties)['avata'] : ''; ?>" class="grayscale" style="display: block;"/>
+                            <td width="20%" class="center"><img width="90%" alt="<?php echo isset($item) && isset($item->name) && $item->name ? $item->name : '' ; ?>" src="<?php echo isset($item) && isset(unserialize($item->properties)['avata']) && unserialize($item->properties)['avata'] ? $this->basePath().'/img/admin/article/'.unserialize($item->properties)['avata'] : ''; ?>" class="" style="display: block;"/>
                             </td>
                             <td class="center"><?php echo $item->status; ?></td>
                             <td class="center">

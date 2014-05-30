@@ -207,7 +207,16 @@ class ItemTable
             }
         }
     }
-
+    /* Update Item product*/
+    public function updateItem($id, $data)
+    {
+        $this->tableGateway->update($data, array('id' => $id));
+    }
+    /* Chang status product*/
+    public function changStatusItem($id, $value)
+    {
+        $this->tableGateway->update(array('status' => $value), array('id' => $id));
+    }
     public function deleteItem($id)
     {
         $this->tableGateway->delete(array('id' => $id));

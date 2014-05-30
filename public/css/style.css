@@ -503,3 +503,13 @@ min-height:297px;
 }
 #attach{list-style: none; margin: 0 0 20px 0!important; }
 #attach li{margin-bottom: 10px!important;}
+
+
+.status-enable{
+    color: #003cb3;
+    font-weight: bold;
+}
+.status-disable{
+    color: #b1191e;
+    font-weight: bold;
+}

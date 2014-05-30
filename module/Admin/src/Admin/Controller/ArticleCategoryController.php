@@ -61,7 +61,18 @@ class ArticleCategoryController extends AbstractActionController
                    
         /* Edit Article Category*/
         if (isset($_GET['id'])) {
-            $articleCategory = $this->getArticleCategoryTable()->getArticleCategory($_GET['id']);            
+            $articleCategory = $this->getArticleCategoryTable()->getArticleCategory($_GET['id']);
+
+            /* Delete avata*/
+            if(isset($_GET['delva']) && $_GET['delva'] == 'delva'){
+                if($articleCategory -> properties['avata']){
+                    unlink($mkdirArticle.$articleCategory -> properties['avata']);
+                    unset($articleCategory -> properties['avata']);
+                    $this->getArticleCategoryTable()->saveArticleCategory($articleCategory);
+                    return $this->redirect()->toRoute('adartCat', array('action' => 'save'), array('query' => array('id' => $articleCategory->id )));
+                }
+            }
+
             return array(
                 'articleCategory' => $articleCategory,
                 'treeArtCat' => $treeArtCat                

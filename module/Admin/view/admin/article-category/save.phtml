@@ -45,15 +45,14 @@
 							  <div class="controls">
                                 <ul class="thumbnails gallery">                               
 							         <li class="thumbnail" id="image-1" style="margin: 0px;">
-                                     <?php  if (isset($articleCategory)){?>
+                                     <?php  if (isset($articleCategory) && isset($articleCategory->properties['avata'])){?>
                                          <a style="height: 10px;" href="<?php echo $this->url('adartCat', array('action' => 'save'), array('query' => array('id' => $articleCategory->id, 'delva' => 'delva'))); ?>">
                                              <i style="cursor: pointer;" class="icon-remove" id=""></i>
                                         </a>
-                                     <?php
+								        <img alt="<?php echo isset($articleCategory) && isset($articleCategory->name) && $articleCategory->name ? $articleCategory->name : '' ; ?>" src="<?php echo isset($articleCategory) && isset($articleCategory->properties['avata']) && $articleCategory->properties['avata'] ? $this->basePath().'/img/admin/article/'.$articleCategory->properties['avata'] : ''; ?>" class="" style="display: block;"/>
+                                         <?php
                                          }
-                                     ?>
-								        <img alt="<?php echo isset($articleCategory) && isset($articleCategory->name) && $articleCategory->name ? $articleCategory->name : '' ; ?>" src="<?php echo isset($articleCategory) && isset($articleCategory->properties['avata']) && $articleCategory->properties['avata'] ? $this->basePath().'/img/admin/article/'.$articleCategory->properties['avata'] : ''; ?>" class="grayscale" style="display: block;"/>
-
+                                         ?>
                                          <input name="image" type="file"/>
                                      </li>
 				                </ul>
