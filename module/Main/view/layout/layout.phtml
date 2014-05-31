@@ -1,100 +1,108 @@
 <?php echo $this->doctype(); ?>
 
-<html lang="en">
-    <head>
-        <meta charset="utf-8">
-		<meta name="google-site-verification" content="A0XNAugHQazno3xtGRFmiBOcWulXez0JrhLYujcXPPQ" />
-		<meta name="author" content="jason" />
-		<meta name="description" content="Chanh Tay" />
-		<meta name="keywords" content="glassware, gia dung, thuy tinh, chen, dia, ly, bat" />
-		<script>
-		  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-		  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-		  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-		  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+    <meta charset="utf-8">
+    <title>Untitled Page</title>
+    <!-- Le styles -->
+    <?php echo $this->headLink(array('rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon', 'href' => $this->basePath() . '/img/favicon.ico'))
+        ->prependStylesheet($this->basePath() . '/css/main.css')
+        ->prependStylesheet($this->basePath() . '/css/skitter.styles.css')
+        ->prependStylesheet($this->basePath() . '/css/highlight.black.css')
+        ->prependStylesheet($this->basePath() . '/css/sexy-bookmarks-style.css')?>
 
-		  ga('create', 'UA-42301931-2', 'chanhtay.com');
-		  ga('send', 'pageview');
-		</script>
+    <!-- Scripts -->
+    <?php echo $this->headScript()
+        ->prependFile($this->basePath() . '/js/highlight.js')
+        ->prependFile($this->basePath() . '/js/jquery.skitter.js')
+        ->prependFile($this->basePath() . '/js/jquery.animate-colors-min.js')
+        ->prependFile($this->basePath() . '/js/jquery.easing.1.3.js')
+        ->prependFile($this->basePath() . '/js/jquery-1.6.3.min.js')
+        ->prependFile($this->basePath() . '/js/html5.js', 'text/javascript', array('conditional' => 'lt IE 9',))
+        ->prependFile($this->basePath() . '/js/jquery.validate.js')
+        ->prependFile($this->basePath() . '/js/common.js')
+        ->prependFile($this->basePath() . '/js/jquery.js')
+    ?>
+    <script>
 
-        <?php echo $this->headTitle($this->translate('Chánh Tây'))->setSeparator(' - ')->setAutoEscape(false) ?>
-        <?php echo $this->headMeta()->appendName('viewport', 'width=device-width, initial-scale=1.0') ?>
-
-        <!-- Le styles -->
-        <?php echo $this->headLink(array('rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon', 'href' => $this->basePath() . '/img/favicon.ico'))
-                        ->prependStylesheet($this->basePath()."/css/ie7.css", "", 'lte IE 7')
-                        ->prependStylesheet($this->basePath()."/css/ie8.css", "", 'lte IE 8')
-                        ->prependStylesheet($this->basePath() . '/css/main.css')?>
-
-        <!-- Scripts -->
-        <?php echo $this->headScript()->prependFile($this->basePath() . '/js/html5.js', 'text/javascript', array('conditional' => 'lt IE 9',))
-                                      ->prependFile($this->basePath() . '/js/jquery.validate.js')
-                                      ->prependFile($this->basePath() . '/js/common.js')
-                                      ->prependFile($this->basePath() . '/js/jquery.js') ?>
-
-    </head>
-    <body>
-		<!-- Google Tag Manager -->
-		<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-RMPTZ"
-		height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-		<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-		new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-		j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-		'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-		})(window,document,'script','dataLayer','GTM-RMPTZ');</script>
-		<!-- End Google Tag Manager -->
-        <div class="containner">
+        $(function () {
+            $('.box_skitter_large').skitter({ dots: true });
+        });
+    </script>
+</head>
+<body>
+    <div class="wrapper">
         <div class="header">
-            <div class="inner-header">
-                <div class="nav-header">
-                    <div class="quantity"><?php echo $cart; ?></div>
-                    <div class="cart"><a style="color: transparent;" href="<?php echo $this->url('main', array('action' => 'cart')); ?>" title="cart">Cart</a></div>
-                </div>
-                <div class="logo">
-                    <!--<a href="index.htm"><img alt="default logo" src="img/logo.gif"/></a>-->
-                    <h3 style="color: #494949;"><a href="<?php echo $this->url('main'); ?>">EXIMCO CHÁNH TÂY</a></h3>
-                    <div class="caret"></div>
-                </div>
-                <div class="info-header">
-                    <form name="search-form" method="" action="">
-                        <div class="search">
-                            <span>Search</span>
-                            <span class="slash-search">|</span>
-                            <input class="search-input"  name="search" />
-                            <button class="search-button"></button>
-                        </div>
-                    </form>
-                </div>
-                <div></div>
+            <div class="btn_share">
+                <img src="img/s1.png" alt="logo hoangphat" />
+                <img src="img/s2.png" alt="logo hoangphat" />
+                <img src="img/s3.png" alt="logo hoangphat" />
             </div>
         </div>
-        <?php echo $this->content; ?>
-        <div class="clear"></div>
-        <div class="footer-main">
-            <div class="clear"></div>
-            <div class="ft-botm">
-                <div class="inner-foot visit">
-                    <span style="font-weight: bold;">Visit</span><br />
-                    <span>124/8 An Nhơn, P17, Q.Gò Vấp</span><br />
-                    <span>Ho Chi Minh City, Viet Nam</span>
+        <div class="content">
+            <div class="menu">
+                <div class="logo">
+                    <img src="img/logo.png" width="108px" alt="logo hoangphat" />
+
                 </div>
-                <div class="inner-foot call">
-                    <span style="font-weight: bold;">Call</span><br />
-                    <span>Tel: 0934 109-968</span><br />
-                    <span>Fax: 08 6297-5889</span>
+                <div class="menu_top">
+                    <ul class="menu_v">
+                        <a href="#"><li class="active">Trang chủ</li></a>
+                        <a href="#"><li>Giới thiệu</li></a>
+                        <a href="#"><li>Dự án tiêu biểu</li></a>
+                        <a href="#"><li>Không gian nội thất</li></a>
+                        <a href="#"><li>Tin tức</li></a>
+                        <a href="#"><li>Liên hệ</li></a>
+                    </ul>
                 </div>
-                <div class="inner-foot cont">
-                    <span style="font-weight: bold;">Contact</span><br />
-                    <span>jasonsmith2812@gmail.com</span>
+            </div>
+            <div class="slide">
+                <div class="border_box" >
+                    <div class="box_skitter box_skitter_large ">
+                        <ul>
+                            <li><a href="#cube"><img src="img/1.png" class="cube" /></a></li>
+                            <li><a href="#cubeRandom"><img src="img/1.png" class="cubeRandom" /></a></li>
+
+                        </ul>
+                    </div>
                 </div>
-                <div class="inner-foot copy">
-                    <span style="font-weight: bold;">Copyright</span><br />
-                    <span>© <?php echo date('Y') ?> by Chánh Tây</span><br />
-                    <span>All rights reserved</span>
+
+            </div>
+
+            <div class="project">
+                <div class="tab1_l">
+
+                    <img src="img/pic1.png" alt="logo hoangphat" />
+                    <div class="title_tab1">Dự án mũi né</div>
+
                 </div>
-            </div> 
-            <div class="clear"></div>     	 
+
+                <div class="tab1_l" style="margin-right:0px">
+
+                    <img src="img/pic1.png" alt="logo hoangphat" />
+                    <div class="title_tab1">Dự án mũi né</div>
+
+                </div>
+                <div class="news_fi">
+                    <div class="header_news_fi">Thông tin mới</div>
+                    <ul class="n_e">
+                        <li>Hưởng ứng ngày môi trường thế giới 05/6/2013</li>
+                        <li>Hưởng ứng ngày môi trường thế giới 05/6/2013</li>
+                        <li>Hưởng ứng ngày môi trường thế giới 05/6/2013</li>
+                        <li>Hưởng ứng ngày môi trường thế giới 05/6/2013</li>
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="footer">
+
+            <div class="footer_left">Copyright Hoang Phat 2014</div>
+            <div class="footer_right">Số lượt truy cập: 100</div>
         </div>
     </div>
-    </body>
+</body>
 </html>
