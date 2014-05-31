@@ -43,8 +43,8 @@
 				  <tr>
                       <th>Hình ảnh</th>
 					  <th>Tên sản phẩm</th>
-					  <th>Ngày tạo</th>
-					  <th>Giá</th>
+
+					  <th>Home</th>
 					  <th>Trạng Thái</th>
 					  <th>Thao tác</th>
 				  </tr>
@@ -55,16 +55,20 @@
 				<tr>
                     <td><img style="width: 80px; padding: 1px; border: 2px solid;" src="<?php  if($images) echo $this->basePath().'/img/admin/items/'.$images[0]; ?>" /></td>
 					<td><?php echo $i->name; ?></td>
-					<td class="center"><?php echo $i->date_create; ?></td>
-					<td class="center"><?php echo $i->price; ?></td>
-					<td class="center">
-						<span class="label label-warning"><?php echo $status['product']['1'] ?> %</span>
-					</td>
+					<td class="center"><?php if($i->home ==1){ ?>
+                            <a title="UnSetHome" class="btn btn-inverse" href="<?php echo $this->url('aditm', array('action' => 'index'), array('query' => array('id' => $i->id, 'action' => 'unsethome', ))); ?>">
+                                <i class="icon-home icon-white"></i>
+                            </a>
+                        <?php
+                        }
+                      ?>
+                      </td>
+					<td class="center"><?php echo $i->status == 1 ? status_1 : status_0 ; ?></td>
 					<td style="text-align: right">
-						<a title="Xem" class="btn btn-success" href="<?php echo $this->url('main', array('action' => 'product'), array('query' => array('pid' => $i->id))); ?>">
+						<a title="View" class="btn btn-success" href="<?php echo $this->url('main', array('action' => 'product'), array('query' => array('pid' => $i->id))); ?>">
 							<i class="icon-zoom-in icon-white"></i>
 						</a>
-						<a title="Sửa" class="btn btn-info" href="<?php echo $this->url('aditm', array('action' => 'save'), array('query' => array('id' => $i->id))); ?>">
+						<a title="Edit" class="btn btn-info" href="<?php echo $this->url('aditm', array('action' => 'save'), array('query' => array('id' => $i->id))); ?>">
 							<i class="icon-edit icon-white"></i>
 						</a>
                         <a title="SetHome" class="btn btn-inverse" href="<?php echo $this->url('aditm', array('action' => 'index'), array('query' => array('id' => $i->id, 'action' => 'sethome', ))); ?>">
@@ -76,7 +80,7 @@
                         <a title="Disable" class="btn btn-inverse" href="<?php echo $this->url('aditm', array('action' => 'index'), array('query' => array('id' => $i->id, 'action' => 'disable', ))); ?>">
                             <i class="icon-off icon-white"></i>
                         </a>
-						<a title="Xóa" class="btn btn-danger" href="<?php echo $this->url('aditm', array('action' => 'del'), array('query' => array('id' => $i->id))); ?>">
+						<a title="Delete" class="btn btn-danger" href="<?php echo $this->url('aditm', array('action' => 'del'), array('query' => array('id' => $i->id))); ?>">
 							<i class="icon-trash icon-white"></i>
 						</a>
 					</td>

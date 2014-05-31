@@ -21,6 +21,7 @@ class Item
 
     public function exchangeArray($data)
     {
+        echo 'vao iem ri';
         $this->id                   = (isset($data['id'])) ? $data['id'] : null;
         $this->name                 = (isset($data['name'])) ? $data['name'] : null;
         $this->category_id          = (isset($data['category_id'])) ? $data['category_id'] : null;
@@ -35,7 +36,7 @@ class Item
         $this->status               = (isset($data['status'])) ? $data['status'] : null;
         $this->home                 = (isset($data['home'])) ? $data['home'] : null;
     }
-    
+
     // Add the following method:
     public function getArrayCopy()
     {

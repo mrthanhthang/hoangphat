@@ -37,7 +37,7 @@ class Article
         $this->home             = (isset($data['home'])) ? $data['home'] : null;
         $this->properties       = (isset($data['properties'])) ? unserialize($data['properties']) : null;
 
-    }    
+    }
     // Add the following method:
     public function getArrayCopy()
     {

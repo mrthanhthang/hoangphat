@@ -31,9 +31,37 @@ class ArticleController extends AbstractActionController
     {
         $pIndex = $this->params()->fromQuery('page', 1);
         $arrArticle = $this->getArticleTable()->fetchAllJoinCat($pIndex);
+        /*Action product*/
+        if(isset($_GET['action']) && $_GET['action']){
+            $action = $_GET['action'];
+            $id = $_GET['id'];
+            /*Set home product*/
+            if($action == 'sethome'){
+                $data = array('home' => SET_HOME);
+                $this->getArticleTable()->updateItem($id,$data);
+                return $this->redirect()->toRoute('adarticle');
+            }
+            /*UN Set home product*/
+            if($action == 'unsethome'){
+                $data = array('home' => UN_SET_HOME);
+                $this->getArticleTable()->updateItem($id,$data);
+                return $this->redirect()->toRoute('adarticle');
+            }
+            /*Enable product*/
+            if($action == 'enable'){
+                $this->getArticleTable()->changStatusItem($id,ENABLE);
+                return $this->redirect()->toRoute('adarticle');
+            }
+            /*Disable product*/
+            if($action == 'disable'){
+                $this->getArticleTable()->changStatusItem($id,DISABLE);
+                return $this->redirect()->toRoute('adarticle');
+            }
+        }
         return new ViewModel(array(
             'arrArticle' => $arrArticle,
         ));
+
     }
     public function saveAction() {
         $mkdirArticle = 'public/img/admin/article/';
@@ -106,5 +134,25 @@ class ArticleController extends AbstractActionController
             );
         }
         return array('treeArtCat' => $treeArtCat);
+    }
+    public function delAction()
+    {
+        $id = $this->params()->fromQuery('id');
+        $article = $this->getArticleTable()->getArticle($id);
+
+
+        if($article) {
+            $mkdirArticle = 'public/img/admin/article/';
+            $properties = $article->properties;
+            if($properties['avata']) unlink($mkdirArticle.$properties['avata']);
+            if($properties['file']){
+                foreach($properties['file'] as $file){
+                    unlink($mkdirArticle.$file);
+               }
+            }
+            $this->getArticleTable()->deleteItem($article->id);
+        }
+        return $this->redirect()->toRoute('adarticle');
+        return new ViewModel(array());
     }
 }

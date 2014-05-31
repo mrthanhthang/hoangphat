@@ -57,14 +57,23 @@ class ItemController extends AbstractActionController
             if($action == 'sethome'){
                 $data = array('home' => SET_HOME);
                 $this->getItemTable()->updateItem($id,$data);
+                return $this->redirect()->toRoute('aditm');
+            }
+            /*UN Set home product*/
+            if($action == 'unsethome'){
+                $data = array('home' => UN_SET_HOME);
+                $this->getItemTable()->updateItem($id,$data);
+                return $this->redirect()->toRoute('aditm');
             }
             /*Enable product*/
             if($action == 'enable'){
                 $this->getItemTable()->changStatusItem($id,ENABLE);
+                return $this->redirect()->toRoute('aditm');
             }
             /*Disable product*/
             if($action == 'disable'){
                 $this->getItemTable()->changStatusItem($id,DISABLE);
+                return $this->redirect()->toRoute('aditm');
             }
         }
 
@@ -115,7 +124,7 @@ class ItemController extends AbstractActionController
             }
             $objRequest->arr_images = serialize(array_unique($listImg));
             $this->getItemTable()->saveItem($objRequest);
-            //return $this->redirect()->toRoute('aditm');
+            return $this->redirect()->toRoute('aditm');
         }
         $arrPID = $this->getCategoryTable()->getParentID();
         if (isset($_GET['id'])) {          

@@ -22,7 +22,7 @@ class ArticleCategory
         $this->keyword        = (isset($data['keyword'])) ? $data['keyword'] : null;
         $this->description          = (isset($data['description'])) ? $data['description'] : null;
         $this->position            = (isset($data['position'])) ? $data['position'] : null;
-        $this->properties   = (isset($data['properties'])) ? unserialize($data['properties']) : null;      
+        $this->properties   = (isset($data['properties'])) ? unserialize($data['properties']) : null;
         $this->status         = (isset($data['status'])) ? $data['status'] : null;
     }    
     // Add the following method:
