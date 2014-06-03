@@ -221,4 +221,15 @@ class ItemTable
     {
         $this->tableGateway->delete(array('id' => $id));
     }
+    /* Get List product sethome*/
+    public function listSetHome($pIndex = null)
+    {
+        $select = $this->tableGateway->getSql()->select();
+        $select->where(array(
+            'home' => 1
+        ));
+        //$select->order('date_create DESC');
+        $row = $this->tableGateway->selectWith($select);
+        return $row;
+    }
 }

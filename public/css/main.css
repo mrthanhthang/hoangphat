@@ -8,7 +8,7 @@ body
 {
     font-size:12px;
     background:url("../img/bg.png") no-repeat fixed center 0 rgba(0, 0, 0, 0);
-    font-family:Arial;
+    font-family:Lora;
 }
 .wrapper
 {
@@ -41,7 +41,7 @@ body
     }
 ul.menu_v li {
     background: url("../img/line_menu.png") no-repeat scroll right 17px rgba(0, 0, 0, 0);
-    color: #ED7415;
+    color: #f6f6f6;
     float: left;
     font-size: 12px;
     font-weight: bold;
@@ -85,39 +85,62 @@ ul.menu_v li:hover ul
     display:block;
     }
 .project {
-    height: 165px;
+    height: 200px;
     margin-left: 5px;
     margin-right: 5px;
 }
-        .footer
-        {
-            
-            height:37px;
-        border:1px solid #CCC;
-            background: url("../img/footer.png") repeat-x scroll 0px 0px rgba(0, 0, 0, 0);
-            clear:both;
-            }
+.footer
+{
+
+    height:37px;
+    border:1px solid #CCC;
+    background: url("../img/footer-2.png") repeat-x scroll 0px 0px rgba(0, 0, 0, 0);
+    clear:both;
+    }
        
        
 .tab1_l {
     float: left;
-    height: 150px;
+    height: 175px;
     margin-bottom: 11px;
     margin-left: 10px;
     width: 308px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+}
+.tab1_l img{
+    width: 100%;
+}
+.tab1_l div.tab_img{
+    height: 80%;
+    overflow: hidden;
+    -moz-border-radius-topleft: 10px;
+    -moz-border-radius-topright: 10px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
 }
 .title_tab1 {
     color: #FFFFFF;
     font-weight: bold;
-    margin-top: -25px;
     text-align: center;
-    width: 98%;
+    width: 100%;
+    height: 16%;
+    padding-top: 12px;
+    background: url("../img/bg-title.png");
+    -moz-border-radius-bottomright: 10px;
+    -moz-border-radius-bottomleft: 10px;
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+.title_tab1 p{
+
 }
 .news_fi {
     border: 2px solid #FF6B00;
     border-radius: 8px;
     float: right;
-    height: 142px;
+    height: 175px;
     margin-right: 10px;
     width: 300px;
 }
@@ -130,19 +153,17 @@ ul.menu_v li:hover ul
     text-transform: uppercase;
 }
 .n_e > li {
-    font-size: 12px;
-    line-height: 25px;
+    font-size: 14px;
+    line-height: 32px;
     margin-left: 19px;
 }
 .footer_left {
-    color: #FFFFFF;
     float: left;
     font-weight: bold;
     line-height: 35px;
     margin-left: 15px;
 }
 .footer_right {
-    color: #FFFFFF;
     float: right;
     font-weight: bold;
     line-height: 35px;
@@ -234,7 +255,7 @@ img
     }
     .active
     {
-        color:white !important;
+        color:#ff0000 !important;
         }
         
            .activev a
@@ -247,5 +268,17 @@ img
             }
             
             .slide {
-    height: 422px;
+    height: 445px;
+}
+.bgslider{
+    background: url("../img/bg-slider.png") no-repeat ;
+    height: 30px;
+    width: 100%;
+    margin-top: -10px;
+}
+.slide ul li{
+    overflow: hidden;
+}
+.slide img{
+    width: 985px;
 }
