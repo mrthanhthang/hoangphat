@@ -3,7 +3,8 @@
         <div class="box_skitter box_skitter_large ">
             <ul>
                 <?php
-                foreach($arrProductHome as $product){
+                foreach($arrProductHome as $key => $product){
+                    if($key == 0) $productTop = $product;
                     isset($product->arr_images) && $product->arr_images ? $images = unserialize($product->arr_images) : $images = array('');
                     ?>
                     <li><a href="#cube"><img height="100%" src="<?php  if($images) echo $this->basePath().'/img/admin/items/'.$images[0]; ?>" class="cube" /></a></li>
@@ -19,23 +20,41 @@
 
 <div class="project">
     <div class="tab1_l">
-        <div class="tab_img"><img width="100%" src="img/hinh1.png" alt="logo hoangphat" /></div>
-        <div class="title_tab1"><h2>Phòng ngủ</h2></div>
+        <?php
+        if($productTop){
+            isset($productTop->arr_images) && $productTop->arr_images ? $images = unserialize($productTop->arr_images) : $images = array('');
+
+            ?>
+            <div class="tab_img"><a href="#"><img width="100%" src="<?php  if($images) echo $this->basePath().'/img/admin/items/'.$images[0]; ?>" alt="<?php echo $productTop -> name ?>" /></a></div>
+            <div class="title_tab1"><a href="#"><h2><?php echo $productTop -> name ?></h2></a></div>
+        <?php } ?>
     </div>
 
     <div class="tab1_l" style="margin-left: 17px">
 
-        <div class="tab_img"><img width="100%" src="img/hinh2.png" alt="logo hoangphat" /></div>
-        <div class="title_tab1"><h2>Phòng ngủ</h2></div>
+        <?php
+        if($projectHome){
+            foreach($projectHome as $project){
+                isset($project -> properties['avata']) ? $images = $project -> properties['avata'] : $images = '';
+
+            ?>
+            <div class="tab_img"> <a href="#"> <img width="100%" src="<?php  if($images) echo $this->basePath().'/img/admin/article/'.$images; ?>" alt="<?php echo $productTop -> name ?>" /></a></div>
+            <div class="title_tab1"><a href="#"><h2><?php echo $project -> title ?></h2></a></div>
+        <?php }} ?>
 
     </div>
     <div class="news_fi">
-        <div class="header_news_fi">Thông tin mới</div>
-        <ul class="n_e">
-            <li>Hưởng ứng ngày môi trường</li>
-            <li>Hưởng ứng ngày môi trường</li>
-            <li>Hưởng ứng ngày môi trường</li>
-            <li>Hưởng ứng ngày môi trường</li>
-        </ul>
+        <div class="tab_img">
+            <ul class="n_e">
+                <?php
+                    if($arrArticleHome){
+                        foreach($arrArticleHome as $article){
+                            ?>
+                <li> <a href="#"> <?php echo substr( $article -> title ,0, 50 ); echo substr( $article -> title ,50 ) ? '...' : ''?> </a> </li>
+                <?php }
+                }
+                ?>
+            </ul></div>
+        <div class="title_tab1"><h2>Thông tin mới</h2></div>
     </div>
 </div>

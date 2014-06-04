@@ -13,15 +13,13 @@ class Item
     public $price;
     public $discount_percent;
     public $view;
-
     public $status;
     public $home;
-
+    public $position;
 
 
     public function exchangeArray($data)
     {
-        echo 'vao iem ri';
         $this->id                   = (isset($data['id'])) ? $data['id'] : null;
         $this->name                 = (isset($data['name'])) ? $data['name'] : null;
         $this->category_id          = (isset($data['category_id'])) ? $data['category_id'] : null;
@@ -32,9 +30,9 @@ class Item
         $this->price                = (isset($data['price'])) ? $data['price'] : null;
         $this->discount_percent     = (isset($data['discount_percent'])) ? $data['discount_percent'] : null;
         $this->view                 = (isset($data['view'])) ? $data['view'] : null;
-
         $this->status               = (isset($data['status'])) ? $data['status'] : null;
         $this->home                 = (isset($data['home'])) ? $data['home'] : null;
+        $this->position                 = (isset($data['position'])) ? $data['position'] : null;
     }
 
     // Add the following method:
@@ -43,5 +41,4 @@ class Item
         return get_object_vars($this);
     }
 }
-
 ?>

@@ -1,70 +1,271 @@
-<?php echo $this->doctype(); ?>
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" >
 <head>
     <meta charset="utf-8">
     <title>Untitled Page</title>
-    <!-- Le styles -->
-    <?php echo $this->headLink(array('rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon', 'href' => $this->basePath() . '/img/favicon.ico'))
-        ->prependStylesheet($this->basePath() . '/css/main.css')
-        ->prependStylesheet($this->basePath() . '/css/skitter.styles.css')
-        ->prependStylesheet($this->basePath() . '/css/highlight.black.css')
-        ->prependStylesheet($this->basePath() . '/css/sexy-bookmarks-style.css')?>
+    <link href="/hoangphat/public/css/main.css?v=3.0" type="text/css" rel="Stylesheet" />
 
-    <!-- Scripts -->
-    <?php echo $this->headScript()
-        ->prependFile($this->basePath() . '/js/highlight.js')
-        ->prependFile($this->basePath() . '/js/jquery.skitter.js')
-        ->prependFile($this->basePath() . '/js/jquery.animate-colors-min.js')
-        ->prependFile($this->basePath() . '/js/jquery.easing.1.3.js')
-        ->prependFile($this->basePath() . '/js/jquery-1.6.3.min.js')
-        ->prependFile($this->basePath() . '/js/html5.js', 'text/javascript', array('conditional' => 'lt IE 9',))
-        ->prependFile($this->basePath() . '/js/jquery.validate.js')
-        ->prependFile($this->basePath() . '/js/common.js')
-        ->prependFile($this->basePath() . '/js/jquery.js')
-    ?>
-    <script>
-
+    <link rel="stylesheet" type="text/css" href="/hoangphat/public/Slide/jquery.ad-gallery.css">
+    <script src="/hoangphat/public/js/jquery-1.9.1.js"></script>
+    <script type="text/javascript" src="/hoangphat/public/Slide/jquery.ad-gallery.js"></script>
+    <script type="text/javascript">
         $(function () {
-            $('.box_skitter_large').skitter({ dots: true });
+            $('img.image1').data('ad-desc', 'Whoa! This description is set through elm.data("ad-desc") instead of using the longdesc attribute.<br>And it contains <strong>H</strong>ow <strong>T</strong>o <strong>M</strong>eet <strong>L</strong>adies... <em>What?</em> That aint what HTML stands for? Man...');
+            $('img.image1').data('ad-title', 'Title through $.data');
+
+            var galleries = $('.ad-gallery').adGallery();
+            $('#switch-effect').change(
+                function () {
+                    galleries[0].settings.effect = $(this).val();
+                    return false;
+                }
+            );
+            $('#toggle-slideshow').click(
+                function () {
+                    galleries[0].slideshow.toggle();
+                    return false;
+                }
+            );
+            $('#toggle-description').click(
+                function () {
+                    if (!galleries[0].settings.description_wrapper) {
+                        galleries[0].settings.description_wrapper = $('#descriptions');
+                    } else {
+                        galleries[0].settings.description_wrapper = false;
+                    }
+                    return false;
+                }
+            );
         });
     </script>
+    <link rel="stylesheet" href="/hoangphat/public/css/demo.css">
+    <script src="/hoangphat/public/js/json2.js"></script>
+    <script src="/hoangphat/public/js/jquery.collapse.js"></script>
+    <script src="/hoangphat/public/js/jquery.collapse_storage.js"></script>
+    <script src="/hoangphat/public/js/jquery.collapse_cookie_storage.js"></script>
+
 </head>
 <body>
-    <div class="wrapper">
-        <div class="header">
-            <div class="btn_share">
-                <img src="img/s1.png" alt="logo hoangphat" />
-                <img src="img/s2.png" alt="logo hoangphat" />
-                <img src="img/s3.png" alt="logo hoangphat" />
-            </div>
-        </div>
-        <div class="menu">
-            <div class="logo">
-                <img src="img/logo.png" width="108px" alt="logo hoangphat" />
+<div class="wrapper">
+<div class="header">
+    <div class="btn_share">
+        <img src="/hoangphat/public/img/s1.png" alt="logo hoangphat" />
+        <img src="/hoangphat/public/img/s2.png" alt="logo hoangphat" />
+        <img src="/hoangphat/public/img/s3.png" alt="logo hoangphat" />
 
-            </div>
-            <div class="menu_top">
-                <ul class="menu_v">
-                    <a href="#"><li class="active">Trang chủ</li></a>
-                    <a href="#"><li>Giới thiệu</li></a>
-                    <a href="#"><li>Dự án tiêu biểu</li></a>
-                    <a href="#"><li>Không gian nội thất</li></a>
-                    <a href="#"><li>Tin tức</li></a>
-                    <a href="#"><li>Liên hệ</li></a>
+    </div>
+
+</div>
+<div class="menu">
+    <div class="logo">
+        <img src="/hoangphat/public/img/logo.png" width="108px" alt="logo hoangphat" />
+
+    </div>
+    <div class="menu_top">
+        <ul class="menu_v">
+            <li>Trang chủ</li>
+            <li>Giới thiệu</li>
+            <li >Dự án tiêu biểu
+
+                <ul>
+                    <li>Dự án 1</li>
+                    <li>Dự án 2</li>
                 </ul>
+
+            </li>
+            <li class="active">Không gian nội thất
+                <ul>
+                    <li>Không gian 1</li>
+                    <li>Không gian 2</li>
+                </ul>
+
+            </li>
+            <li>Tin tức
+                <ul>
+                    <li>Tin tức 1</li>
+                    <li>Tin tức 2</li>
+                </ul>
+
+            </li>
+            <li>Liên hệ</li>
+        </ul>
+    </div>
+</div>
+<div class="content">
+    <div class="column_left">
+        <div class="menu_ver">
+            <div class="header_menu_ver">Không gian nội thất</div>
+
+            <div id="css3-animated-example">
+                <h3 class="open activev"><span class="arrows"></span> Commercial</h3>
+                <div>
+                    <div class="content">
+                        <ul class="m_n_v">
+
+
+
+
+                            <li><span class="arrows1"></span><a href="#"> Commercial 1</a></li>
+                            <li><span class="arrows1"></span><a href="#">Commercial 2</a></li>
+                            <li><span class="arrows1"></span><a href="#"> Commercial 3</a></li>
+                            <li><span class="arrows1"></span><a href="#"> Commercial 4</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <h3><span class="arrows"></span> Home Office</h3>
+                <div>
+                    <div class="content">
+                        <ul class="m_n_v">
+
+
+
+
+                            <li><span class="arrows1"></span> Home Office 1</li>
+                            <li><span class="arrows1"></span>Home Office 2</li>
+                            <li><span class="arrows1"></span> Home Office 3</li>
+                            <li><span class="arrows1"></span> Home Office 4</li>
+                        </ul>
+                    </div>
+                </div>
+                <h3><span class="arrows"></span> Commercial</h3>
+                <div>
+                    <div class="content">
+                        <ul class="m_n_v">
+
+
+
+
+                            <li><span class="arrows1"></span> Commercial 1</li>
+                            <li><span class="arrows1"></span>Commercial 2</li>
+                            <li><span class="arrows1"></span> Commercial 3</li>
+                            <li><span class="arrows1"></span> Commercial 4</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <h3><span class="arrows"></span>Home Office </h3>
+                <div>
+                    <div class="content">
+                        <ul class="m_n_v">
+
+
+
+
+                            <li><span class="arrows1"></span> Home Office 1</li>
+                            <li><span class="arrows1"></span>Home Office 2</li>
+                            <li><span class="arrows1"></span> Home Office 3</li>
+                            <li><span class="arrows1"></span> Home Office 4</li>
+                        </ul>
+                    </div>
+                </div>
             </div>
-        </div>
-        <div class="content">
-            <?php echo $this->content; ?>
+            <script>
+                $("#css3-animated-example").collapse({
+                    accordion: true,
+                    open: function () {
+                        this.addClass("open");
+                        this.css({ height: this.children().outerHeight() });
+                    },
+                    close: function () {
+                        this.css({ height: "0px" });
+                        this.removeClass("open");
+                    }
+                });
+            </script>
+
         </div>
 
-        <div class="footer">
+        <div class="menu_ver" style="margin-top:10px;">
+            <div class="header_menu_ver" style="width:200px;">Hỗ trợ trực tuyến</div>
 
-            <div class="footer_left">Copyright Hoang Phat 2014</div>
-            <div class="footer_right">Số lượt truy cập: 100</div>
+            <ul class="m_n_v">
+                <li>Mr . Khoa : <span style="color:red;font-weight:bold">098655666</span>
+                    <img src="http://opi.yahoo.com/online?u=NICK_CUA_BAN&m=g&t=2"/>
+
+                </li>
+                <li>Mr . Khoa : <span style="color:red;font-weight:bold">098655666</span>
+
+                    <img src="http://opi.yahoo.com/online?u=NICK_CUA_BAN&m=g&t=2"/>
+                </li>
+                <li>Mr . Khoa : <span style="color:red;font-weight:bold">098655666</span>
+
+                    <img src="http://opi.yahoo.com/online?u=NICK_CUA_BAN&m=g&t=2"/>
+                </li>
+
+            </ul>
+        </div>
+
+        <div class="menu_ver" style="margin-top:10px;">
+            <div class="header_menu_ver" style="width:160px;">Số lượng truy cập</div>
+
+            <ul class="m_n_v">
+                <li>Tất cả : 23339</li>
+                <li>Hôm qua : 230</li>
+
+            </ul>
         </div>
     </div>
+    <div class="column_right">
+        <div id="gallery" class="ad-gallery">
+            <div class="nen_bgs"></div>
+            <div class="ad-image-wrapper">
+            </div>
+            <div class="ad-controls">
+            </div>
+            <div class="ad-nav">
+                <div class="ad-thumbs">
+                    <ul class="ad-thumb-list">
+
+                        <li>
+                            <a href="Slide/images/p.png">
+                                <img src="/hoangphat/public/Slide/images/thumbs/p.png" title="Dai ca thang" alt="This is a nice, and incredibly descriptive, description of the image 10.jpg" class="image1">
+                            </a>
+                        </li>
+                        <li>
+                            <a href="Slide/images/p.png">
+                                <img src="/hoangphat/public/Slide/images/thumbs/p.png" title="A title for 10.jpg" alt="This is a nice, and incredibly descriptive, description of the image 10.jpg" class="image1">
+                            </a>
+                        </li>
+                        <li>
+                            <a href="Slide/images/p.png">
+                                <img src="/hoangphat/public/Slide/images/thumbs/p.png" title="A title for 10.jpg" alt="This is a nice, and incredibly descriptive, description of the image 10.jpg" class="image1">
+                            </a>
+                        </li>
+                        <li>
+                            <a href="Slide/images/p.png">
+                                <img src="/hoangphat/public/Slide/images/thumbs/p.png" title="A title for 10.jpg" alt="This is a nice, and incredibly descriptive, description of the image 10.jpg" class="image1">
+                            </a>
+                        </li>
+                        <li>
+                            <a href="Slide/images/p.png">
+                                <img src="/hoangphat/public/Slide/images/thumbs/p.png" title="A title for 10.jpg" alt="This is a nice, and incredibly descriptive, description of the image 10.jpg" class="image1">
+                            </a>
+                        </li>
+                        <li>
+                            <a href="Slide/images/p.png">
+                                <img src="/hoangphat/public//images/thumbs/p.png" title="A title for 10.jpg" alt="This is a nice, and incredibly descriptive, description of the image 10.jpg" class="image1">
+                            </a>
+                        </li>
+                        <li>
+                            <a href="Slide/images/p.png">
+                                <img src="/hoangphat/public/Slide/images/thumbs/p.png" title="A title for 10.jpg" alt="This is a nice, and incredibly descriptive, description of the image 10.jpg" class="image1">
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="des">Mô tả</div>
+        <div class="nd">Chọn nơi an cư lạc nghiệp hay đầu tư sinh lợi luôn là một việc lớn đối với nhiều người, và khi đến với Lucky Home có thể hoàn toàn yên tâm về những điều đó.Chọn nơi an cư lạc nghiệp hay đầu tư sinh lợi luôn là một việc lớn đối với nhiều người, và khi đến với Lucky Home có thể hoàn toàn yên tâm về những điều đó.Chọn nơi an cư lạc nghiệp hay đầu tư sinh lợi luôn là một việc lớn đối với nhiều người, và khi đến với Lucky Home có thể hoàn toàn yên tâm về những điều đó.Chọn nơi an cư lạc nghiệp hay đầu tư sinh lợi luôn là một việc lớn đối với nhiều người, và khi đến với Lucky Home có thể hoàn toàn yên tâm về những điều đó.</div>
+    </div>
+</div>
+<div class="footer">
+
+    <div class="footer_left">Copyright Hoang Phat 2014</div>
+    <div class="footer_right">Số lượt truy cập: 100</div>
+</div>
+</div>
 </body>
 </html>

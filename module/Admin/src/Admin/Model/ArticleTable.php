@@ -76,6 +76,7 @@ class ArticleTable
         }
         return $row;
     }
+
     public function saveArticle($obj)
     {
         $data = array(
@@ -128,5 +129,26 @@ class ArticleTable
     {
         $this->tableGateway->delete(array('id' => $id));
     }
+    /* Get List Article sethome*/
+    public function listSetHome($pIndex = null)
+    {
+        $select = $this->tableGateway->getSql()->select();
+        $select->where(array(
+            'home' => SET_HOME
+        ));
+        $select->order('position ASC');
+        $select->limit(1);
+        $row = $this->tableGateway->selectWith($select);
+        return $row;
+    }
 
+    public function getArticleWhere($where, $limit = '')
+    {
+        $select = $this->tableGateway->getSql()->select();
+        $select->where($where);
+        $select->order('position ASC');
+        if($limit) $select->limit($limit);
+        $row = $this->tableGateway->selectWith($select);
+        return $row;
+    }
 }

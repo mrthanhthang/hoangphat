@@ -15,8 +15,9 @@ class MainController extends AbstractActionController
 {
     protected $itemTable;
     protected $categoryTable;
-    protected $orderTable;
-    protected $orderDetailTable;
+    protected $articleTable;
+    protected $articleCategoryTable;
+
     
     public function getItemTable()
     {
@@ -35,54 +36,46 @@ class MainController extends AbstractActionController
         }
         return $this->categoryTable;
     }
+    public function getArticleTable()
+    {
+        if (!$this->articleTable) {
+            $sm = $this->getServiceLocator();
+            $this->articleTable = $sm->get('Admin\Model\ArticleTable');
+        }
+        return $this->articleTable;
+    }
+    public function getArticleCategoryTable()
+    {
+        if (!$this->articleCategoryTable) {
+            $sm = $this->getServiceLocator();
+            $this->articleCategoryTable = $sm->get('Admin\Model\ArticleCategoryTable');
+        }
+        return $this->articleCategoryTable;
+    }
+
+    /*Page*/
     //index page
     public function indexAction()
     {
-        $arrCat = $this->getCategoryTable()->fetchAll();
+        $idArticleCatNews = $this->getArticleCategoryTable()->getIdCategory('tin-tuc');
+        $arrArticleHome = $this->getArticleTable()->getArticleWhere(array( 'cat_id' => $idArticleCatNews , 'home' => SET_HOME ), 4);
+        /* List Du-an-tieu-Bieu set home*/
+        $idArticleCat = $this->getArticleCategoryTable()->getIdCategory('du-an-tieu-bieu');
+        $projectHome = $this->getArticleTable()->getArticleWhere(array( 'cat_id' => $idArticleCat , 'home' => SET_HOME ), 1);
+        /* List Product set home*/
         $arrProductHome = $this->getItemTable()->listSetHome();
         return new ViewModel(
-            array('arrProductHome' => $arrProductHome)
-        );
-    }
-    
-    //index page
-    public function categoryAction()
-    {
-        $cid = $this->params()->fromQuery('cid');
-        $arrItem = $this->getItemTable()->getItemByCategory($cid);
-        $arrCat = $this->getCategoryTable()->fetchAll();
-        return new ViewModel(
-            array( 'arrCat' => $arrCat, 'arrItem' => $arrItem)
+            array('arrProductHome' => $arrProductHome, 'arrArticleHome' => $arrArticleHome, 'projectHome' => $projectHome)
         );
     }
     
     //product page
     public function productAction()
     {
-        $pid = $this->params()->fromQuery('pid');
-        $pro = $this->getItemTable()->getItem($pid);
-		if(!$pro)
-			$this->redirect()->toRoute('main', array('action' => 'index'));
-        $pro->view = $pro->view +1;
-        $this->getItemTable()->saveItem($pro);
-        $arrCat = $this->getCategoryTable()->fetchAll();
-        $url = $this->getItemTable()->getHostDirection();
-        return new ViewModel(
-            array('pro' => $pro, 'arrCat' => $arrCat, 'url' => $url)
-        );
+
     }
 
-    public function latestAction()
-    {
-        $pIndex = $this->params()->fromQuery('page', 1);
-        $arrLT = $this->getItemTable()->fetchAll($pIndex);
-        $arrCat = $this->getCategoryTable()->fetchAll();
-        return new ViewModel(
-            array('arrCat' => $arrCat, 'arrLT' => $arrLT)
-        );
-    }
-
-    //product page
+    //About page
     public function aboutAction()
     {
         $arrCat = $this->getCategoryTable()->fetchAll();
@@ -93,32 +86,6 @@ class MainController extends AbstractActionController
     //contact page
     public function contactAction()
     {
-        $arrCat = $this->getCategoryTable()->fetchAll();
-        $request = $this->getRequest();
-        if ($request->isPost()) {
-            $objRequest = $request->getPost();
-            try {
-                $transport = new SmtpTransport(new SmtpOptions(array(
-                                    'name' => 'gmail',
-                                    'host' => 'smtp.gmail.com',
-                                    'port' => 465,
-                                    'connectionClass' => 'login',
-                                    'connectionConfig' => array(
-                                        'ssl' => 'ssl',
-                                        'username' => 'jasonsmith2812@gmail.com',
-                                        'password' => 'vuthiphuongtran',
-                                    )
-                                )));
-                $message = new Message();
-                $message->addTo('jasonsmith2812@gmail.com')
-                        ->addFrom($objRequest->email)
-                        ->setSubject($objRequest->subject)
-                        ->setBody($objRequest->message);
-                $transport->send($message);
-            } catch (Zend_Exception $e) {
-                return false;
-            }
-        }
         return new ViewModel(
             array('arrCat' => $arrCat)
         );

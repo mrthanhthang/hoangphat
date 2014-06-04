@@ -86,4 +86,14 @@ class ArticleCategoryTable
     {
         $this->tableGateway->delete(array('id' => $id));
     }
+    /* Get Id from Slug*/
+    public function getIdCategory($slug)
+    {
+        $rowset = $this->tableGateway->select(array('slug' => $slug));
+        $row = $rowset->current();
+        if (!$row) {
+            throw new \Exception("Could not find row $id");
+        }
+        return $row -> id;
+    }
 }

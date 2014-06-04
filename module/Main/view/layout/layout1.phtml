@@ -1,0 +1,85 @@
+<?php echo $this->doctype(); ?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+    <meta charset="utf-8">
+    <title>Untitled Page</title>
+    <!-- Le styles -->
+    <?php echo $this->headLink(array('rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon', 'href' => $this->basePath() . '/img/favicon.ico'))
+        ->prependStylesheet($this->basePath() . '/Slide/jquery.ad-gallery.css')
+        ->prependStylesheet($this->basePath() . '/css/skitter.styles.css')
+        ->prependStylesheet($this->basePath() . '/css/highlight.black.css')
+        ->prependStylesheet($this->basePath() . '/css/sexy-bookmarks-style.css')?>
+
+    <!-- Product styles -->
+    <?php echo $this->headLink(array('rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon', 'href' => $this->basePath() . '/img/favicon.ico'))
+        ->prependStylesheet($this->basePath() . '/css/main.css')
+        ->prependStylesheet($this->basePath() . '/css/skitter.styles.css')
+        ->prependStylesheet($this->basePath() . '/css/highlight.black.css')
+        ->prependStylesheet($this->basePath() . '/css/sexy-bookmarks-style.css')?>
+    <!-- Scripts -->
+    <?php echo $this->headScript()
+        ->prependFile($this->basePath() . '/js/highlight.js')
+        ->prependFile($this->basePath() . '/js/jquery.skitter.js')
+        ->prependFile($this->basePath() . '/js/jquery.animate-colors-min.js')
+        ->prependFile($this->basePath() . '/js/jquery.easing.1.3.js')
+        ->prependFile($this->basePath() . '/js/jquery-1.6.3.min.js')
+        ->prependFile($this->basePath() . '/js/html5.js', 'text/javascript', array('conditional' => 'lt IE 9',))
+        ->prependFile($this->basePath() . '/js/jquery.validate.js')
+        ->prependFile($this->basePath() . '/js/common.js')
+        ->prependFile($this->basePath() . '/js/jquery.js')
+    ?>
+
+    <!-- Scripts Product -->
+    <?php echo $this->headScript()
+        ->prependFile($this->basePath() . '/js/json2.js')
+        ->prependFile($this->basePath() . '/js/jquery.collapse.js')
+        ->prependFile($this->basePath() . '/js/jquery.collapse_storage.js')
+        ->prependFile($this->basePath() . '/js/jquery.collapse_cookie_storage.js')
+        ->prependFile($this->basePath() . '/Slide/ad-gallery.js.js')
+    ?>
+    <script>
+
+        $(function () {
+            $('.box_skitter_large').skitter({ dots: true });
+        });
+    </script>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="header">
+            <div class="btn_share">
+                <img src="<?php echo $this->basePath().'/img/s1.png' ?>" alt="google hoangphat" />
+                <img src="<?php echo $this->basePath().'/img/s2.png' ?>" alt="twitter hoangphat" />
+                <img src="<?php echo $this->basePath().'/img/s3.png' ?>" alt="facebook hoangphat" />
+            </div>
+        </div>
+        <div class="menu">
+            <div class="logo">
+                <img src="<?php echo $this->basePath().'/img/logo.png' ?>" width="108px" alt="logo hoangphat" />
+
+            </div>
+            <div class="menu_top">
+                <ul class="menu_v">
+                    <a href="<?php echo $this->url('main', array('action' => 'index')); ?>"><li class="active">Trang chủ</li></a>
+                    <a href="<?php echo $this->url('main', array('action' => 'about')); ?>"><li>Giới thiệu</li></a>
+                    <a href="<?php echo $this->url('main', array('action' => 'project')); ?>"><li>Dự án tiêu biểu</li></a>
+                    <a href="<?php echo $this->url('main', array('action' => 'product')); ?>"><li>Không gian nội thất</li></a>
+                    <a href="<?php echo $this->url('main', array('action' => 'news')); ?>"><li>Tin tức</li></a>
+                    <a href="<?php echo $this->url('main', array('action' => 'contacs')); ?>"><li>Liên hệ</li></a>
+                </ul>
+            </div>
+        </div>
+        <div class="content">
+            <?php echo $this->content; ?>
+        </div>
+
+        <div class="footer">
+
+            <div class="footer_left">Copyright Hoang Phat 2014</div>
+            <div class="footer_right">Số lượt truy cập: 100</div>
+        </div>
+    </div>
+</body>
+</html>

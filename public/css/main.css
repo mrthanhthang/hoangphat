@@ -112,6 +112,9 @@ ul.menu_v li:hover ul
 .tab1_l img{
     width: 100%;
 }
+.tab1_l a{
+    color: #ffffff;
+}
 .tab1_l div.tab_img{
     height: 80%;
     overflow: hidden;
@@ -138,11 +141,14 @@ ul.menu_v li:hover ul
 }
 .news_fi {
     border: 2px solid #FF6B00;
-    border-radius: 8px;
+    border-radius: 10px;
     float: right;
     height: 175px;
     margin-right: 10px;
     width: 300px;
+}
+.news_fi .tab_img{
+   height: 80%;
 }
 .header_news_fi {
     color: #FF6B00;
@@ -271,7 +277,7 @@ img
     height: 445px;
 }
 .bgslider{
-    background: url("../img/bg-slider.png") no-repeat ;
+    background: url("../img/bg-slider-2.png") no-repeat ;
     height: 30px;
     width: 100%;
     margin-top: -10px;

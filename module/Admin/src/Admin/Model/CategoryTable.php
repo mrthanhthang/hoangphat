@@ -96,4 +96,5 @@ class CategoryTable
     {
         $this->tableGateway->delete(array('id' => $id));
     }
+
 }

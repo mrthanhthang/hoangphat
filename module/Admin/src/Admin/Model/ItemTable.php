@@ -226,9 +226,9 @@ class ItemTable
     {
         $select = $this->tableGateway->getSql()->select();
         $select->where(array(
-            'home' => 1
+            'home' => SET_HOME
         ));
-        //$select->order('date_create DESC');
+        $select->order('position ASC');
         $row = $this->tableGateway->selectWith($select);
         return $row;
     }
