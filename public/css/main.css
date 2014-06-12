@@ -136,8 +136,8 @@ ul.menu_v li:hover ul
     border-bottom-right-radius: 10px;
     border-bottom-left-radius: 10px;
 }
-.title_tab1 p{
-
+.title_tab1 h2{
+    margin-top: 0px;
 }
 .news_fi {
     border: 2px solid #FF6B00;
@@ -219,11 +219,13 @@ ul.menu_v li:hover ul
 }
 .m_n_v > li {
     color: #656565;
-    font-weight: bold;
     line-height: 28px;
     list-style: none outside none;
     padding-left: 15px;
     position:relative;
+}
+.m_n_v > li.active{
+   font-weight: bold;
 }
 
 .m_n_v {

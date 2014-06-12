@@ -76,13 +76,16 @@ class CategoryController extends AbstractActionController
             return $this->redirect()->toRoute('adcat');
         }
         $arrPID = $this->getCategoryTable()->getParentID();
+        $treeCat = $this->getCategoryTable()->getTreeMenu(0);
+
         if (isset($_GET['id'])) {
             $cus = $this->getCategoryTable()->getCategory($_GET['id']);
             return array(
                 'cat' => $cus,
                 'arrPID' => $arrPID,
+                'treeCat' => $treeCat,
             );
         }
-        return array('arrPID' => $arrPID,);
+        return array('arrPID' => $arrPID, 'treeCat' => $treeCat);
     }
 }

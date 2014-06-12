@@ -45,8 +45,9 @@
 							  <div class="controls">
                                 <select name="parent_id" id="1">
                                     <option value="0">------- Chọn danh mục -------</option>
-                                    <?php if($arrPID){ foreach($arrPID as $pID){ ?>
-                                    <option <?php echo isset($cus) && isset($cus->parent_id) && $cus->parent_id == $pID->id ? 'selected="on"' : '' ; ?> value="<?php echo $pID->id; ?>"><?php echo $pID->name; ?></option>
+                                    <?php  if($treeCat){ foreach($treeCat as $cate){
+                                        ?>
+                                        <option <?php echo isset($cus) && isset($cus->parent_id) && $cus->parent_id == $cate->id ? 'selected="on"' : '' ; ?> value="<?php echo $cate->id; ?>"><?php echo $cate->name; ?></option>
                                     <?php }} ?>
                                 </select>
                               </div>

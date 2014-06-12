@@ -72,7 +72,18 @@ class MainController extends AbstractActionController
     //product page
     public function productAction()
     {
-
+       // $treeArtCat = $this->getCategoryTable()->getTreeMenu(0);
+        $arrTreeCat = $this->getCategoryTable()->getTreeMenu();
+        $arrCat = $this->getCategoryTable()->fetchAll();
+        echo '<pre>';
+        print_r($arrCat);
+        echo '</pre>';
+        $arrCat2 = $this->getCategoryTable()->getTreeMenu();
+        $arritem = $this->getItemTable()->fetchAll();
+        $arritem = $this->getItemTable()->fetchAll();
+        return new ViewModel(
+            array('arrCat' => $arrCat, 'arrTreeCat' => $arrTreeCat)
+        );
     }
 
     //About page

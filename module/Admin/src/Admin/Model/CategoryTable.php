@@ -97,4 +97,18 @@ class CategoryTable
         $this->tableGateway->delete(array('id' => $id));
     }
 
+    //Get tree category
+    public function getTreeMenu($parent_id = 0,$space = "", $trees = array()) {
+        $arrCat = $this -> getParentID($parent_id);
+        $numrow = count($arrCat);
+        if($numrow > 0){
+            foreach($arrCat as $item){
+                $item -> name = $space.$item -> name;
+                $trees[] = $item;
+                $trees = $this -> getTreeMenu($item -> id, $space.'&nbsp;&nbsp;&nbsp;|--', $trees);
+            }
+        }
+        return $trees;
+    }
+
 }
