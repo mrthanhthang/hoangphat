@@ -81,7 +81,7 @@ class CategoryController extends AbstractActionController
         if (isset($_GET['id'])) {
             $cus = $this->getCategoryTable()->getCategory($_GET['id']);
             return array(
-                'cat' => $cus,
+                'cus' => $cus,
                 'arrPID' => $arrPID,
                 'treeCat' => $treeCat,
             );

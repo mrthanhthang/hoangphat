@@ -127,15 +127,18 @@ class ItemController extends AbstractActionController
             return $this->redirect()->toRoute('aditm');
         }
         $arrPID = $this->getCategoryTable()->getParentID();
+        $treeCat = $this->getCategoryTable()->getTreeMenu(0);
+
         if (isset($_GET['id'])) {          
             $item = $this->getItemTable()->getItem($_GET['id']);
             return array(
                 'item' => $item,
                 'arrPID' => $arrPID,
+                'treeCat' => $treeCat,
             );
         }
         return array(
-                'arrPID' => $arrPID,
+                'arrPID' => $arrPID,'treeCat' => $treeCat,
         );
     }
     

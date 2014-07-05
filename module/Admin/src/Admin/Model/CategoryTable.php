@@ -17,7 +17,7 @@ class CategoryTable
     public function fetchAll($pIndex = null)
     {
         
-        $resultSet = $this->tableGateway->select(array('parent_id' => 0));
+        $resultSet = $this->tableGateway->select();
         if( is_numeric($pIndex)){
             $paginator = new Paginator(new Iterator($resultSet->buffer()));
             $paginator->setCurrentPageNumber($pIndex)
@@ -78,6 +78,8 @@ class CategoryTable
             'name' => $obj->name,
             'image'  => $obj->image,
             'parent_id' => $obj->parent_id,
+            'description' => $obj->description,
+            'position' => $obj->position,
         );
 
         $id = (int)$obj->id;

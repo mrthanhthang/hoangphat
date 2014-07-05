@@ -7,6 +7,8 @@ class Category
     public $name;
     public $image;
     public $parent_id;
+    public $description;
+    public $position;
 
     public function exchangeArray($data)
     {
@@ -14,6 +16,8 @@ class Category
         $this->name          = (isset($data['name'])) ? $data['name'] : null;
         $this->image         = (isset($data['image'])) ? $data['image'] : null;
         $this->parent_id     = (isset($data['parent_id'])) ? $data['parent_id'] : null;
+        $this->description   = (isset($data['description'])) ? $data['description'] : null;
+        $this->position      = (isset($data['position'])) ? $data['position'] : null;
     }
 
     // Add the following method:

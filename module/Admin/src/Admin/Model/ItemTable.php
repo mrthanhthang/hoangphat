@@ -232,4 +232,14 @@ class ItemTable
         $row = $this->tableGateway->selectWith($select);
         return $row;
     }
+
+    public function getObjects($where, $limit = '')
+    {
+        $select = $this->tableGateway->getSql()->select();
+        $select->where($where);
+        $select->order('position ASC');
+        if($limit) $select->limit($limit);
+        $row = $this->tableGateway->selectWith($select);
+        return $row;
+    }
 }

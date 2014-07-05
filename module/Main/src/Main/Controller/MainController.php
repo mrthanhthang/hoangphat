@@ -68,21 +68,49 @@ class MainController extends AbstractActionController
             array('arrProductHome' => $arrProductHome, 'arrArticleHome' => $arrArticleHome, 'projectHome' => $projectHome)
         );
     }
-    
+    //category page
+    public function categoryAction()
+    {
+        $arritem = '';
+        $category = '';
+        $arrCat = $this->getCategoryTable()->fetchAll();
+        $listCate = array();
+        foreach($arrCat as $cat){
+            $listCate[] = $cat;
+        }
+        isset($_GET['id']) ? $cateId = $_GET['id'] : $cateId = '';
+        isset($_GET['parent_id']) ? $parent_id = $_GET['parent_id'] : $parent_id = '';
+        if($cateId){
+            isset($cateId) ? $category = $this->getCategoryTable()->getCategory($cateId) : $category = '';
+            $arritem = $this->getItemTable()->getObjects(array( 'category_id' => $cateId , 'status' => ENABLE ));
+        }
+
+        return new ViewModel(
+            array(  'arrCat' => $listCate,
+                    'arritem' => $arritem,
+                    'category' => $category,
+                    'parent_id' => $parent_id,
+                    'cateId' => $cateId,
+            )
+        );
+    }
     //product page
     public function productAction()
     {
        // $treeArtCat = $this->getCategoryTable()->getTreeMenu(0);
         $arrTreeCat = $this->getCategoryTable()->getTreeMenu();
         $arrCat = $this->getCategoryTable()->fetchAll();
-        echo '<pre>';
-        print_r($arrCat);
-        echo '</pre>';
+
+        $listCate = array();
+        foreach($arrCat as $cat){
+            $listCate[] = $cat;
+        }
+
         $arrCat2 = $this->getCategoryTable()->getTreeMenu();
         $arritem = $this->getItemTable()->fetchAll();
         $arritem = $this->getItemTable()->fetchAll();
         return new ViewModel(
-            array('arrCat' => $arrCat, 'arrTreeCat' => $arrTreeCat)
+            array('arrCat' => $listCate)
         );
     }
 
