@@ -182,11 +182,10 @@ ul.menu_v li:hover ul
 .column_left {
    
     float: left;
-   
     margin-bottom: 10px;
     margin-left: 10px;
     margin-top: 60px;
-    width: 209px;
+    width: 182px;
 }
 .column_right {
     float: right;

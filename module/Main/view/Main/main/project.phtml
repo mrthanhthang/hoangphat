@@ -44,37 +44,37 @@
 <div class="column_right">
     <div id="gallery" class="ad-gallery">
         <?php if(isset($arritem) && $arritem && count($arritem)){ ?>
-        <div class="nen_bgs"></div>
-        <div class="ad-image-wrapper">
-        </div>
-        <div class="ad-controls">
-        </div>
-
-        <div class="ad-nav">
-            <div class="ad-thumbs">
-                <ul class="ad-thumb-list">
-                    <?php
-
-                    foreach($arritem as $item){
-                        isset($item->arr_images) && $item->arr_images ? $images = unserialize($item->arr_images)[0] : $images = '';
-                    ?>
-                        <li>
-                            <a href="<?php  if($images) echo $this->basePath().'/img/admin/items/'.$images; ?>">
-                                <img src="<?php  if($images) echo $this->basePath().'/img/admin/items/'.$images; ?>" title="<?php echo $item -> name ?> " class="image1">
-                            </a>
-                        </li>
-                    <?php
-                        }
-                    ?>
-                </ul>
+            <div class="nen_bgs"></div>
+            <div class="ad-image-wrapper">
             </div>
-        </div>
+            <div class="ad-controls">
+            </div>
+
+            <div class="ad-nav">
+                <div class="ad-thumbs">
+                    <ul class="ad-thumb-list">
+                        <?php
+
+                        foreach($arritem as $item){
+                            isset($item->arr_images) && $item->arr_images ? $images = unserialize($item->arr_images)[0] : $images = '';
+                            ?>
+                            <li>
+                                <a href="<?php  if($images) echo $this->basePath().'/img/admin/items/'.$images; ?>">
+                                    <img src="<?php  if($images) echo $this->basePath().'/img/admin/items/'.$images; ?>" title="<?php echo $item -> name ?> " class="image1">
+                                </a>
+                            </li>
+                        <?php
+                        }
+                        ?>
+                    </ul>
+                </div>
+            </div>
         <?php
-            }
+        }
         ?>
     </div>
     <div class="des">Mô tả</div>
     <div class="nd">
-       <?Php if($category) echo $category -> description  ?>
+        <?Php if($category) echo $category -> description  ?>
     </div>
 </div>

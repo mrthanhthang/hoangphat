@@ -1,0 +1,39 @@
+<script>
+    $("#css3-animated-example").collapse({
+        accordion: true,
+        open: function () {
+            this.addClass("open");
+            this.css({ height: this.children().outerHeight() });
+        },
+        close: function () {
+            this.css({ height: "0px" });
+            this.removeClass("open");
+        }
+    });
+</script>
+<div class="menu_ver" style="margin-top:10px;">
+    <div class="header_menu_ver" style="width:180px;">Hỗ trợ trực tuyến</div>
+
+    <ul class="m_n_v">
+        <li>Mr . Thắng : <span style="color:red;font-weight:bold">0974436059</span><br/>
+            <a href="ymsgr:sendim?mrthanhthang" title="mrthanhthang"><span class="caption">
+                                    <img height="35" src="<?php echo $this->basePath().'/img/icon-yahoo.png' ?>"></span></a>
+
+            <a style="margin-left: 50px" href="skype:mrthanhthang?chat">
+                <img height="35" src="<?php echo $this->basePath().'/img/icon-skype.png' ?>"></a>
+
+        </li>
+
+
+    </ul>
+</div>
+
+<div class="menu_ver" style="margin-top:10px;">
+    <div class="header_menu_ver" style="width:180px;">Số lượng truy cập</div>
+
+    <ul class="m_n_v">
+        <li>Tất cả : 23339</li>
+        <li>Hôm qua : 230</li>
+
+    </ul>
+</div>

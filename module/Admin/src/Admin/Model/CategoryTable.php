@@ -112,5 +112,13 @@ class CategoryTable
         }
         return $trees;
     }
-
+    public function getCategoryWhere($where = '', $limit = '')
+    {
+        $select = $this->tableGateway->getSql()->select();
+        if($where) $select->where($where);
+        $select->order('position ASC');
+        if($limit) $select->limit($limit);
+        $row = $this->tableGateway->selectWith($select);
+        return $row;
+    }
 }

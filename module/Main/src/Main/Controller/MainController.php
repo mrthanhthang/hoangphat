@@ -83,8 +83,16 @@ class MainController extends AbstractActionController
         if($cateId){
             isset($cateId) ? $category = $this->getCategoryTable()->getCategory($cateId) : $category = '';
             $arritem = $this->getItemTable()->getObjects(array( 'category_id' => $cateId , 'status' => ENABLE ));
+        }else{
+            $arrCategory = $this->getCategoryTable() -> getCategoryWhere('',1);
+            foreach($arrCategory as $value){
+                $category = $value;
+            }
+            if($category) {
+                $cateId = $category['id'];
+                $arritem = $this->getItemTable()->getObjects(array( 'category_id' => $cateId , 'status' => ENABLE ));
+            }
         }
-
         return new ViewModel(
             array(  'arrCat' => $listCate,
                     'arritem' => $arritem,
@@ -93,6 +101,52 @@ class MainController extends AbstractActionController
                     'cateId' => $cateId,
             )
         );
+    }
+    // Project page
+    public function projectAction()
+    {
+        $arritem = '';
+        $category = '';
+        $idCateProject = $this->getArticleCategoryTable()->getIdCategory('du-an-tieu-bieu');
+        $idCateProject ? $listCatProject = $this->getArticleCategoryTable()->getArticleCategoryWhere(array( 'id' =>  $idCateProject)) : $arrCatProject = array();
+
+        $listCate = array();
+
+
+        foreach($listCatProject as $cat){
+            $listCate[] = $cat;
+        }
+        isset($_GET['id']) ? $cateId = $_GET['id'] : $cateId = '';
+        isset($_GET['parent_id']) ? $parent_id = $_GET['parent_id'] : $parent_id = '';
+        if($cateId){
+            isset($cateId) ? $category = $this->getArticleCategoryTable()->getCategory($cateId) : $category = '';
+            $arritem = $this->getArticleTable()->getArticleWhere(array( 'cat_id' => $cateId , 'status' => ENABLE ));
+        }else{
+            $arrCategory = $this->getArticleCategoryTable() -> getArticleCategoryWhere('',1);
+            foreach($arrCategory as $value){
+                $category = $value;
+            }
+            if($category) {
+                $cateId = $category['id'];
+                $arritem = $this->getArticleTable()->getArticleWhere(array( 'category_id' => $cateId , 'status' => ENABLE ));
+            }
+        }
+        return new ViewModel(
+            array(  'arrCat' => $listCate,
+                'arritem' => $arritem,
+                'category' => $category,
+                'parent_id' => $parent_id,
+                'cateId' => $cateId,
+            )
+        );
+
+
+
+
+
+
+
+
     }
     //product page
     public function productAction()
