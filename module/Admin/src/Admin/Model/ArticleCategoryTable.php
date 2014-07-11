@@ -41,12 +41,12 @@ class ArticleCategoryTable
     }
     public function getTreeMenu($parent_id = 0,$space = "", $trees = array()) {
        $arrArtCat = $this -> getParentID($parent_id);
-       $numrow = count($arrArtCat);         
+       $numrow = count($arrArtCat);
         if($numrow > 0){
             foreach($arrArtCat as $item){
                 $item -> name = $space.$item -> name;
-                $trees[] = $item;               
-                $trees = $this -> getTreeMenu($item -> id, $space.'&nbsp;&nbsp;&nbsp;|--', $trees);          
+                $trees[] = $item;
+                $trees = $this -> getTreeMenu($item -> id, $space.'&nbsp;&nbsp;&nbsp;|--', $trees);
             }
         }       
        return $trees;
@@ -96,10 +96,10 @@ class ArticleCategoryTable
         }
         return $row -> id;
     }
-    public function getArticleCategoryWhere($where, $limit = '')
+    public function getArticleCategoryWhere($where = '', $limit = '')
     {
         $select = $this->tableGateway->getSql()->select();
-        $select->where($where);
+        if($where) $select->where($where);
         $select->order('position ASC');
         if($limit) $select->limit($limit);
         $row = $this->tableGateway->selectWith($select);

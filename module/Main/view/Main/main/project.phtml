@@ -1,80 +1,59 @@
-
 <div class="column_left">
     <div class="menu_ver">
         <div class="header_menu_ver">Không gian nội thất</div>
-        <div id="css3-animated-example">
+        <div class="css3-animated-example">
             <?php
             if($arrCat){
                 foreach($arrCat as $cate){
-                    if($cate -> parent_id == 0){
-                        $id = $cate -> id;
+                    if($cate -> level == 0){
                         ?>
-                        <h3 class="activev <?php if($parent_id == $id) echo 'open' ?> "><span class="arrows"></span><?php echo $cate -> name ?></h3>
-
+                        <h3 class="activev"><span style="margin-left: -1px;
+    margin-top: 16px;" class="arrows"></span>
+                           <a class="<?php if($cateId == $cate -> id) echo 'open'?>" title="" href="<?php echo $this->url('main', array('action' => 'project'), array('query' => array('cateId' => $cate -> id,))); ?>">
+                               <?php echo $cate -> name ?>
+                            </a>
+                        </h3>
                         <div>
-                            <div class="content">
-                                <ul class="m_n_v">
-                                    <?php
-                                    foreach($arrCat as $cate2){
-                                        if($cate2 -> parent_id == $id){
-                                            ?>
-                                            <li class="<?php if($cateId == $cate2 -> id) echo 'active' ?>"><span class="arrows1"></span><a href="<?php echo $this->url('main', array('action' => 'category'), array('query' => array('id' => $cate2->id, 'parent_id' => $id,))); ?>"> <?php echo $cate2 -> name ?></a></li>
-                                        <?php
-                                        }
-                                    }
-                                    ?>
-                                </ul>
-                            </div>
                         </div>
-
                     <?php
                     }
                 }
             }
             ?>
-
         </div>
-
-
     </div>
     <div id="sidebar">
         <?php echo $this->partial('sidebar'); ?>
     </div>
 </div>
+<?php if($id){ ?>
 <div class="column_right">
-    <div id="gallery" class="ad-gallery">
-        <?php if(isset($arritem) && $arritem && count($arritem)){ ?>
-            <div class="nen_bgs"></div>
-            <div class="ad-image-wrapper">
-            </div>
-            <div class="ad-controls">
-            </div>
-
-            <div class="ad-nav">
-                <div class="ad-thumbs">
-                    <ul class="ad-thumb-list">
-                        <?php
-
-                        foreach($arritem as $item){
-                            isset($item->arr_images) && $item->arr_images ? $images = unserialize($item->arr_images)[0] : $images = '';
-                            ?>
-                            <li>
-                                <a href="<?php  if($images) echo $this->basePath().'/img/admin/items/'.$images; ?>">
-                                    <img src="<?php  if($images) echo $this->basePath().'/img/admin/items/'.$images; ?>" title="<?php echo $item -> name ?> " class="image1">
-                                </a>
-                            </li>
-                        <?php
-                        }
-                        ?>
-                    </ul>
-                </div>
-            </div>
-        <?php
-        }
-        ?>
-    </div>
-    <div class="des">Mô tả</div>
-    <div class="nd">
-        <?Php if($category) echo $category -> description  ?>
-    </div>
+    <?php if($acticle){ ?>
+        <h2><?php echo $acticle -> title ?></h2>
+        <?php echo $acticle -> detail ?>
+    <?php } ?>
 </div>
+<?php }else{ ?>
+<div class="column_right">
+    <?php
+    if($arrCat){
+        foreach($arritem as $item){
+    ?>
+    <div class="listNews">
+        <div class="newleft">
+            <a title="<?php echo $item -> title?>" href="<?php echo $this->url('main', array('action' => 'project'), array('query' => array('id' => $item->id, 'cateId' => $item -> cat_id,))); ?>">
+                <img height="100px" alt="<?php echo $item -> title?>" src="<?php echo $this->basePath().'/img/new.jpg' ?>"></a>
+
+        </div>
+        <div class="newright">
+            <h2><a title="<?php echo $item -> title?>" href="<?php echo $this->url('main', array('action' => 'project'), array('query' => array('id' => $item->id, 'cateId' => $item -> cat_id,))); ?>"><?php echo $item -> title?></a></h2>
+            <p class="date"><?php echo $item -> date_created?></p>
+            <?php echo $item -> description ?>
+        </div>
+    </div>
+    <?php
+        }
+    }
+    ?>
+</div>
+<?php } ?>

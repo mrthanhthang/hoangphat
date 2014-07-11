@@ -17,7 +17,6 @@ class MainController extends AbstractActionController
     protected $categoryTable;
     protected $articleTable;
     protected $articleCategoryTable;
-
     
     public function getItemTable()
     {
@@ -27,7 +26,6 @@ class MainController extends AbstractActionController
         }
         return $this->itemTable;
     }
-    
     public function getCategoryTable()
     {
         if (!$this->categoryTable) {
@@ -107,41 +105,46 @@ class MainController extends AbstractActionController
     {
         $arritem = '';
         $category = '';
+        $acticle = '';
+        // ID of category du-an-tieu-bieu
         $idCateProject = $this->getArticleCategoryTable()->getIdCategory('du-an-tieu-bieu');
-        $idCateProject ? $listCatProject = $this->getArticleCategoryTable()->getArticleCategoryWhere(array( 'id' =>  $idCateProject)) : $arrCatProject = array();
-
+        $idCateProject ? $listCatProject = $this->getArticleCategoryTable()->getArticleCategoryWhere(array( 'parent_id' =>  $idCateProject)) : $arrCatProject = array();
         $listCate = array();
 
-
-        foreach($listCatProject as $cat){
+        foreach($listCatProject as $key => $cat){
+            if($key == 0)   $category = $cat;
             $listCate[] = $cat;
         }
-        isset($_GET['id']) ? $cateId = $_GET['id'] : $cateId = '';
-        isset($_GET['parent_id']) ? $parent_id = $_GET['parent_id'] : $parent_id = '';
-        if($cateId){
-            isset($cateId) ? $category = $this->getArticleCategoryTable()->getCategory($cateId) : $category = '';
-            $arritem = $this->getArticleTable()->getArticleWhere(array( 'cat_id' => $cateId , 'status' => ENABLE ));
-        }else{
-            $arrCategory = $this->getArticleCategoryTable() -> getArticleCategoryWhere('',1);
-            foreach($arrCategory as $value){
-                $category = $value;
-            }
-            if($category) {
-                $cateId = $category['id'];
-                $arritem = $this->getArticleTable()->getArticleWhere(array( 'category_id' => $cateId , 'status' => ENABLE ));
+
+        // ID category article
+        isset($_GET['cateId']) ? $cateId = $_GET['cateId'] : $cateId = '';
+
+        // ID acticle
+        isset($_GET['id']) ? $id = $_GET['id'] : $id = '';
+
+        // view article detail
+        if($id){
+            $acticle = $this->getArticleTable()->getArticle($id);
+        }else{ // view article category
+            if($cateId){
+               $arritem = $this->getArticleTable()->getArticleWhere(array( 'cat_id' => $cateId , 'status' => ENABLE, ));
+
+            }else{
+                if($category) {
+                    $cateId = $category -> id;
+                    $arritem = $this->getArticleTable()->getArticleWhere(array( 'cat_id' => $cateId , 'status' => ENABLE, ));
+                }
             }
         }
+
         return new ViewModel(
             array(  'arrCat' => $listCate,
                 'arritem' => $arritem,
-                'category' => $category,
-                'parent_id' => $parent_id,
+                'acticle' => $acticle,
                 'cateId' => $cateId,
+                'id' => $id,
             )
         );
-
-
-
 
 
 

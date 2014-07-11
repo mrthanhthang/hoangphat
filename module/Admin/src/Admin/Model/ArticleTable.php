@@ -84,7 +84,7 @@ class ArticleTable
             'cat_id'  => $obj->cat_id ? $obj->cat_id : '',
             'title' => $obj->title ? $obj->title : '',
             'description' => $obj->description ? $obj->description : '',
-            'detail' => $obj->detail ? $obj->cat_id : '',
+            'detail' => $obj->detail ? $obj->detail : '',
             'position' => $obj->position ? $obj->position : '',
             'properties' => serialize($obj->properties) ? serialize($obj->properties) : ''
         );
@@ -142,10 +142,10 @@ class ArticleTable
         return $row;
     }
 
-    public function getArticleWhere($where, $limit = '')
+    public function getArticleWhere($where = '', $limit = '')
     {
         $select = $this->tableGateway->getSql()->select();
-        $select->where($where);
+        if($where) $select->where($where);
         $select->order('position ASC');
         if($limit) $select->limit($limit);
         $row = $this->tableGateway->selectWith($select);
