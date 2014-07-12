@@ -182,8 +182,36 @@ class MainController extends AbstractActionController
     //contact page
     public function contactAction()
     {
+
+    }
+
+    // News page
+    public function newsAction()
+    {
+        $arritem = '';
+        $category = '';
+        $acticle = '';
+        // ID of category tin-tuc
+        $cateId = $this->getArticleCategoryTable()->getIdCategory('tin-tuc');
+        // ID acticle
+        isset($_GET['id']) ? $id = $_GET['id'] : $id = '';
+
+        // view article detail
+        if($id){
+            $acticle = $this->getArticleTable()->getArticle($id);
+        }else{ // view article category
+            if($cateId){
+                $arritem = $this->getArticleTable()->getArticleWhere(array( 'cat_id' => $cateId , 'status' => ENABLE, ));
+
+            }
+        }
         return new ViewModel(
-            array('arrCat' => $arrCat)
+            array(
+                'arritem' => $arritem,
+                'acticle' => $acticle,
+                'cateId' => $cateId,
+                'id' => $id,
+            )
         );
     }
 

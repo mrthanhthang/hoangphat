@@ -1,0 +1,31 @@
+<div class="content-news">
+    <?php if($id){ ?>
+        <div class="">
+            <?php if($acticle){ ?>
+                <h2><?php echo $acticle -> title ?></h2>
+                <?php echo $acticle -> detail ?>
+            <?php } ?>
+        </div>
+    <?php }else{ ?>
+        <div class="">
+            <?php
+                foreach($arritem as $item){
+                    ?>
+                    <div class="listNews">
+                        <div class="newleft">
+                            <a title="<?php echo $item -> title?>" href="<?php echo $this->url('main', array('action' => 'project'), array('query' => array('id' => $item->id, 'cateId' => $item -> cat_id,))); ?>">
+                                <img height="100px" alt="<?php echo $item -> title?>" src="<?php echo $this->basePath().'/img/new.jpg' ?>"></a>
+
+                        </div>
+                        <div class="newright">
+                            <h2><a title="<?php echo $item -> title?>" href="<?php echo $this->url('main', array('action' => 'project'), array('query' => array('id' => $item->id, 'cateId' => $item -> cat_id,))); ?>"><?php echo $item -> title?></a></h2>
+                            <p class="date"><?php echo $item -> date_created?></p>
+                            <?php echo $item -> description ?>
+                        </div>
+                    </div>
+                <?php
+                }
+            ?>
+        </div>
+    <?php } ?>
+</div>

@@ -86,6 +86,7 @@ class ArticleTable
             'description' => $obj->description ? $obj->description : '',
             'detail' => $obj->detail ? $obj->detail : '',
             'position' => $obj->position ? $obj->position : '',
+            'status' => ENABLE,
             'properties' => serialize($obj->properties) ? serialize($obj->properties) : ''
         );
 

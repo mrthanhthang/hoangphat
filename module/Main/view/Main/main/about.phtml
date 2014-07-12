@@ -1,69 +1,30 @@
-<?php
-$title = 'Về chúng tôi';
-$this->headTitle($title);
-?>
-<div class="banner">
-    <div class="border-top"></div>
-    <div class="inner_banner">
-        <div class="top-cat note-top">
-            <div class="note-top-right"></div>
-        </div>
-        <div class="cat note">
-            <h3 style="font-size: 30px;"><span class="green-title">SHOP</span> CATEGORY</h3>
-            <ul class="category">
-                <?php if(isset($arrCat) && $arrCat){ foreach($arrCat as $cus){ ?>
-                <li><a href="<?php echo $this->url('main', array('action' => 'category'), array('query' => array('cid' =>  $cus->id))); ?>"><?php echo $cus->name; ?></a></li>
-                <?php }} ?>
+<div class="content-news">
+    <div class="about-left">
+        noi dung 1
+    </div>
+    <div class="about-right">
+        <div class="blockInfo">
+            <h4>thông tin liên hệ</h4>
+            <ul class="lstInfo">
+                <li>02 Chu Văn An, Phường Bình Thọ, Q.Thủ Đức, Tp.HCM</li>
+                <li><img width="17" height="16" alt="phone" src="<?php echo $this->basePath().'/img/icon_info_phone.png' ?>"><strong>
+                        (08) 2218.6188</strong></li>
+                <li><img width="17" height="16" alt="mobile" src="<?php echo $this->basePath().'/img/icon_info_mobile.png' ?>"><strong>
+                        0903.609.931</strong></li>
+                <li><img width="16" height="16" alt="email" src="<?php echo $this->basePath().'/img/icon_info_mail.png' ?>">
+                    <a title="lovegardencoffee@yahoo.com" href="mailto:lovegardencoffee@yahoo.com">
+                        <span> lovegardencoffee@yahoo.com</span>
+                    </a>
+                </li>
             </ul>
-            <div class="note-right"></div>
-        </div>
-        <div class="menu-top">
-            <ul>
-                <li><a href="<?php echo $this->url('main', array('action' => 'latest')); ?>" title="">Latest Items &nbsp;&nbsp;&nbsp;</a><span class="slash-menu">|</span></li>
-                <li><a href="<?php echo $this->url('main', array('action' => 'saleoff')); ?>" title="">Sale Off &nbsp;&nbsp;&nbsp;</a><span class="slash-menu">|</span></li>
-                <li><a href="<?php echo $this->url('main', array('action' => 'about')); ?>" title="">About Us &nbsp;&nbsp;&nbsp;</a><span class="slash-menu">|</span></li>
-                <li><a href="<?php echo $this->url('main', array('action' => 'contact')); ?>" title="">Contact </a></li>
-            </ul>
-            <?php //echo $this->navigation('Navigation')->menu(); ?>
-        </div>
-        <div class="ad-inner-main" id="ad-inner-main">
-            <div class="contac-detail-main">
-                <div>
-                    <p><span class="title">Về chúng tôi</span></p><br />
-                </div>
-                <div style="float: left;">
-                    <div class="about-us">
-                        <img src="<?php  echo $this->basePath(); ?>/img/aboutz.jpg"/>
-                        <div class="about-caption">
-                            Chánh Tây tự hào mang đến cho quý khách các sản phẩm gia dụng bằng thủy tinh, sành, sứ, inox với chất lượng cao, thiết kế tinh xảo với giá hấp dẫn.
-                        </div>
-                    </div>
-                    
-                    <div  class="about-us-right">
-                        <div class="about-right-wrapper">
-                            <img src="<?php  echo $this->basePath(); ?>/img/dosu.jpg" />
-                            <div class="about-caption-bot">
-                                <div class="left">Đồ Sứ</div>
-                                <div class="right">Sang trọng</div>
-                            </div>
-                        </div>
-                        <div class="about-right-wrapper">
-                            <img src="<?php  echo $this->basePath(); ?>/img/inox.jpg" />
-                            <div class="about-caption-bot">
-                                <div class="left">Đồ Inox</div>
-                                <div class="right">Tiện dụng</div>
-                            </div>
-                        </div>
-                        <div id="none" class="about-right-wrapper">
-                            <img src="<?php  echo $this->basePath(); ?>/img/thuytinh.jpg" />
-                            <div class="about-caption-bot">
-                                <div class="left">Đồ Thủy Tinh</div>
-                                <div class="right">Tinh tế</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <form action="" method="post" class="frm" id="frmSendMail" name="frmSendMail">
+                <span class="title">Nhận tin khuyến mãi</span>
+                <fieldset>
+                    <input type="text" value="Nhập email của bạn ..." onblur="if(this.value=='')this.value='Nhập email của bạn ...';" onfocus="if(this.value=='Nhập email của bạn ...')this.value='';" id="txtSendMail" name="email">
+                    <input type="submit" value="" id="btnSendMail" name="btnSendMail">
+                    <input type="hidden" name="act" value="newsletter">
+                </fieldset>
+            </form>
         </div>
     </div>
 </div>
