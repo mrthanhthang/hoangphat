@@ -328,14 +328,15 @@ img
 
 .about-right {
     float: right;
-    background: url("../img/bg_contact_info-2.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
+    background: url("../img/bg_contact_info-3.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
     color: #FFFFFF;
     overflow: hidden;
     padding: 0 25px;
     width: 180px;
+    height: 400px;
 }
 .about-right ul {
-   margin-top: 50px;
+   margin-top: 28px;
 }
 .about-right li {
     background: url("../img/bg_info_line.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
