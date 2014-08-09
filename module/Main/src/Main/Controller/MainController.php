@@ -63,7 +63,7 @@ class MainController extends AbstractActionController
         /* List Product set home*/
         $arrProductHome = $this->getItemTable()->listSetHome();
         return new ViewModel(
-            array('arrProductHome' => $arrProductHome, 'arrArticleHome' => $arrArticleHome, 'projectHome' => $projectHome)
+            array('arrProductHome' => $arrProductHome, 'arrArticleHome' => $arrArticleHome, 'projectHome' => $projectHome, 'action' => 'index')
         );
     }
     //category page
@@ -97,6 +97,7 @@ class MainController extends AbstractActionController
                     'category' => $category,
                     'parent_id' => $parent_id,
                     'cateId' => $cateId,
+                    'action' => 'category'
             )
         );
     }
@@ -143,11 +144,9 @@ class MainController extends AbstractActionController
                 'acticle' => $acticle,
                 'cateId' => $cateId,
                 'id' => $id,
+                'action' => 'project'
             )
         );
-
-
-
 
 
     }
@@ -167,7 +166,7 @@ class MainController extends AbstractActionController
         $arritem = $this->getItemTable()->fetchAll();
         $arritem = $this->getItemTable()->fetchAll();
         return new ViewModel(
-            array('arrCat' => $listCate)
+            array('arrCat' => $listCate, 'action' => 'index')
         );
     }
 
@@ -176,7 +175,7 @@ class MainController extends AbstractActionController
     {
         $arrCat = $this->getCategoryTable()->fetchAll();
         return new ViewModel(
-            array('arrCat' => $arrCat)
+            array('arrCat' => $arrCat,'action' => 'about')
         );
     }
     //contact page
@@ -211,6 +210,7 @@ class MainController extends AbstractActionController
                 'acticle' => $acticle,
                 'cateId' => $cateId,
                 'id' => $id,
+                'action' => 'news'
             )
         );
     }
