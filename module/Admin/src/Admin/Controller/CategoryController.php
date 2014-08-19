@@ -38,9 +38,22 @@ class CategoryController extends AbstractActionController
             $arrCat = $this->getCategoryTable()->searchCategory($name, $pid, $pIndex);
         }else
             $arrCat = $this->getCategoryTable()->fetchAll($pIndex);
-       // echo '<pre>';
-//        print_r($arrCat);
-//        echo '</pre>';      
+        if(isset($_GET['action']) && $_GET['action']){
+            $action = $_GET['action'];
+            $id = $_GET['id'];
+            /*Set home product*/
+            if($action == 'sethome'){
+                $data = array('home' => SET_HOME);
+                $this->getCategoryTable()->updateItem($id,$data);
+                return $this->redirect()->toRoute('adcat');
+            }
+            /*UN Set home product*/
+            if($action == 'unsethome'){
+                $data = array('home' => UN_SET_HOME);
+                $this->getCategoryTable()->updateItem($id,$data);
+                return $this->redirect()->toRoute('adcat');
+            }
+        }
         return new ViewModel(array(
             'arrCat' => $arrCat,
         ));

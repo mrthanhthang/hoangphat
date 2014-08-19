@@ -114,8 +114,40 @@
 </div>
 <?php if($id){ ?>
 <div class="column_right">
-    <?php if($acticle){ ?>
-        <h2><?php echo $acticle -> title ?></h2>
+    <?php if($acticle){
+        if(isset($acticle -> properties['file']) && $acticle -> properties['file'])
+        {
+        ?>
+            <div id="gallery" class="ad-gallery">
+                    <div class="nen_bgs"></div>
+                    <div class="ad-image-wrapper">
+                    </div>
+                    <div class="ad-controls">
+                    </div>
+                    <div class="ad-nav">
+                        <div class="ad-thumbs">
+                            <ul class="ad-thumb-list">
+                                <?php
+                                foreach($acticle -> properties['file'] as $images){
+                                    ?>
+                                    <li>
+                                        <a href="<?php  if($images) echo $this->basePath().'/img/admin/article/'.$images; ?>">
+                                            <img src="<?php  if($images) echo $this->basePath().'/img/admin/article/'.$images; ?>" title="" class="image1">
+                                        </a>
+                                    </li>
+                                <?php
+                                }
+                                ?>
+                            </ul>
+                        </div>
+                    </div>
+            </div>
+
+
+
+
+        <?php  } ?>
+        <div class="des"><?php echo $acticle -> title ?></div>
         <?php echo $acticle -> detail ?>
     <?php } ?>
 </div>
@@ -124,11 +156,11 @@
     <?php
     if($arrCat){
         foreach($arritem as $item){
-    ?>
+            ?>
     <div class="listNews">
         <div class="newleft">
             <a title="<?php echo $item -> title?>" href="<?php echo $this->url('main', array('action' => 'project'), array('query' => array('id' => $item->id, 'cateId' => $item -> cat_id,))); ?>">
-                <img height="100px" alt="<?php echo $item -> title?>" src="<?php echo $this->basePath().'/img/new.jpg' ?>"></a>
+                <img height="100px" alt="<?php echo $item -> title?>" src="<?php if(isset($item -> properties['avata']) && $item -> properties['avata']) echo $this->basePath().'/img/admin/article/'.$item -> properties['avata']; else echo $this->basePath().'/img/logo.png'?>"></a>
 
         </div>
         <div class="newright">

@@ -105,4 +105,9 @@ class ArticleCategoryTable
         $row = $this->tableGateway->selectWith($select);
         return $row;
     }
+    /* Update Item article*/
+    public function updateItem($id, $data)
+    {
+        $this->tableGateway->update($data, array('id' => $id));
+    }
 }

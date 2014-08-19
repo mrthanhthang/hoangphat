@@ -59,11 +59,17 @@ class MainController extends AbstractActionController
         $arrArticleHome = $this->getArticleTable()->getArticleWhere(array( 'cat_id' => $idArticleCatNews , 'home' => SET_HOME ), 4);
         /* List Du-an-tieu-Bieu set home*/
         $idArticleCat = $this->getArticleCategoryTable()->getIdCategory('du-an-tieu-bieu');
-        $projectHome = $this->getArticleTable()->getArticleWhere(array( 'cat_id' => $idArticleCat , 'home' => SET_HOME ), 1);
+        $listCatProject = $this->getArticleCategoryTable()->getArticleCategoryWhere(array( 'parent_id' => $idArticleCat));
+        foreach($listCatProject as $value){
+            $listIdCatProject[] = $value -> id;
+        }
+       $catHome = $this->getCategoryTable()->getCategoryWhere(array( 'home' => SET_HOME));
+
+        $projectHome = $this->getArticleTable()->getProjectHome($listIdCatProject);
         /* List Product set home*/
         $arrProductHome = $this->getItemTable()->listSetHome();
         return new ViewModel(
-            array('arrProductHome' => $arrProductHome, 'arrArticleHome' => $arrArticleHome, 'projectHome' => $projectHome, 'action' => 'index')
+            array('arrProductHome' => $arrProductHome, 'arrArticleHome' => $arrArticleHome, 'projectHome' => $projectHome, 'catHome' => $catHome)
         );
     }
     //category page

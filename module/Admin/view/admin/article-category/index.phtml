@@ -39,7 +39,7 @@
 					  <th>Tên Nhóm</th>					
 					  <th>Thuộc</th>
 					  <th>Hình ảnh</th>					  
-                      <th>Trạng thái</th>
+                      <th>Set Home</th>
                       <th>Thao tác</th>
 				  </tr>
 			  </thead>   
@@ -50,7 +50,12 @@
 					<td ><?php echo $item->name; ?></td>
 					<td class="center"><?php echo $item->parent_id; ?></td>
 					<td class="center"><img alt="<?php echo isset($item) && isset($item->name) && $item->name ? $item->name : '' ; ?>" src="<?php echo isset($item) && isset($item->properties['avata']) && $item->properties['avata'] ? $this->basePath().'/img/admin/article/'.$item->properties['avata'] : ''; ?>" class="" style=" width: 80px;"/></td>
-					<td class="center"><?php echo $item->status; ?></td>
+                    <td class="center">
+                        <?php if($item->home == 1){ ?>
+                            <a title="UnSetHome" class="btn btn-inverse" href="<?php echo $this->url('adartCat', array('action' => 'index'), array('query' => array('id' => $item->id, 'action' => 'unsethome', ))); ?>">
+                                <i class="icon-home icon-white"></i>
+                            </a>
+                        <?php } ?></td>
                     <td class="right">
 						<a class="btn btn-success" href="<?php echo $this->url('adartCat', array('action' => 'detail'), array('query' => array('id' => $item->id))); ?>">
 							<i class="icon-zoom-in icon-white"></i>  
@@ -58,8 +63,13 @@
 						</a>
                         <a class="btn btn-info" href="<?php echo $this->url('adartCat', array('action' => 'save'), array('query' => array('id' => $item->id))); ?>">
 							<i class="icon-edit icon-white"></i>  
-							Sửa                                            
+							Sửa
 						</a>
+                        <?php if($item->home != 1){ ?>
+                        <a title="SetHome" class="btn btn-inverse" href="<?php echo $this->url('adartCat', array('action' => 'index'), array('query' => array('id' => $item->id, 'action' => 'sethome', ))); ?>">
+                            <i class="icon-home icon-white"></i>
+                        </a>
+                        <?php } ?>
 						<a class="btn btn-danger" href="<?php echo $this->url('adartCat', array('action' => 'del'), array('query' => array('id' => $item->id))); ?>">
 							<i class="icon-trash icon-white"></i> 
 							Xóa

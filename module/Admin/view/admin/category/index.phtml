@@ -32,6 +32,7 @@
 				  <tr>
 					  <th>Hình ảnh</th>
 					  <th>Tên danh mục</th>
+                      <th>Set Home</th>
 					  <th>Thao tác</th>
 				  </tr>
 			  </thead>   
@@ -41,7 +42,13 @@
 				<tr>
                     <td><img style="width: 80px; padding: 1px; border: 2px solid;" src="<?php echo $this->basePath().'/img/admin/cats/'.$i->image; ?>" /></td>
 					<td><a href="<?php echo $this->url('adcat', array('action' => 'index'), array('query' => array('pid' => $i->id))); ?>"><?php echo $i->name; ?></a></td>
-					<td class="center">
+                    <td class="center">
+                        <?php if($i->home == 1){ ?>
+                            <a title="UnSetHome" class="btn btn-inverse" href="<?php echo $this->url('adcat', array('action' => 'index'), array('query' => array('id' => $i->id, 'action' => 'unsethome', ))); ?>">
+                                <i class="icon-home icon-white"></i>
+                            </a>
+                        <?php } ?></td>
+                    <td class="center">
 						<a class="btn btn-success" href="<?php echo $this->url('main', array('action' => 'category'), array('query' => array('cid' => $i->id))); ?>">
 							<i class="icon-zoom-in icon-white"></i>  
 							Xem                                            
@@ -50,6 +57,11 @@
 							<i class="icon-edit icon-white"></i>  
 							Sửa                                            
 						</a>
+                        <?php if($i->home != 1){ ?>
+                            <a title="SetHome" class="btn btn-inverse" href="<?php echo $this->url('adcat', array('action' => 'index'), array('query' => array('id' => $i->id, 'action' => 'sethome', ))); ?>">
+                                <i class="icon-home icon-white"></i>
+                            </a>
+                        <?php } ?>
 						<a class="btn btn-danger" href="<?php echo $this->url('adcat', array('action' => 'del'), array('query' => array('id' => $i->id))); ?>">
 							<i class="icon-trash icon-white"></i> 
 							Xóa

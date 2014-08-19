@@ -116,7 +116,7 @@ class ArticleTable
 
         return $file_ary;
     }
-    /* Update Item product*/
+    /* Update Item article*/
     public function updateItem($id, $data)
     {
         $this->tableGateway->update($data, array('id' => $id));
@@ -151,5 +151,15 @@ class ArticleTable
         if($limit) $select->limit($limit);
         $row = $this->tableGateway->selectWith($select);
         return $row;
+    }
+    public function getProjectHome($listIn)
+    {
+        //$listIn =  array('17', '18', '19');
+        $item = new Item;
+        $table = $this->tableGateway->table;
+        $sql = "SELECT * FROM `$table` WHERE `cat_id` IN (".implode(',',$listIn).") and `home` = 1 LIMIT 0,1";
+        $resultSet = $this->tableGateway->adapter->query($sql, array());
+        if(!$resultSet) return false;
+        return $resultSet;
     }
 }

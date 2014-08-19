@@ -9,6 +9,8 @@ class Category
     public $parent_id;
     public $description;
     public $position;
+    public $home;
+
 
     public function exchangeArray($data)
     {
@@ -18,6 +20,7 @@ class Category
         $this->parent_id     = (isset($data['parent_id'])) ? $data['parent_id'] : null;
         $this->description   = (isset($data['description'])) ? $data['description'] : null;
         $this->position      = (isset($data['position'])) ? $data['position'] : null;
+        $this->home             = (isset($data['home'])) ? $data['home'] : null;
     }
 
     // Add the following method:

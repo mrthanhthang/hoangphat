@@ -85,13 +85,11 @@
 <div class="project">
     <div class="tab1_l">
         <?php
-        if($productTop){
-            isset($productTop->arr_images) && $productTop->arr_images ? $images = unserialize($productTop->arr_images) : $images = array('');
-
-            ?>
-            <div class="tab_img"><a href="#"><img width="100%" src="<?php  if($images) echo $this->basePath().'/img/admin/items/'.$images[0]; ?>" alt="<?php echo $productTop -> name ?>" /></a></div>
-            <div class="title_tab1"><a href="#"><h2><?php echo $productTop -> name ?></h2></a></div>
-        <?php } ?>
+            if($catHome){
+            foreach($catHome as $cate){?>
+            <div class="tab_img"><a href="<?php echo $this->url('main', array('action' => 'category'), array('query' => array('id' => $cate->id, 'parent_id' => $cate -> parent_id,))); ?>"><img width="100%" src="<?php if(isset($cate->image) && $cate->image) echo $this->basePath().'/img/admin/cats/'.$cate->image; ?>" /></a></div>
+            <div class="title_tab1"><a href="#"><h2><?php echo $cate -> name ?></h2></a></div>
+        <?php }} ?>
     </div>
 
     <div class="tab1_l" style="margin-left: 17px">
@@ -99,11 +97,11 @@
         <?php
         if($projectHome){
             foreach($projectHome as $project){
-                isset($project -> properties['avata']) ? $images = $project -> properties['avata'] : $images = '';
-
+                $properties = unserialize( $project -> properties);
+                isset($properties['avata']) ? $images = $properties['avata'] : $images = '';
             ?>
-            <div class="tab_img"> <a href="#"> <img width="100%" src="<?php  if($images) echo $this->basePath().'/img/admin/article/'.$images; ?>" alt="<?php echo $productTop -> name ?>" /></a></div>
-            <div class="title_tab1"><a href="#"><h2><?php echo $project -> title ?></h2></a></div>
+            <div class="tab_img"> <a href="<?php echo $this->url('main', array('action' => 'project'), array('query' => array('id' => $project->id, 'cateId' => $project -> cat_id,))); ?>"> <img width="100%" src="<?php  if($images) echo $this->basePath().'/img/admin/article/'.$images; ?>" alt="<?php $project -> title ?>" /></a></div>
+            <div class="title_tab1"><a href="<?php echo $this->url('main', array('action' => 'project'), array('query' => array('id' => $project->id, 'cateId' => $project -> cat_id,))); ?>"><h2><?php echo $project -> title ?></h2></a></div>
         <?php }} ?>
 
     </div>
@@ -119,6 +117,6 @@
                 }
                 ?>
             </ul></div>
-        <div class="title_tab1"><h2>Thông tin mới</h2></div>
+        <div class="title_tab1"><h2>Tin Mới</h2></div>
     </div>
 </div>

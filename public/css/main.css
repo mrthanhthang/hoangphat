@@ -296,6 +296,9 @@ img
 .listNews {
     width: 100%;
     margin-bottom: 20px;
+    border-bottom: 1px solid #dddddd;
+    height: 120px;
+    padding-bottom: 15px;
 }
 .listNews div{
     float: left;
@@ -303,15 +306,16 @@ img
     overflow: hidden;
 }
 .listNews div.newleft{
-
+    overflow: hidden;
     width: 20%;
     overflow: hidden;
 }
 .listNews div.newleft img{
-    width: 80%;
+
 }
 .listNews div.newright{
-    width: 80%;
+    width: 77%;
+    padding-left: 3%;
 }
 .listNews div.newright h2{
     margin-top: 0px;

@@ -24,7 +24,7 @@ class ItemTable
         if( is_numeric($pIndex)){
             $paginator = new Paginator(new Iterator($resultSet->buffer()));
             $paginator->setCurrentPageNumber($pIndex)
-                        ->setItemCountPerPage(12)
+                        ->setItemCountPerPage(ADMIN_NUM_PAGE)
                         ->setPageRange(5);
             return $paginator;
         }

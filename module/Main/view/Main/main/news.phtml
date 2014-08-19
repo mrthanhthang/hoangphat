@@ -100,7 +100,7 @@
                     <div class="listNews">
                         <div class="newleft">
                             <a title="<?php echo $item -> title?>" href="<?php echo $this->url('main', array('action' => 'news'), array('query' => array('id' => $item->id, 'cateId' => $item -> cat_id,))); ?>">
-                                <img height="100px" alt="<?php echo $item -> title?>" src="<?php echo $this->basePath().'/img/new.jpg' ?>"></a>
+                                <img height="100px" alt="<?php echo $item -> title?>" src="<?php if(isset($item -> properties['avata']) && $item -> properties['avata']) echo $this->basePath().'/img/admin/article/'.$item -> properties['avata']; else echo $this->basePath().'/img/logo.png'?>"></a>
 
                         </div>
                         <div class="newright">

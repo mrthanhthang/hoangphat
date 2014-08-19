@@ -13,6 +13,7 @@ class ArticleCategory
     public $level;
     public $properties;
     public $status;
+    public $home;
 
     public function exchangeArray($data)
     {
@@ -26,6 +27,7 @@ class ArticleCategory
         $this->level            = (isset($data['level'])) ? $data['level'] : null;
         $this->properties       = (isset($data['properties'])) ? unserialize($data['properties']) : null;
         $this->status           = (isset($data['status'])) ? $data['status'] : null;
+        $this->home             = (isset($data['home'])) ? $data['home'] : null;
     }    
     // Add the following method:
     public function getArrayCopy()
