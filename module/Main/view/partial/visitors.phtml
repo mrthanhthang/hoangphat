@@ -1,7 +1,6 @@
 <?php
 $ses_id = session_id();
 $file_dir = 'includes/counter/count.txt';
-echo $_SERVER['REMOTE_ADDR'];
 if(!isset($_SESSION['session_id'])){
     $_SESSION['session_id'] = 1;
     $content = file_get_contents($file_dir);

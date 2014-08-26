@@ -102,9 +102,6 @@ pre#event-log {
 /* Responsive design
 --- */
 @media screen and (max-width: 1056px) {
-  body {
-    width: 672px;
-  }
   .c2 {
     margin-right: 0;
     margin-bottom: 0;

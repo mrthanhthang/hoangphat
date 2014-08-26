@@ -29,28 +29,6 @@
         ->prependFile($this->basePath() . '/js/jquery.js')
     ?>
 
-    <!-- Product styles -->
-    <link rel="stylesheet" type="text/css" href="/hoangphat/public/Slide/jquery.ad-gallery.css">
-
-    <!-- Scripts -->
-    <script src="/hoangphat/public/js/jquery-1.9.1.js"></script>
-    <script type="text/javascript" src="/hoangphat/public/Slide/jquery.ad-gallery.js"></script>
-    <script type="text/javascript">
-        $(function () {
-            var galleries = $('.ad-gallery').adGallery();
-            $('#switch-effect').change(
-                function () {
-                    galleries[0].settings.effect = $(this).val();
-                    return false;
-                }
-            );
-        });
-    </script>
-    <link rel="stylesheet" href="/hoangphat/public/css/demo.css">
-    <script src="/hoangphat/public/js/json2.js"></script>
-    <script src="/hoangphat/public/js/jquery.collapse.js"></script>
-    <script src="/hoangphat/public/js/jquery.collapse_storage.js"></script>
-    <script src="/hoangphat/public/js/jquery.collapse_cookie_storage.js"></script>
     <script>
         $(function () {
             $('.box_skitter_large').skitter({ dots: true });
@@ -84,10 +62,22 @@
         </div>
     </div>
     <div class="content">
-<div class="content-news">
-    <div style="margin: auto;width: 90%">
+        <div class="content-news">
+            <div style="margin: auto;width: 90%; line-height: 25px; font-size: 18px;text-align: justify">
+                &nbsp;&nbsp;&nbsp;&nbsp;  Kính thưa Quý vị, Sau gần 4 năm hoạt động, Công ty TNHH TMV sản xuất gỗ Hoàng Phát đã trở thành một Công ty phát triển lớn mạnh về mọi mặt, với định hướng chiến lược và các chiến lược tình thế cụ thể trong từng giai đoạn phát triển cùng với tiêu chí “Khát Vọng – Tin Tưởng – Hành Động – Thành Công”, Hoàng Phát hoàn toàn có thể tự tin hướng đến vị trí của một thương hiệu vững mạnh được khách hàng trong và ngoài nước tín nhiệm và đặc biệt là luôn nhận được sự ủng hộ to lớn của Chính phủ, các ban ngành và các cấp lãnh đạo chính quyền địa phương. Thành công này đã khẳng định tầm nhìn chiến lược, khát vọng xây dựng một cuộc sống tốt đẹp hơn với những công trình mang dấu ấn và phong cách, tạo môi trường cho các kiến trúc sư trong nước thể hiện bản lĩnh và cái tôi riêng biệt, đồng thời thay đổi bộ mặt cũng như nhận thức về Kiến trúc Việt Nam Hoàng Phát là hoàn toàn đúng đắn. Qua đó, Công ty sẽ tận dụng cơ hội mở rộng hợp tác đầu tư, ưu tiên khai thác những thế mạnh và năng lực cốt lõi có sẵn, được xây dựng trên cơ sở phát triển bền vững và lâu dài.
+
+                <br/>&nbsp;&nbsp;&nbsp;&nbsp;Công ty TNHH TMV sản xuất gỗ Hoàng Phát đang ngày càng hướng tới sự hoàn thiện về hệ thống quản lý, nâng cao nguồn nhân lực, mở rộng hợp tác kinh doanh để đạt đến tính chuyên nghiệp cao. Với đội ngũ lãnh đạo và nhân viên trẻ,  năng động, chuyên nghiệp được đào tạo bài bản và không ngừng nâng cấp và thử thách cùng sự tin tưởng của quý đối tác, quý khách hàng và các cổ đông, với lòng quyết tâm và sự nỗ lực không ngừng của Hội đồng Quản trị, Ban điều hành và toàn thể cán bộ - nhân viên. Chúng tôi tin chắc rằng Hoàng Phát có đủ cơ sở để đạt những mục tiêu mà chiến lược đã đề ra. Hoàng Phát sẽ không phụ lòng tín nhiệm và sự kỳ vọng mà Quý vị đã dành cho HoàngPhát.
 
 
-    <img width="100%" alt="mobile" src="<?php echo $this->basePath().'/img/about.png' ?>">
+
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        <div class="footer_left" style="color: #a84e2a">Copyright Hoang Phat 2014</div>
+        <div class="footer_right" style="color: #a84e2a">Số lượt truy cập: <?php echo $this->render('partial/visitors'); ?></div>
     </div>
 </div>
+</body>
+</html>
+

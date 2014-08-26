@@ -29,28 +29,6 @@
         ->prependFile($this->basePath() . '/js/jquery.js')
     ?>
 
-    <!-- Product styles -->
-    <link rel="stylesheet" type="text/css" href="/hoangphat/public/Slide/jquery.ad-gallery.css">
-
-    <!-- Scripts -->
-    <script src="/hoangphat/public/js/jquery-1.9.1.js"></script>
-    <script type="text/javascript" src="/hoangphat/public/Slide/jquery.ad-gallery.js"></script>
-    <script type="text/javascript">
-        $(function () {
-            var galleries = $('.ad-gallery').adGallery();
-            $('#switch-effect').change(
-                function () {
-                    galleries[0].settings.effect = $(this).val();
-                    return false;
-                }
-            );
-        });
-    </script>
-    <link rel="stylesheet" href="/hoangphat/public/css/demo.css">
-    <script src="/hoangphat/public/js/json2.js"></script>
-    <script src="/hoangphat/public/js/jquery.collapse.js"></script>
-    <script src="/hoangphat/public/js/jquery.collapse_storage.js"></script>
-    <script src="/hoangphat/public/js/jquery.collapse_cookie_storage.js"></script>
     <script>
         $(function () {
             $('.box_skitter_large').skitter({ dots: true });
@@ -115,3 +93,12 @@
         </div>
     <?php } ?>
 </div>
+    </div>
+    <div style="clear: both"></div>
+    <div class="footer">
+        <div class="footer_left" style="color: #a84e2a">Copyright Hoang Phat 2014</div>
+        <div class="footer_right" style="color: #a84e2a">Số lượt truy cập: <?php echo $this->render('partial/visitors'); ?></div>
+    </div>
+</div>
+</body>
+</html>

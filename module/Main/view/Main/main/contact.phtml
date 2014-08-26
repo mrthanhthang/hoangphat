@@ -29,28 +29,6 @@
         ->prependFile($this->basePath() . '/js/jquery.js')
     ?>
 
-    <!-- Product styles -->
-    <link rel="stylesheet" type="text/css" href="/hoangphat/public/Slide/jquery.ad-gallery.css">
-
-    <!-- Scripts -->
-    <script src="/hoangphat/public/js/jquery-1.9.1.js"></script>
-    <script type="text/javascript" src="/hoangphat/public/Slide/jquery.ad-gallery.js"></script>
-    <script type="text/javascript">
-        $(function () {
-            var galleries = $('.ad-gallery').adGallery();
-            $('#switch-effect').change(
-                function () {
-                    galleries[0].settings.effect = $(this).val();
-                    return false;
-                }
-            );
-        });
-    </script>
-    <link rel="stylesheet" href="/hoangphat/public/css/demo.css">
-    <script src="/hoangphat/public/js/json2.js"></script>
-    <script src="/hoangphat/public/js/jquery.collapse.js"></script>
-    <script src="/hoangphat/public/js/jquery.collapse_storage.js"></script>
-    <script src="/hoangphat/public/js/jquery.collapse_cookie_storage.js"></script>
     <script>
         $(function () {
             $('.box_skitter_large').skitter({ dots: true });
@@ -77,7 +55,7 @@
                 <a href="<?php echo $this->url('main', array('action' => 'index')); ?>"><li>Trang chủ</li></a>
                 <a href="<?php echo $this->url('main', array('action' => 'about')); ?>"><li>Giới thiệu</li></a>
                 <a href="<?php echo $this->url('main', array('action' => 'project')); ?>"><li>Dự án tiêu biểu</li></a>
-                <a href="<?php echo $this->url('main', array('action' => 'category')); ?>"><li class="active">Không gian nội thất</li></a>
+                <a href="<?php echo $this->url('main', array('action' => 'category')); ?>"><li>Không gian nội thất</li></a>
                 <a href="<?php echo $this->url('main', array('action' => 'news')); ?>"><li>Tin tức</li></a>
                 <a href="<?php echo $this->url('main', array('action' => 'contact')); ?>"><li class="active">Liên hệ</li></a>
             </ul>
@@ -86,22 +64,22 @@
     <div class="content">
 <div class="content-news">
     <div class="about-left">
-        <iframe width="700" height="400" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://www.google.com/maps?f=q&amp;source=s_q&amp;hl=vi&amp;geocode=&amp;q=25C%2F10+Qu%E1%BB%91c+l%E1%BB%99+1K,+tx.+D%C4%A9+An,+B%C3%ACnh+D%C6%B0%C6%A1ng,+Vi%E1%BB%87t+Nam&amp;aq=0&amp;oq=25C%2F10+Qu%E1%BB%91c+l%E1%BB%99+1K,+tx.+D%C4%A9+An,+B%C3%ACnh+D%C6%B0%C6%A1ng,+Vi%E1%BB%87t+Nam&amp;sll=10.892248,106.792409&amp;sspn=0.012832,0.013797&amp;ie=UTF8&amp;hq=&amp;hnear=25+Qu%E1%BB%91c+l%E1%BB%99+1K,+%C4%90%C3%B4ng+H%C3%B2a,+tx.+D%C4%A9+An,+B%C3%ACnh+D%C6%B0%C6%A1ng,+Vi%E1%BB%87t+Nam&amp;ll=10.890701,106.785044&amp;spn=0.006416,0.006899&amp;t=m&amp;z=14&amp;iwloc=A&amp;output=embed"></iframe><br /><small><a href="https://www.google.com/maps?f=q&amp;source=embed&amp;hl=vi&amp;geocode=&amp;q=25C%2F10+Qu%E1%BB%91c+l%E1%BB%99+1K,+tx.+D%C4%A9+An,+B%C3%ACnh+D%C6%B0%C6%A1ng,+Vi%E1%BB%87t+Nam&amp;aq=0&amp;oq=25C%2F10+Qu%E1%BB%91c+l%E1%BB%99+1K,+tx.+D%C4%A9+An,+B%C3%ACnh+D%C6%B0%C6%A1ng,+Vi%E1%BB%87t+Nam&amp;sll=10.892248,106.792409&amp;sspn=0.012832,0.013797&amp;ie=UTF8&amp;hq=&amp;hnear=25+Qu%E1%BB%91c+l%E1%BB%99+1K,+%C4%90%C3%B4ng+H%C3%B2a,+tx.+D%C4%A9+An,+B%C3%ACnh+D%C6%B0%C6%A1ng,+Vi%E1%BB%87t+Nam&amp;ll=10.890701,106.785044&amp;spn=0.006416,0.006899&amp;t=m&amp;z=14&amp;iwloc=A" style="color:#0000FF;text-align:left">Xem Bản đồ cỡ lớn hơn</a></small>
+        <iframe width="675" height="400" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://www.google.com/maps?f=q&amp;source=s_q&amp;hl=vi&amp;geocode=&amp;q=25C%2F10+Qu%E1%BB%91c+l%E1%BB%99+1K,+tx.+D%C4%A9+An,+B%C3%ACnh+D%C6%B0%C6%A1ng,+Vi%E1%BB%87t+Nam&amp;aq=0&amp;oq=25C%2F10+Qu%E1%BB%91c+l%E1%BB%99+1K,+tx.+D%C4%A9+An,+B%C3%ACnh+D%C6%B0%C6%A1ng,+Vi%E1%BB%87t+Nam&amp;sll=10.892248,106.792409&amp;sspn=0.012832,0.013797&amp;ie=UTF8&amp;hq=&amp;hnear=25+Qu%E1%BB%91c+l%E1%BB%99+1K,+%C4%90%C3%B4ng+H%C3%B2a,+tx.+D%C4%A9+An,+B%C3%ACnh+D%C6%B0%C6%A1ng,+Vi%E1%BB%87t+Nam&amp;ll=10.890701,106.785044&amp;spn=0.006416,0.006899&amp;t=m&amp;z=14&amp;iwloc=A&amp;output=embed"></iframe><br /><small><a href="https://www.google.com/maps?f=q&amp;source=embed&amp;hl=vi&amp;geocode=&amp;q=25C%2F10+Qu%E1%BB%91c+l%E1%BB%99+1K,+tx.+D%C4%A9+An,+B%C3%ACnh+D%C6%B0%C6%A1ng,+Vi%E1%BB%87t+Nam&amp;aq=0&amp;oq=25C%2F10+Qu%E1%BB%91c+l%E1%BB%99+1K,+tx.+D%C4%A9+An,+B%C3%ACnh+D%C6%B0%C6%A1ng,+Vi%E1%BB%87t+Nam&amp;sll=10.892248,106.792409&amp;sspn=0.012832,0.013797&amp;ie=UTF8&amp;hq=&amp;hnear=25+Qu%E1%BB%91c+l%E1%BB%99+1K,+%C4%90%C3%B4ng+H%C3%B2a,+tx.+D%C4%A9+An,+B%C3%ACnh+D%C6%B0%C6%A1ng,+Vi%E1%BB%87t+Nam&amp;ll=10.890701,106.785044&amp;spn=0.006416,0.006899&amp;t=m&amp;z=14&amp;iwloc=A" style="color:#0000FF;text-align:left">Xem Bản đồ cỡ lớn hơn</a></small>
     </div>
     <div class="about-right">
             <h4>Công ty THHH MTV sản xuất gỗ Hoàng Phát</h4>
             <ul class="lstInfo">
                 <li style="background: none">2380/2A Đường Vườn Lài, Khu Phố 2, Phường An Phú Đông, Quận 12, TpHCM</li>
                 <li ><img width="17" height="16" alt="phone" src="<?php echo $this->basePath().'/img/icon_info_phone.png' ?>"><strong>
-                        (08) 2218.6188</strong></li>
+                        0650.3773.173</strong></li>
                 <li><img width="17" height="16" alt="mobile" src="<?php echo $this->basePath().'/img/icon_info_mobile.png' ?>"><strong>
-                        0903.609.931</strong></li>
+                        0937878592 - 0907744890</strong></li>
                 <li><img width="16" height="16" alt="email" src="<?php echo $this->basePath().'/img/icon_info_mail.png' ?>">
                     <a title="lovegardencoffee@yahoo.com" href="mailto:lovegardencoffee@yahoo.com">
-                        <span>mrthanhthang@gmail.com</span>
+                        <span>hoangphatfurniture@yahoo.com.vn</span>
                     </a>
                 </li>
-                <li><img width="17" height="16" alt="mobile" src="<?php echo $this->basePath().'/img/icon_info_mobile.png' ?>"><strong>
+                <li style="border: none"><img width="17" height="16" alt="mobile" src="<?php echo $this->basePath().'/img/icon_info_mobile.png' ?>"><strong>
                         Showroom:<br/>
                        </li>
                <p>
@@ -111,3 +89,12 @@
             </ul>
     </div>
 </div>
+    </div>
+    <div style="clear: both"></div>
+    <div class="footer">
+        <div class="footer_left" style="color: #a84e2a">Copyright Hoang Phat 2014</div>
+        <div class="footer_right" style="color: #a84e2a">Số lượt truy cập: <?php echo $this->render('partial/visitors'); ?></div>
+    </div>
+</div>
+</body>
+</html>
